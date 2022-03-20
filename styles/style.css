@@ -1,0 +1,83 @@
+a {
+    text-decoration: none;
+}
+
+a:link {
+  color: #292929;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:visited {
+  color: pink;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #B37AFF;
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+a:active {
+  color: yellow;
+  background-color: transparent;
+  text-decoration: underline;
+}
+
+.header {
+    text-align: center;
+    padding: 3rem 0;
+    font-size: 4rem;
+}
+
+.lower-header {
+    text-align: center;
+    padding: 0 0 3rem 0;
+    font-size: 4rem;
+}
+
+#title {
+    background-color: #292929;
+    color: white;
+}
+.name {
+    padding: auto;
+    margin: auto;
+}
+.circuit {
+    width: 90%;
+}
+
+.circuitl {
+    text-align: left;
+    overflow: hidden;
+}
+
+.circuitr {
+    text-align: right;
+    overflow: hidden;
+}
+.titlecontainer {
+    padding: 2em 0;
+}
+.titlename {
+    overflow: hidden;
+    padding: 0;
+}
+
+.light {
+    font-weight: 300;
+}
+.underconstruction {
+    padding: 5rem 0;
+    line-height: 100px;
+    text-align: center;
+}
+
+.link {
+    padding: 5%;
+    align-items: center;
+    text-align: center;
+}
