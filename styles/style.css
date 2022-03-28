@@ -84,8 +84,13 @@ a:active {
     width: 80%;
     line-height: 1.7em;
 
+
 }
 
+.info-paragraph-narrow {
+    width: 60%;
+    text-align: center;
+}
 .info-img {
     width: 100%;
     margin: 20px auto;
@@ -101,4 +106,9 @@ a:active {
 .here:link {
     color: #B37AFF;
     text-decoration: none;
+}
+
+.li-link {
+    font-size: 1.3rem;
+    text-align: left;
 }
