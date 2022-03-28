@@ -1,0 +1,302 @@
+a {
+    text-decoration: none;
+
+}
+a:hover {
+    color: #9747ff;
+}
+
+body {
+    font-family: 'Roboto Mono', monospace;
+}
+
+.title-social-link:link {
+  color: white;
+  background-color: transparent;
+  text-decoration: none;
+}
+/*  */
+.title-social-link:visited {
+  color: white;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+.title-social-link:hover {
+  color: #B37AFF;
+  background-color: transparent;
+}
+
+.title-social-link:active {
+  color: #B37AFF;
+  background-color: transparent;
+}
+
+.here:link {
+    color: #B37AFF;
+    text-decoration: none;
+}
+
+/* title section */
+.title-left {
+    background-color: #202020;
+    height: 100vh;
+    overflow: hidden;
+    font-family: 'Roboto Mono', monospace;
+    font-size: 2em;
+    overflow-wrap: break-word;
+    color: #59565e;
+}
+
+@media (min-width: 1200px) {
+    .title-left {
+        width: 100vw;
+    }
+    .title-right {
+        height: 0;
+        width: 0;
+    }
+}
+
+.title-right {
+    background-color: rgb(255, 255, 255);
+    height: 100vh;
+}
+
+.titlecard {
+    position: absolute;
+    z-index: 1;
+    height: 60%;
+    width: 70%;
+    top: 10%;
+    left: 20%;
+    min-height: 600px;
+}
+
+.title-container {
+    height: 100%;
+}
+.title-face {
+    background-color: #795e91;
+    height: 100%;
+    min-height: 60%;
+    border-radius: 5%;
+    border-width: 4px;
+    border-style: solid;
+    border-color: #292929;
+    text-align: center;
+    color: white;
+    padding: 5%;
+    min-width: 400px;
+}
+
+.title-card-image {
+    width: 40%;
+    margin: 6%;
+}
+.title-card-name {
+    width: 20%;
+    font-family: 'Source Code Pro', monospace;
+    font-weight: 400;
+    font-size: 3em;
+}
+.title-card-email { 
+    color: white;
+    width: 20%;
+    font-family: 'Source Code Pro', monospace;
+    font-weight: 200;
+    font-size: 1.5em;
+
+}
+.title-card-major {
+    width: 20%;
+    font-family: 'Source Code Pro', monospace;
+    font-weight: 200;
+    font-size: 1.5em;
+}
+.title-socials {
+    height: 5%;
+    padding: 10%;
+}
+.title-social-icon {
+    color: white;
+}
+
+.title-greeting {
+    font-family: 'Source Code Pro', monospace;
+    font-weight: 300;
+    font-size: 4em;
+    padding: 5% 15%;
+    
+}
+.title-paragraph {
+    padding: 5% 0% 5% 15%;
+    font-family: 'Source Code Pro', monospace;
+    font-weight: 300;
+    line-height: 1.5;
+}
+
+/* Education */
+
+.education-container {
+    height: 90%;
+    background-color: #202020;
+    color: white;
+    padding: 40px 90px;
+}
+
+.education-right {
+    padding: 3%;
+    text-align: center;
+    vertical-align: center;
+}
+.msoe-logo {
+    width: 40%;
+}
+
+.education-header {
+    margin: 40px 0;
+    color: #9747ff;
+}
+.education-p {
+    font-size: 1.3em;
+    line-height: 1.5;
+    font-weight: 300;
+}
+
+/* projects */
+
+#projects {
+    text-align: center;
+    background-color: white;
+    color: white;
+}
+
+.projects-header {
+    padding: 40px 90px;
+    text-align: left;
+    color: #202020;
+}
+
+.carousel-item {
+    text-align: center;
+}
+
+.project-img-container {
+    display: inline-block;
+    height: 400px;
+    width: 1000px;
+    margin: auto;
+    
+}
+
+.project-img {
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+
+}
+
+.project-text {
+    font-size: 2rem;
+    line-height: 1.5;
+    color: #202020;
+    margin-bottom: 3em;
+
+}
+
+
+.projects-nav {
+    color: #B37AFF;
+}
+
+
+.projects-nav:hover {
+    color: #9747ff;
+}
+
+.projects-nav:after {
+    color: #B37AFF;
+}
+
+.projects-nav:active {
+    color: #B37AFF;
+}
+
+.projects-nav:visited {
+    color: #B37AFF;
+}
+
+.projects-nav::selection {
+    color: #B37AFF;
+}
+
+/* skills */
+
+.skills-container {
+    height: 90%;
+    background-color: white;
+    color: #202020;
+    padding: 40px 90px;
+}
+
+.skills-header {
+    text-align: center;
+    margin: 40px 0;
+    color: #202020;
+}
+
+#features {
+    padding: 3% 10%;
+    background-color: white;
+    position: relative;
+}
+.feature {
+    padding: 5%;
+    align-items: center;
+    text-align: center;
+}
+
+.icon {
+    width: 30%;
+    margin-bottom: 1rem;
+}
+
+.icon:hover {
+    color: #9747ff;
+}
+
+#title {
+    background-color: #292929;
+    color: white;
+}
+.name {
+    padding: auto;
+    margin: auto;
+}
+.circuit {
+    width: 90%;
+}
+
+.circuitl {
+    text-align: left;
+    overflow: hidden;
+}
+
+.circuitr {
+    text-align: right;
+    overflow: hidden;
+}
+.titlecontainer {
+    padding: 2em 0;
+}
+.titlename {
+    overflow: hidden;
+    padding: 0;
+}
+
+.header {
+    text-align: center;
+    padding: 3rem 0;
+    font-size: 4rem;
+}

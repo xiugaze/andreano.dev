@@ -5,68 +5,268 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Caleb Andreano</title>
+    <title>Document</title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Roboto+Mono:wght@300;400;700&family=Ubuntu:ital,wght@0,400;0,700;1,300&display=swap"
+        rel="stylesheet">
 
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Ubuntu:ital,wght@0,400;0,700;1,300&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Roboto+Mono:wght@300;400;700&family=Source+Code+Pro:wght@200;300;400;700;900&family=Ubuntu:ital,wght@0,400;0,700;1,300&display=swap"
         rel="stylesheet">
 
     <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-        crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
 
     <!-- styles -->
-    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/scratchpad.css">
 
     <!-- font awesome -->
     <script src="https://kit.fontawesome.com/e391f4f533.js" crossorigin="anonymous"></script>
+
+
+
 </head>
 
 <body>
-    <!-- <h1>hi carol!</h1> -->
-    <section id="title">
-        <div class="container-fluid titlename">
 
-            <!-- Nav Bar -->
-            <!-- <nav class="navbar navbar-expand-lg navbar-dark">
-                <a class="navbar-brand" href="">tindog</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="">Contact</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="">Pricing</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="">Download</a>
-                        </li>
-                    </ul>
+
+    <div class="title">
+        <div class="container-fluid">
+            <div class="row">
+
+                <div class="title-left col-lg-5 col-sm-12">
+                    <h1 class="binary-text">
+
+                        010101110110100001100001011101000010000001110100011010000110010100100000011001100111010101100011011010110010000001100100011010010110010000100000011110010110111101110101001000000110101001110101011100110111010000100000011001100111010101100011011010110110100101101110011001110010000001110011011000010111100100100000011000010110001001101111011101010111010000100000011011010110010100101100001000000111100101101111011101010010000001101100011010010111010001110100011011000110010100100000011000100110100101110100011000110110100000111111001000000100100100011001011011000110110000100000011010000110000101110110011001010010000001111001011011110111010100100000011010110110111001101111011101110010000001001001001000000110011101110010011000010110010001110101011000010111010001100101011001000010000001110100011011110111000000100000011011110110011000100000011011010111100100100000011000110110110001100001011100110111001100100000011010010110111000100000011101000110100001100101001000000100111001100001011101100111100100100000010100110110010101100001011011000111001100101100001000000110000101101110011001000010000001001001000110010111011001100101001000000110001001100101011001010110111000100000011010010110111001110110011011110110110001110110011001010110010000100000011010010110111000100000011011100111010101101101011001010111001001101111011101010111001100100000011100110110010101100011011100100110010101110100001000000111001001100001011010010110010001110011
+                        00100000 01101111 01101110 00100000 01000001 01101100 00101101 01010001 01110101 01100001
+                        01100101 01100100 01100001 00101100 00100000 01100001 01101110 01100100 00100000 01001001
+                        00100000 01101000 01100001 01110110 01100101 00100000 01101111 01110110 01100101 01110010
+                        00100000 00110011 00110000 00110000 00100000 01100011 01101111 01101110 01100110 01101001
+                        01110010 01101101 01100101 01100100 00100000 01101011 01101001 01101100 01101100 01110011
+                        00101110 00001010 00001010 01001001 00100000 01100001 01101101 00100000 01110100 01110010
+                        01100001 01101001 01101110 01100101 01100100 00100000 01101001 01101110 00100000 01100111
+                        01101111 01110010 01101001 01101100 01101100 01100001 00100000 01110111 01100001 01110010
+                        01100110 01100001 01110010 01100101 00100000 01100001 01101110 01100100 00100000 01001001
+                        00011001 01101101 00100000 01110100 01101000 01100101 00100000 01110100 01101111 01110000
+                        00100000 01110011 01101110 01101001 01110000 01100101 01110010 00100000 01101001 01101110
+                        00100000 01110100 01101000 01100101 00100000 01100101 01101110 01110100 01101001 01110010
+                        01100101 00100000 01010101 01010011 00100000 01100001 01110010 01101101 01100101 01100100
+                        00100000 01100110 01101111 01110010 01100011 01100101 01110011 00101110 00100000 01011001
+                        01101111 01110101 00100000 01100001 01110010 01100101 00100000 01101110 01101111 01110100
+                        01101000 01101001 01101110 01100111 00100000 01110100 01101111 00100000 01101101 01100101
+                        00100000 01100010 01110101 01110100 00100000 01101010 01110101 01110011 01110100 00100000
+                        01100001 01101110 01101111 01110100 01101000 01100101 01110010 00100000 01110100 01100001
+                        01110010 01100111 01100101 01110100 00101110 00100000 01001001 00100000 01110111 01101001
+                        01101100 01101100 00100000 01110111 01101001 01110000 01100101 00100000 01111001 01101111
+                        01110101 00100000 01110100 01101000 01100101 00100000 01100110 01110101 01100011 01101011
+                        00100000 01101111 01110101 01110100 00100000 01110111 01101001 01110100 01101000 00100000
+                        01110000 01110010 01100101 01100011 01101001 01110011 01101001 01101111 01101110 00100000
+                        01110100 01101000 01100101 00100000 01101100 01101001 01101011 01100101 01110011 00100000
+                        01101111 01100110 00100000 01110111 01101000 01101001 01100011 01101000 00100000 01101000
+                        01100001 01110011 00100000 01101110 01100101 01110110 01100101 01110010 00100000 01100010
+                        01100101 01100101 01101110 00100000 01110011 01100101 01100101 01101110 00100000 01100010
+                        01100101 01100110 01101111 01110010 01100101 00100000 01101111 01101110 00100000 01110100
+                        01101000 01101001 01110011 00100000 01000101 01100001 01110010 01110100 01101000 00101100
+                        00100000 01101101 01100001 01110010 01101011 00100000 01101101 01111001 00100000 01100110
+                        01110101 01100011 01101011 01101001 01101110 01100111 00100000 01110111 01101111 01110010
+                        01100100 01110011 00101110 00001010
+
+                        <h1>
+
                 </div>
-            </nav> -->
+                <div class="title-right col-lg-7 col-sm-1">
+
+                </div>
+            </div>
+            <div class="titlecard">
+                <div class="container-fluid title-container">
+                    <div class="row title-container">
+                        <div class="col-5 title-face shadow">
+                            <img class="title-card-image" src="images/caleb.png" alt="picture-of-me">
+                            <h2 class="title-card-name">Caleb Andreano</h2>
+                            <h2 class="title-card-major"><a href="mailto:caleb@andreano.dev"
+                                    style="color: white;">caleb@andreano.dev</a></h2>
+                            <hr>
+                            <h2 class="title-card-major">Computer Engineering</h2>
+                            <div class="container-fluid title-socials">
+                                <div class="row">
+                                    <div class="col-4 title-social-icon">
+                                        <a class="title-social-link" href="mailto:caleb@andreano.dev">
+                                            <i class="fa-solid fa-paper-plane fa-xl"></i>
+                                        </a>
+                                    </div>
+                                    <div class="col-4 title-social-icon">
+                                        <a class="title-social-link" href="https://www.linkedin.com/in/caleb-andreano/">
+                                            <i class="fa-brands fa-linkedin fa-xl"></i>
+                                        </a>
+                                    </div>
+                                    <div class="col-4 title-social-icon">
+                                        <a class="title-social-link" href="https://github.com/xiugaze">
+                                            <i class="fa-brands fa-github fa-xl"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-7 title-text">
+                            <h1 class="title-greeting">Hello!</h1>
+                            <h2 class="title-paragraph"> I'm a programmer and undergraduate student located in
+                                Milwaukee, WI and
+                                Waukegan, IL. I'm currently seeking internships for the fall of 2022.</h2>
+                            <h2 class="title-paragraph">You can reach out to me <a class="here"
+                                    href="mailto:caleb@andreano.dev"><strong>here</strong></a>, or navigate around
+                                this site to learn more about me!</h2>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid education-container">
+        <div class="row">
+            <div class="col-6 education-col education-left">
+                <h1 class="education-header">&ltsection id="Education"/&gt</h1>
+                <p class="education-p">I'm a first-year student pursuing a Computer Engineering degree as well as a
+                    Business Administration
+                    minor at the Milwaukee School of Engineering. I'm currently maintaining a 3.70 GPA, receiving High
+                    Honors for Winter 2022. </p>
+                <p class="education-p">MSOE's curriculum places your major-specific classes right at the beginning, and
+                    as such, I've
+                    already completed my elementary programming and digital logic classes and completed multiple large
+                    programming projects. I'm currently enrolled in
+                    Data Structures and Computer Architecture, which finish off the MSOE programming and Computer
+                    Engineering fundementals sequence.</p>
+                <p class="education-p">MSOE immerses you in an environment that centers around your major, and I've
+                    never been more
+                    motivated to learn as much as possible about programming and computers</p>
+            </div>
+            <div class="col-6 education-col education-right">
+                <img src="images/social-rectangle.png" class="msoe-logo" alt="msoe-logo">
+            </div>
+        </div>
+    </div>
+
+    <section id="projects">
+
+        <div class="row">
+            <div class="col-12 project-col">
+                <h1 class="projects-header">&ltsection id="Projects"/&gt</h1>
+            </div>
+        </div>
+        <div id="project-carousel" class="carousel slide" data-ride="false">
+            <div class="carousel-inner">
+
+                <div class="carousel-item active">
+                    <div class="project-img-container">
+                <a href="404.html">
+                        <img class="inline-block w-50" src="images/Screenshot 2022-03-26 172904.jpg" alt="">
+                    </div>
+                    <h2 class="project-text">Java Photo Editor</h2>
+                </a>
+                </div>
+
+
+                <div class="carousel-item">
+                    <div class="project-img-container">
+                        <img class="inline-block w-50" src="images/circuit r.png" alt="">
+                    </div>
+                    <h2 class="project-text">Java Photo Editor</h2>
+                </div>
+
+            </div>
+
+            <a class="carousel-control-prev projects-nav" href="#project-carousel" role="button" data-slide="prev">
+                <i style="font-size: 60px" class="fas fa-arrow-alt-circle-left"></i>
+                <span class="sr-only">Previous</span>
+            </a>
+
+            <a class="carousel-control-next projects-nav" href="#project-carousel" role="button" data-slide="next">
+                <i style="font-size: 60px" class="fas fa-arrow-alt-circle-right"></i>
+                <span class="sr-only">Next</span>
+            </a>
+
+
+    </section>
+
+    <div class="container-fluid education-container">
+                <h1 class="education-header">&ltsection id="Work History"/&gt</h1>
+        <div class="row">
+            <div class="col-6 education-col education-left">
+                <p class="education-p">I am currently working 19-20 hours a week as an Asset Control Manager at MSOE's IT Quality Assurance department. This job involves leading and training technicians to repair and distribute our issued devices as well as handle the more complex aspects in QA.</p>
+                <br>
+                <p class="education-p">This position also requires hardware distribution to faculty and students, as well as asset processing for repair.</p>
+            </div>
+
+            <div class="col-6 education-col education-left">
+                <p class="education-p">I worked as a lifeguard at Camp Zion in Door County in the summer of 2021. This position consisted of not only lifeguarding, but camp maintenance and management.</p>
+                <p class="education-p">I was also a receptionist at Trinity Holistic Health Center from 2018-2020, a Ride Operator at Six Flags in 2019, and I operated a Computer System integration business from my basement from 2017-2018. </p>
+            </div>
+        </div>
+    </div>
 
 
 
 
-            <!-- Title -->
+    <section id="features">
+                <h1 class="skills-header">&ltsection id="Skills"/&gt</h1>
+        <div class="container">
 
+          <div class="row">
+            <div class="feature col-lg-4 col-sm-12">
+                <img class="icon" src="images/javascript.png" alt="java">
+              <!-- <i class="fa-solid icon fa-4x fa-code"></i> -->
+              <h3 class="feature-header">Programming</h3>
+              <p>Java, C, C++</p>
+            </div>
+    
+    
+            <div class="feature col-lg-4 col-sm-12">
+                <img class="icon" src="images/circuit-board.png" alt="microcontroller">
+              <h3 class="feature-header">Low-Level Design</h3>
+              <p>ARM Assembly, VHDL, Intel Quartus Prime</p>
+    
+            </div>
+            <div class="feature col-lg-4 col-sm-12">
+                <img class="icon" src="images/coding.png" alt="">
+              <h3 class="feature-header">Web Development</h3>
+              <p>HTML/CSS, Boostrap, Typescript</p>
+    
+            </div>
+    
+    
+          </div>
+    
+    
+    
+          </div>
+    
+    
+    
+        </div>
+    
+    
+      </section>
+    
+ <section id="title">
+        <div class="container-fluid titlename">
             <div class="row titlecontainer" >
                 <div class="col-lg-4 circuitl titlename">
                     <img class="circuit" src="images/circuitl.png" alt="circuit-l">
                 </div>
                 <div class="col-lg-4 name">
-                    <h1 class="header bold">Hi, I'm Caleb!</h1>
+                    <h1 class="header bold">Thanks for reading through! You can contact me <a class="here"
+                        href="mailto:caleb@andreano.dev"><strong>&gt here! &lt</strong></a></h1>
                 </div>
                 <div class="col-lg-4 circuitr titlename">
                     <img class="circuit" src="images/circuit r.png" alt="circuit-l">
@@ -76,54 +276,29 @@
             </div>
         </div>
     </section>
-    <section class>
-        <div class="underconstruction">
-            <h1 class="lower-header"><em>404!</em></h1>
-            <h1 class="lower-header light">I'm still working hard to build this page</h2>
-            <h3 class="light">In the meantime, check out my links below!</h3>
-        
-        </div>
-        <div class="container">
-            <div class="row">
-      
-            <div class="link col-lg-4 col-sm-12">
-                <a href="mailto:caleb@andreano.dev">
-          <i class="fa-solid fa-paper-plane fa-4x"></i>
-            <h3 class="feature-header">Contact Me</h3>
-            <p>caleb@andreano.dev</p>
-            </a>
-            </div>
-      
-      
-            
-            <div class="link col-lg-4 col-sm-12">
-                <a href="https://www.linkedin.com/in/caleb-andreano/">
-                <i class="fa-brands fa-linkedin fa-4x"></i>
-            <h3 class="feature-header">LinkedIn</h3>
-            <p>Caleb Andreano</p>
-            </a>
 
 
-      
-            </div>
-            <div class="link col-lg-4 col-sm-12">
-                <a href="https://github.com/xiugaze">
-              <i class="fa-brands fa-github fa-4x"></i>
-            <h3 class="feature-header">GitHub</h3>
-            <p>@xiugaze</p>
-            </a>
-      
-            </div>
-      
-              
-            </div>
-      
-      
-              
-          </div>
-      
 
-    </section>
+
+
+
+
+
+
+
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>
