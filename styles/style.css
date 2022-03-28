@@ -1,3 +1,6 @@
+body {
+    font-family: 'Roboto Mono', monospace;
+}
 a {
     text-decoration: none;
 }
@@ -27,7 +30,7 @@ a:active {
 .header {
     text-align: center;
     padding: 3rem 0;
-    font-size: 4rem;
+    font-size: 2rem;
 }
 
 .lower-header {
@@ -45,7 +48,7 @@ a:active {
     margin: auto;
 }
 .circuit {
-    width: 90%;
+    width: 40%;
 }
 
 .circuitl {
@@ -68,14 +71,34 @@ a:active {
 .light {
     font-weight: 300;
 }
-.underconstruction {
+.info {
     padding: 5rem 0;
-    line-height: 100px;
     text-align: center;
+    width: 50%;
+    margin: auto;
+}
+.info-paragraph {
+    margin: 20px auto;
+    text-align: left;
+    font-size: 1.4em;
+    width: 80%;
+    line-height: 1.7em;
+
+}
+
+.info-img {
+    width: 100%;
+    margin: 20px auto;
 }
 
 .link {
     padding: 5%;
     align-items: center;
     text-align: center;
+}
+
+
+.here:link {
+    color: #B37AFF;
+    text-decoration: none;
 }

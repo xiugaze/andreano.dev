@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Java Photo Editor
+    <title>Dorm Hallway Rangefinder
     </title>
 
 
@@ -60,7 +60,7 @@
                     <img class="circuit" src="images/circuitl.png" alt="circuit-l">
                 </div>
                 <div class="col-lg-4 name">
-                    <h1 class="header bold">Java Photo Editor</h1>
+                    <h1 class="header bold">Dorm Hallway Rangefinder</h1>
                 </div>
                 <div class="col-lg-4 circuitr titlename">
                     <img class="circuit" src="images/circuit r.png" alt="circuit-l">
@@ -73,14 +73,33 @@
 
     <section class>
         <div class="info">
-                <p class="info-paragraph">This was my month-long final project for CS-1021 Software Development II. I used Java
-                    and JavaFX to build a functional user interface that allows a user to load and view images of multiple different filetypes, including 
-                .png, .jpg, .bmp, and two custom binary formats called .msoe and .bmsoe. The program was built with event-driven and functional programming principles. The application can handle invalid inputs or filetypes, and notifies the user of any errors through pop-up dialogues. 
-            After loading an image, a user can apply color transformations and tints, blur and sharpen, or even a custom 3x3 image filter kernel. I went past the requirements of this project by designing complex, intuitive user interface using FXML and CSS. This design follows traditional Windows UI design tenets, and is modeled after Adobe Photoshop. </p>
-            <p class="info-paragraph">You can view the project repo or download the application <a class="here"
-                href="https://github.com/xiugaze/java-photo-editor/tree/master"><strong>&gt here! &lt</strong></a> </p>
-            <img class="info-img" src="images/javafx1.png" alt="">
-            <img class="info-img" src="images/javafx2.png" alt="">
+            <p class="info-paragraph">This project stemmed from classic dorm boredom. My floormates and I wanted to find
+                a way to spice up the
+                look of our floor for Christmastime besides the traditional lights. I led a team of three to build a
+                custom controller and firmware to interface a Garmin LIDAR
+                sensor to a long strip of NeoPixel LEDs run over our main hallway. This rangefinder would be able to
+                calculate the distance of a moving body,
+                and in turn light up the section of the strip corresponding to the body. This created a strip of light
+                that could follow person down the hallway.
+            </p>
+            <p class="info-paragraph">
+                Our controller consisted of an AdaFruit Feather M4 and multiple breakout boards to interact with the
+                LIDAR sensor. This board was chosen for it's
+                good NeoPixel compatibility and integrated RTJ45 connectors.
+
+            </p>
+            <p class="info-paragraph">
+                I built a proof-of-concept using individual LEDs in Novemeber.
+                Unfortunately, after failing to complete the project by Christmas, we lost some motivation. We finished
+                a fully-functional prototype by early January, but decided not to
+                put up the lights and recycle our custom controller for another project.
+            </p>
+
+            <p class="info-paragraph">This repo is a bit out of date, but you can still view it <a class="here"
+                    href="https://github.com/xiugaze/hallway-rangefinder"><strong>&gt here! &lt</strong></a>
+            </p>
+            <img class="info-img" src="images/adafruit-board2.png" alt="">
+            <img class="info-img" src="images/rangefinder2.png" alt="">
 
         </div>
 
