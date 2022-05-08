@@ -123,6 +123,7 @@ body {
 }
 
 .title-greeting {
+    display: inline-block;
     font-family: 'Source Code Pro', monospace;
     font-weight: 300;
     font-size: 4em;
@@ -130,6 +131,7 @@ body {
     
 }
 .title-paragraph {
+    display: inline-block;
     padding: 5% 0% 5% 15%;
     font-family: 'Source Code Pro', monospace;
     font-weight: 300;
