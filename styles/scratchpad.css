@@ -76,6 +76,12 @@ body {
 .title-container {
     height: 100%;
 }
+
+.title-text {
+    width: 60%;
+    margin: auto;
+}
+
 .title-face {
     background-color: #795e91;
     height: 100%;
