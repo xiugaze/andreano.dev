@@ -14,6 +14,7 @@ body {
   display: block;
   width: 50%;
   margin: auto;
+  white-space: nowrap;
 
 }
 
@@ -24,6 +25,26 @@ body {
   width: 200px;
   border: 10px solid black;
   border-radius: 20%;
+}
+
+.playbtn {
+  margin: 25px;
+  display: inline-block;
+  height: 100px;
+  width: 200px;
+  border: 10px solid black;
+  border-radius: 20%;
+  background-color: rgb(255, 167, 248);
+  text-align: center;
+}
+
+.play-restart {
+  margin-top: 20px;
+}
+
+.restart {
+  background-color: rgb(255, 167, 248);
+  opacity: 0.8;
 }
 
 .game-over {

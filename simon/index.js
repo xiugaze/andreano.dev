@@ -4,7 +4,7 @@ let gamePattern = [];
 let started = false;
 let level = 0;
 
-$(document).keypress(function() {
+$(document).keydown(function() {
   if (!started) {
     $("#level-title").text("Level " + level);
     nextSequence();
@@ -20,8 +20,36 @@ function buttonOnClick() {
     checkAnswer(userClickedPattern.length - 1);
 }
 
+function playRestart() {
+    $(".playbtn").addClass("pressed");
+    setTimeout(function () {
+        $(".playbtn").removeClass("pressed");
+    }, 100);
+    if(started) {
+        startOver();
+
+        $("body").addClass("restart");
+        $("#level-title").text("Restarting...");
+
+        setTimeout(function () {
+            $("body").removeClass("restart");
+            started = true;
+            nextSequence();
+        }, 200);
+
+    } else {
+        started = true;
+        nextSequence();
+        $("#level-title").text("Level " + level);
+    }
+}
+
+$(".playbtn").on("click", playRestart);
+
 function nextSequence() {
     $(".btn").off();
+    $(".play-restart").removeClass("fa-play");
+    $(".play-restart").addClass("fa-arrow-rotate-left");
 
     level++;
     $("#level-title").text("Level " + level);
