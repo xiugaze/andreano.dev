@@ -1,0 +1,10 @@
+{{ define "main" }}
+
+{{ if (ne .Title "about") }} 
+  <h1>{{ .Title }}</h1>
+  {{ partial "date-and-tags.html" . }}
+{{ end }}
+<br><br>
+{{ .Content }}
+
+{{ end }}

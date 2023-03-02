@@ -1,0 +1,22 @@
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  {{ hugo.Generator }}
+
+  {{ $bootstrap := "css/bootstrap.min.css" | relURL }}
+  <link rel="stylesheet" href="{{ $bootstrap }}">
+
+
+  <link>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter&family=JetBrains+Mono:ital@0;1&display=swap" rel="stylesheet">
+  {{ $title := print .Title " | " .Site.Title }}
+  {{ if .IsHome }}{{ $title = .Site.Title }}{{ end }}
+
+  {{ $syntax := "css/syntax.css" | relURL }}
+  <link rel="stylesheet" href="{{ $syntax }}">
+
+  <title>{{ $title }}</title>
+  {{ partial "style.html" . }}
+</head>

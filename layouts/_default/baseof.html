@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+  {{ partial "style.html" . }}
+  {{ partial "head.html" . }}
+  <body class="light">
+
+    <!-- {{ if .IsHome  }} -->
+    <!--   {{ partial "darkmode.html" }} -->
+    <!-- {{ end }} -->
+    <!-- show navbar if not home-->
+    {{ if ne .IsHome true }}
+      {{ partial "nav.html" . }}
+    {{ end }}
+    <!---->
+
+    <div class="container">
+      <main id="main">
+        {{ block "main" . }}{{ end }}
+      </main>
+    </div>
+    {{ partial "script.html" . }}
+  </body>
+</html>

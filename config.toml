@@ -1,0 +1,41 @@
+baseURL = "https://example.com"
+languageCode = "en-us"
+title = "Caleb Andreano"
+
+[taxonomies]
+  tag = "tags"
+
+# [permalinks]
+#   posts = "/:filename/"
+
+# See https://feathericons.com/
+# The value of pre is the icon name
+[menu]
+  [[menu.main]]
+    name = "home"
+#pre = "home"
+    url = "/"
+    weight = 1
+  [[menu.main]]
+    name = "posts"
+#    pre = "edit"
+    url = "/posts/"
+    weight = 2
+  [[menu.main]]
+    name = "about"
+#    pre = "tag"
+    url = "/about"
+    weight = 3
+
+[params]
+  containerMaxWidth = "700px"
+  dateFormat = "Jan 2, 2006"
+  homeText = "You just made a Hugo blog from scratch."
+  sun = "sun"
+  moon = "moon"
+[markup]
+  [markup.highlight]
+    noClasses = "false"
+  [markup.goldmark.renderer]
+    unsafe=true
+

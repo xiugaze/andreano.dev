@@ -1,0 +1,79 @@
+<div class="toggle" style="background-color: var(--dark-bg);">
+  <div id="icon-sun">
+    <pre data-feather="sun"></pre>
+  </div>
+  <div id="icon-moon" style="display: none;">
+    <pre data-feather="moon"></pre>
+  </div>
+</div>
+
+
+<style>
+  .toggle {
+    position: relative;
+    background-color: red;
+    width: 40px;
+    height: 40px;
+
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+  }
+</style>
+
+
+<script>
+
+  var body = document.body;
+  var toggle = document.getElementsByClassName('toggle')[0];
+  var sun = document.getElementById('icon-sun');
+  var moon = document.getElementById('icon-moon');
+
+
+  toggle.addEventListener("click", function () {
+    console.log("click");
+    if (body.classList.contains('light')) {
+      onDark();
+    } else {
+      onLight();
+    }
+  });
+
+  if (localStorage.getItem('dark')) {
+    onDark();
+  } else {
+    onLight();
+  }
+
+  function onDark() {
+    body.classList.remove('light');
+    body.classList.add('dark');
+
+    sun.style.display = 'none';
+    moon.style.display = '';
+
+    toggle.style.backgroundColor = "var(--dark-bg)";
+
+    if (!localStorage.getItem('dark')) {
+      localStorage.setItem('dark', 'true');
+    }
+  }
+
+  function onLight() {
+    body.classList.remove('dark');
+    body.classList.add('light');
+
+    sun.style.display = '';
+    moon.style.display = 'none';
+
+    toggle.style.backgroundColor = "var(--light-bg)";
+
+    if (localStorage.getItem('dark')) {
+      localStorage.removeItem('dark', 'true');
+    }
+  }
+
+</script>

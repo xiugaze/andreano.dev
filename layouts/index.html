@@ -1,0 +1,33 @@
+{{ define "main" }}
+
+<div id="home-jumbotron" class="jumbotron text-center">
+  <h1 style="margin-top: 20%;">{{ .Site.Title }}</h1>
+  <!-- <p class="font-125">{{ .Site.Params.homeText | markdownify }}</p> -->
+  <p style="color: #575279;">
+    <!-- <a link="> about </a> -->
+    <a href="/posts/">posts</a> //
+    <a href="/about/">about</a> //
+    <a target="_blank" href="files/cv.pdf"> resume </a>
+  </p>
+  <div class="socials">
+    {{ partial "darkmode.html" . }}
+    <div class="social">
+      <a href="https://www.linkedin.com/in/caleb-andreano/">
+        <pre class="social" data-feather="linkedin"></pre>
+      </a>
+    </div>
+    <div class="social2">
+      <a href="https://github.com/xiugaze">
+        <pre data-feather="github"></pre>
+      </a>
+    </div>
+    <div class="social">
+      <a href="mailto:caleb@andreano.dev">
+        <pre data-feather="mail"></pre>
+      </a>
+    </div>
+
+  </div>
+</div>
+
+{{ end }}
