@@ -1,7 +1,7 @@
 baseURL = "https://www.andreano.dev"
 languageCode = "en-us"
 title = "Caleb Andreano"
-
+publishDir = "docs"
 [taxonomies]
   tag = "tags"
 
