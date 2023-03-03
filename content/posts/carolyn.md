@@ -14,6 +14,13 @@ poopity scoop, scoop dee poop
 
 How much the ertf cost? Imma buy the entire earf and...be a king
 
+> This is a block quote. Below, there's some code `C` code. 
+
+
+
+{{< mathjax/block >}}
+$$ \int_{10}^{13} 2xdx$$
+{{< /mathjax/block >}}
 
 ```c
 int main(void) {

@@ -24,7 +24,8 @@
       <guid>https://www.andreano.dev/posts/carolyn/</guid>
       <description>Heading 1 poopity scoop, scoop dee poop
 hello How much the ertf cost? Imma buy the entire earf and&amp;hellip;be a king
-int main(void) { printf(&amp;#34;HI&amp;#34;); } </description>
+This is a block quote. Below, there&amp;rsquo;s some code C code.
+$$ \int_{10}^{13} 2xdx$$ int main(void) { printf(&amp;#34;HI&amp;#34;); } </description>
     </item>
     
     <item>

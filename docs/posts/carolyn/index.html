@@ -225,6 +225,24 @@ img {
   display: inline;
   margin-right: 8px;
 }
+
+blockquote {
+  margin: 1.5em 0px;
+  padding: 0.5em 15px;
+  border-left: 3px solid ;
+}
+
+.light blockquote {
+  border-color: var(--light-text);
+}
+.dark blockquote {
+  border-color: var(--dark-text);
+}
+
+blockquote p {
+  display: inline;
+  font-style: italic;
+}
 </style>
 
   <head>
@@ -472,6 +490,24 @@ img {
   display: inline;
   margin-right: 8px;
 }
+
+blockquote {
+  margin: 1.5em 0px;
+  padding: 0.5em 15px;
+  border-left: 3px solid ;
+}
+
+.light blockquote {
+  border-color: var(--light-text);
+}
+.dark blockquote {
+  border-color: var(--dark-text);
+}
+
+blockquote p {
+  display: inline;
+  font-style: italic;
+}
 </style>
 
 </head>
@@ -603,6 +639,15 @@ img {
 <p>poopity scoop, scoop dee poop</p>
 <h2 id="hello">hello</h2>
 <p>How much the ertf cost? Imma buy the entire earf and&hellip;be a king</p>
+<blockquote>
+<p>This is a block quote. Below, there&rsquo;s some code <code>C</code> code.</p>
+</blockquote>
+<div class="has-mathjax">
+
+$$ \int_{10}^{13} 2xdx$$
+
+</div>
+
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;HI&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
@@ -616,8 +661,28 @@ img {
 <script>
   feather.replace();
 
-</script>
+</script><style>
+.has-mathjax {
+    visibility: hidden;
+}
+</style>
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
 <script>
+window.MathJax = {
+  startup: {
+    pageReady: () => {
+      return MathJax.startup.defaultPageReady().then(() => {
+        for (let element of document.getElementsByClassName("has-mathjax")) {
+            element.style.visibility = "visible"
+        }
+      });
+    }
+  }
+};
+</script><script>
   function createCopyButton(highlightDiv) {
   const button = document.createElement("button");
   button.className = "copy-code-button";

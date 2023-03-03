@@ -4,6 +4,32 @@
   feather.replace();
 
 </script>
+
+{{- if or (.HasShortcode "mathjax/block") (.HasShortcode "mathjax/inline") -}}
+<style>
+.has-mathjax {
+    visibility: hidden;
+}
+</style>
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<script>
+window.MathJax = {
+  startup: {
+    pageReady: () => {
+      return MathJax.startup.defaultPageReady().then(() => {
+        for (let element of document.getElementsByClassName("has-mathjax")) {
+            element.style.visibility = "visible"
+        }
+      });
+    }
+  }
+};
+</script>
+{{- end -}}
+
 <script>
   function createCopyButton(highlightDiv) {
   const button = document.createElement("button");
