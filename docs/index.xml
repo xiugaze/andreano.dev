@@ -5,29 +5,7 @@
     <link>https://www.andreano.dev/</link>
     <description>Recent content on Caleb Andreano</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Thu, 02 Mar 2023 15:08:33 -0600</lastBuildDate><atom:link href="https://www.andreano.dev/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Test</title>
-      <link>https://www.andreano.dev/posts/test/</link>
-      <pubDate>Thu, 02 Mar 2023 15:08:33 -0600</pubDate>
-      
-      <guid>https://www.andreano.dev/posts/test/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Carolyn</title>
-      <link>https://www.andreano.dev/posts/carolyn/</link>
-      <pubDate>Wed, 01 Mar 2023 18:56:05 -0600</pubDate>
-      
-      <guid>https://www.andreano.dev/posts/carolyn/</guid>
-      <description>Heading 1 poopity scoop, scoop dee poop
-hello How much the ertf cost? Imma buy the entire earf and&amp;hellip;be a king
-This is a block quote. Below, there&amp;rsquo;s some code C code.
-$$ \int_{10}^{13} 2xdx$$ int main(void) { printf(&amp;#34;HI&amp;#34;); } </description>
-    </item>
-    
+    <language>en-us</language><atom:link href="https://www.andreano.dev/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>about</title>
       <link>https://www.andreano.dev/about/</link>
@@ -37,57 +15,6 @@ $$ \int_{10}^{13} 2xdx$$ int main(void) { printf(&amp;#34;HI&amp;#34;); } </desc
       <description>Caleb Andreano I am an aspiring engineer and second-year student pursuing a BS in Computer Engineering. I have a deep passion for both hardware and software, including microarchitecture, software development, web development, embedded systems, and system architecture.
 Work History I am currently working at Gama Space doing embedded development. I previously interned at Cognex Corporation as a software developer.
 Education I&amp;rsquo;m currently studying Computer Engineering with a minor in Business Administration at Milwaukee School of Engineering.</description>
-    </item>
-    
-    <item>
-      <title>Trees by Joyce Kilmer</title>
-      <link>https://www.andreano.dev/posts/trees-by-joyce-kilmer/</link>
-      <pubDate>Sun, 13 Jan 2019 20:28:42 -0600</pubDate>
-      
-      <guid>https://www.andreano.dev/posts/trees-by-joyce-kilmer/</guid>
-      <description>I think that I shall never see
-A poem lovely as a tree.
-A tree whose hungry mouth is prest
-Against the earth’s sweet flowing breast;
-A tree that looks at God all day,
-And lifts her leafy arms to pray;
-A tree that may in Summer wear
-A nest of robins in her hair;
-Upon whose bosom snow has lain;
-Who intimately lives with rain.
-Poems are made by fools like me,</description>
-    </item>
-    
-    <item>
-      <title>That it will never come again by Emily Dickinson</title>
-      <link>https://www.andreano.dev/posts/that-it-will-never-come-again-by-emily-dickinson/</link>
-      <pubDate>Sat, 12 Jan 2019 23:24:54 -0600</pubDate>
-      
-      <guid>https://www.andreano.dev/posts/that-it-will-never-come-again-by-emily-dickinson/</guid>
-      <description>That it will never come again
-Is what makes life so sweet.
-Believing what we don’t believe
-Does not exhilarate.
-That if it be, it be at best
-An ablative estate &amp;ndash;
-This instigates an appetite
-Precisely opposite.</description>
-    </item>
-    
-    <item>
-      <title>If by Rudyard Kipling</title>
-      <link>https://www.andreano.dev/posts/if-by-rudyard-kipling/</link>
-      <pubDate>Sat, 12 Jan 2019 22:14:57 -0600</pubDate>
-      
-      <guid>https://www.andreano.dev/posts/if-by-rudyard-kipling/</guid>
-      <description>If you can keep your head when all about you
-Are losing theirs and blaming it on you,
-If you can trust yourself when all men doubt you,
-But make allowance for their doubting too;
-If you can wait and not be tired by waiting,
-Or being lied about, don’t deal in lies,
-Or being hated, don’t give way to hating,
-And yet don’t look too good, nor talk too wise:</description>
     </item>
     
   </channel>

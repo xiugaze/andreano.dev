@@ -2,43 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://www.andreano.dev/</loc>
-    <lastmod>2023-03-02T15:08:33-06:00</lastmod>
-  </url><url>
-    <loc>https://www.andreano.dev/posts/</loc>
-    <lastmod>2023-03-02T15:08:33-06:00</lastmod>
-  </url><url>
-    <loc>https://www.andreano.dev/posts/test/</loc>
-    <lastmod>2023-03-02T15:08:33-06:00</lastmod>
-  </url><url>
-    <loc>https://www.andreano.dev/posts/carolyn/</loc>
-    <lastmod>2023-03-01T18:56:05-06:00</lastmod>
-  </url><url>
     <loc>https://www.andreano.dev/about/</loc>
     <lastmod>2023-03-01T13:10:01-06:00</lastmod>
   </url><url>
-    <loc>https://www.andreano.dev/tags/poetry/</loc>
-    <lastmod>2019-01-13T20:28:42-06:00</lastmod>
+    <loc>https://www.andreano.dev/</loc>
+  </url><url>
+    <loc>https://www.andreano.dev/posts/</loc>
   </url><url>
     <loc>https://www.andreano.dev/tags/</loc>
-    <lastmod>2019-01-13T20:28:42-06:00</lastmod>
-  </url><url>
-    <loc>https://www.andreano.dev/tags/trees/</loc>
-    <lastmod>2019-01-13T20:28:42-06:00</lastmod>
-  </url><url>
-    <loc>https://www.andreano.dev/posts/trees-by-joyce-kilmer/</loc>
-    <lastmod>2019-01-13T20:28:42-06:00</lastmod>
-  </url><url>
-    <loc>https://www.andreano.dev/posts/that-it-will-never-come-again-by-emily-dickinson/</loc>
-    <lastmod>2019-01-12T23:24:54-06:00</lastmod>
-  </url><url>
-    <loc>https://www.andreano.dev/tags/time/</loc>
-    <lastmod>2019-01-12T23:24:54-06:00</lastmod>
-  </url><url>
-    <loc>https://www.andreano.dev/posts/if-by-rudyard-kipling/</loc>
-    <lastmod>2019-01-12T22:14:57-06:00</lastmod>
-  </url><url>
-    <loc>https://www.andreano.dev/tags/life/</loc>
-    <lastmod>2019-01-12T22:14:57-06:00</lastmod>
   </url>
 </urlset>
