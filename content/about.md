@@ -42,6 +42,8 @@ I'm currently studying Computer Engineering with a minor in Business Administrat
 <br> 
 
 ### how
+[repo](https://github.com/xiugaze/andreano.dev)
+
 I made this website using [Hugo](https://gohugo.io/). The icons are from [Feather](https://feathericons.com/), and there's a little bit of [Bootstrap](https://getbootstrap.com/) here and there for buttons and stuff. Colors are from [Rosé Pine](https://github.com/rose-pine/rose-pine-theme). 
 
 Anything dynamic I made from scratch with raw JavaScript (no `jQuery`, no bloat).
