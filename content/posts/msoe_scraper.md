@@ -2,7 +2,7 @@
 title: "How to Schedule for Classes at MSOE"
 date: 2023-05-18T09:30:38-05:00
 tags: []
-draft: true
+draft: false
 ---
 
 Scheduling for new classes at MSOE can be somewhat confusing and stressful. 
@@ -44,5 +44,7 @@ Web scraping is a way of programatically retrieving data or content from a websi
 We can use these techniques to automatically extract the static HTML data from a website, and with it, potentially database contents that gets served alongside the static website.  
 
 For our little application, I'm going to just pick a [random website](https://resources.msoe.edu/sched/courses/all) that we can easily pull some data off of. 
+
+![targets](/scheduler.png)
 
 
