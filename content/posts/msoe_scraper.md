@@ -40,7 +40,7 @@ You have a lot of options at this point:
 - Schedule for an open section: You may have to put in some extra work to do well in a class with a more difficult professor, but hey, at the end of the day they're all fair in the end, right?
 - Wait for the section to open up: Seats can *always* be added to sections. In my experience, more seats tend to be added at times ending in a prime number, like 8:07 AM or 12:67 PM.
 
-## What happens if I don't get get my schedule?
+## What happens if I don't get my schedule?
 
 If a class is a requirement in your academic track, then the school is required to give you a seat. 
 In this case, a closed section request filed when all section are full will usually be approved without issue. This can be acutally be a good thing, because an 8:00 AM to 7:00 PM schedule is actually really good because it's a realistic simulation of a real work day in industry!
