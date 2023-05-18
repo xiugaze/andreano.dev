@@ -5,6 +5,18 @@ tags: []
 draft: false
 ---
 
+{{< rawhtml >}}
+  <div class="socials">
+    <div class="social2">
+      <a href="https://github.com/xiugaze/msoe-open-seat">
+        <pre data-feather="github"></pre>
+        msoe-open-seat
+      </a>
+    </div>
+  </div>
+  <br>
+{{< /rawhtml >}}
+
 Scheduling for new classes at MSOE can be somewhat confusing and stressful. 
 In this article, I want to quickly share a few tips and tricks I've learned from my time here at school.
 
@@ -45,6 +57,143 @@ We can use these techniques to automatically extract the static HTML data from a
 
 For our little application, I'm going to just pick a [random website](https://resources.msoe.edu/sched/courses/all) that we can easily pull some data off of. 
 
-![targets](/scheduler.png)
+![targets](/images/scheduler.png)
 
+We're going to have two major dependencies for our Python script: `request` from the standard library for our HTTP functions, and a library called [Beautiful Soup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/) (`bs4`) for pulling elements from the DOM and packaging them as Python objects. 
 
+```python
+import requests
+from bs4 import BeautifulSoup
+
+URL = "https://resources.msoe.edu/sched/courses/all"
+
+page = requests.get(URL)
+soup = BeautifulSoup(page.content, "html.parser")
+
+```
+
+Our `page` object is a simple class that contains the data from an HTTP PUT, which is an HTTP primitive that sends data back in response to a GET request. 
+You can read more about POST [here](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/PUT).
+Specifically, this object is going to hold our HTML data in it's `content` attribute, which we're going to pass to the `BeautifulSoup()` constructor to instantiate the HTML document as an object tree. 
+This constructor builds our DOM as a bunch of objects, and returns the root node which we'll store in the `soup` variable. 
+
+Now that we have a handle to our webpage, we can traverse through the tree to target a specific piece of data. 
+For this example, we can see that the main content of the webpage is stored in a table,and using inspect inspect element confirms this structure: 
+
+```html 
+<div class="table_wrapper">
+  <div class="table_wrapper_inner">
+    <table class="course-table">
+        <thead>
+        <tr>
+            <th style="width: 90px">Code</th>
+            <th>Title</th>
+            <th>Status</th>
+            <th>Instructor</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>ACS  1130 001 </td>
+                <td>Introduction to Actuarial Science</td>
+                <td>Open</td>
+                <td>William M. Brummond</td>
+            </tr>
+            <tr>
+                <td>ACS  1530 001 </td>
+                <td>Financial Mathematics I</td>
+                <td>Open</td>
+                <td>. MA Staff</td>
+            </tr>
+            <!-- ...etc -->
+```
+Okay, so here we can see that all of this data is stored in a `<table>` with `class ="course-table"`
+In HTML, the `class` attribute is *not* a unique identifier, meaning that there can be multiple tags that share the same class. 
+However, this is the first occurence of this class in the document, so if there's any more, we can just grab the first one. 
+
+We can get a handle to the table using  `b4f` method `find()`:
+
+```python
+table = soup.find(class_="course-table").find("tbody")
+```
+Here, we're calling the `find()` method on our entire document, searching for the first element with the `class` attribute `"course-table"`.
+We're then calling `find()` again on the `<table>` tag for the first `<tbody>` tag. 
+
+Looking at our HTML document, we can see that it's contains a bunch of `<tr>` (table row) tags, which in turn hold multiple `<td>` (table data) tags each. 
+However, none of these elements specify any unique identifiers, like a `class` or `id` attribute. 
+
+Let's write a quick function to iterate through the `<tbody>` tag and search for the `<tr>` that contains a `<td>` with specific text:
+
+```python
+def find_td_in_tbody(tbody, string):
+  for tr in tbody.find_all('tr'):
+    for td in tr.find_all('td'):
+      if string in td_tag.get_text():
+        return td_tag
+  return None
+
+classcode = find_td_in_body(table, "ACS 1530 001")
+```
+
+In this function, we iterate through each `<tr>` tag in the `<tbody>` tag. 
+Within each of those, we iterate through each `<td>` tag, and check if it contains our search string. If it does, we return the `<td>` element, which corresponds to a cell in the table.
+
+Now that we and element in the row containing our search string, we can check if any of its siblings contain another search string. 
+
+```python
+def find_in_sibling(tag, string):
+  for sibling in tag.find_next_siblings():
+    if string in sibling.get_text():
+      return True
+  return False
+status = find_in_sibling(classcode, "Open")
+```
+Putting all of this together, we can create a simple program that monitors for a state change in an HTML tag:
+
+```python
+import requests
+from bs4 import BeautifulSoup
+
+def find_td_in_tbody(tbody, string):
+  for tr in tbody.find_all('tr'):
+    for td in tr.find_all('td'):
+      if string in td_tag.get_text():
+        return td_tag
+
+def find_in_sibling(tag, string):
+  for sibling in tag.find_next_siblings():
+    if string in sibling.get_text():
+      return True
+  return False
+
+def main():
+  URL = "https://resources.msoe.edu/sched/courses/all"
+  class_name = "ACS 1130 001"
+
+  page = requests.get(URL)
+  soup = BeautifulSoup(page.content, "html.parser")
+
+  table = soup.find(class_="course-table").find("tbody")
+
+  class_element = find_td_in_body(table, class_name)
+  open = find_in_sibling(class_element, "Open")
+
+  status: str
+  if(open):
+    status = "Open"
+  else:
+    status = "Closed"
+
+  print("Class " + classcode + " is currently " + status)
+  
+
+if __name__ == "__main__":
+  main()
+
+```
+Wow, look at that! 
+We just automated the process of refreshing a page and seeing if something changed!
+
+## conclusion
+
+take the power back
