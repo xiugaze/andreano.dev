@@ -3,6 +3,7 @@ title: "How to Schedule for Classes at MSOE"
 date: 2023-05-18T09:30:38-05:00
 tags: []
 draft: false
+summary: "Whining about class scheduling and building a web scraper"
 ---
 
 {{< rawhtml >}}

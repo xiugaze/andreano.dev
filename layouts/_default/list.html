@@ -3,9 +3,11 @@
 <h1>{{ .Title }}</h1>
 {{ range .Pages.ByPublishDate.Reverse }}
 <p>
-  <a class="font-125" href="{{ .RelPermalink }}">{{ .Title }}</a>
+  <a style="font-family: JetBrains Mono;"class="font-125" href="{{ .RelPermalink }}">{{ .Title }}</a>
   <br>
   {{ partial "date-and-tags.html" . }}
+  <br>
+  {{ .Summary }}
 </p>
 {{ end }}
 
