@@ -42,7 +42,9 @@ I'm currently studying Computer Engineering with a minor in Business Administrat
 <br> 
 
 ### how
-[repo](https://github.com/xiugaze/andreano.dev)
+{{< repo >}}
+  andreano.dev
+{{</ repo >}}
 
 I made this website using [Hugo](https://gohugo.io/). The icons are from [Feather](https://feathericons.com/), and there's a little bit of [Bootstrap](https://getbootstrap.com/) here and there for buttons and stuff. Colors are from [Rosé Pine](https://github.com/rose-pine/rose-pine-theme). 
 

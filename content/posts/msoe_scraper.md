@@ -6,17 +6,9 @@ draft: false
 summary: "Whining about class scheduling and building a web scraper"
 ---
 
-{{< rawhtml >}}
-  <div class="socials">
-    <div class="social2">
-      <a href="https://github.com/xiugaze/msoe-open-seat">
-        <pre data-feather="github"></pre>
-        msoe-open-seat
-      </a>
-    </div>
-  </div>
-  <br>
-{{< /rawhtml >}}
+{{< repo >}}
+  msoe-open-seat
+{{< /repo >}}
 
 Scheduling for new classes at MSOE can be somewhat confusing and stressful. 
 In this article, I want to quickly share a few tips and tricks I've learned from my time here at school.
