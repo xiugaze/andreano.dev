@@ -6,9 +6,7 @@ draft: false
 summary: "Whining about class scheduling and building a web scraper"
 ---
 
-{{< repo >}}
-  msoe-open-seat
-{{< /repo >}}
+{{< repo >}}msoe-open-seat{{< /repo >}}
 
 Scheduling for new classes at MSOE can be somewhat confusing and stressful. 
 In this article, I want to quickly share a few tips and tricks I've learned from my time here at school.
