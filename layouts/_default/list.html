@@ -1,6 +1,16 @@
 {{ define "main" }}
 
+<div style="display: flex">
+    
+    <div style="display: flex; align-items: center">
+      <a href="/index.xml">
+        <pre data-feather="rss" style="width: 100%"></pre>
+      </a>
+    </div>
+    <div style="width: 10px">
+    </div>
 <h1>{{ .Title }}</h1>
+</div>
 {{ range .Pages.ByPublishDate.Reverse }}
 <p>
   <a style="font-family: JetBrains Mono;"class="font-125" href="{{ .RelPermalink }}">{{ .Title }}</a>

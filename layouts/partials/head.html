@@ -16,6 +16,7 @@
 
   {{ $syntax := "css/syntax.css" | relURL }}
   <link rel="stylesheet" href="{{ $syntax }}">
+  <link rel="alternate" type="application/rss+xml" href="{{.Site.BaseURL }}/feed.xml" title="{{ .Site.Title }}">
 
   <title>{{ $title }}</title>
   {{ partial "style.html" . }}
