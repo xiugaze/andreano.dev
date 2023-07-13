@@ -3,8 +3,8 @@
 {{ if (ne .Title "about") }} 
   <h1>{{ .Title }}</h1>
   {{ partial "date-and-tags.html" . }}
+  <br><br>
 {{ end }}
-<br><br>
 {{ .Content }}
 
 {{ end }}
