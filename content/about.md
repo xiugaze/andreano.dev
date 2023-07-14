@@ -36,9 +36,7 @@ Here's some links for more information about me:
 
 # This Site  
 <br> 
-{{< repo >}}
-  andreano.dev
-{{</ repo >}}
+{{< repo >}}andreano.dev{{</ repo >}}
 
 I made this website using [Hugo](https://gohugo.io/) with my own template from scratch. The icons are from [Feather](https://feathericons.com/). 
 There is some extra JavaScript here and there, particularily for the dark/light mode toggle.
