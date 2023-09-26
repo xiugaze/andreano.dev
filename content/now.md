@@ -5,6 +5,7 @@ tags: []
 draft: false
 ---
 
+# now
 - Studying Computer Engineering at Milwaukee School of Engineering. 
 - Doing an internship at Gama Space, porting `libcsp` to Rust  
 - Reading a lot, currently Walden by Thoreau and City of God by Augustine

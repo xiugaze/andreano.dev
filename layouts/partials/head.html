@@ -18,6 +18,15 @@
   <link rel="stylesheet" href="{{ $syntax }}">
   <link rel="alternate" type="application/rss+xml" href="{{.Site.BaseURL }}/feed.xml" title="{{ .Site.Title }}">
 
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+  {{ $resume := "css/resume.css" | relURL }}
+  <link rel="stylesheet" href="{{ $resume }}">
+
   <title>{{ $title }}</title>
   {{ partial "style.html" . }}
+    {{ if (eq .Title "resume") }}
+    {{ partial "resume_style.html" }}
+  {{ end}}
+
 </head>

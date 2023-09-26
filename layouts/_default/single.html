@@ -1,6 +1,6 @@
 {{ define "main" }}
 
-{{ if (ne .Title "about") }} 
+{{ if (eq .Section "posts") }} 
   <h1>{{ .Title }}</h1>
   {{ partial "date-and-tags.html" . }}
   <br><br>
