@@ -1,10 +1,19 @@
 {{ define "main" }}
 
-{{ if (eq .Section "posts") }} 
-  <h1>{{ .Title }}</h1>
-  {{ partial "date-and-tags.html" . }}
-  <br><br>
-{{ end }}
-{{ .Content }}
+<main>
+
+<article>
+  {{ if (eq .Section "posts") }} 
+    <header>
+    <h1>{{ .Title }}</h1>
+    {{ partial "date-and-tags.html" . }}
+    <br><br>
+    </header>
+  {{ end }}
+
+  {{ .Content }}
+
+</article>
+</main>
 
 {{ end }}

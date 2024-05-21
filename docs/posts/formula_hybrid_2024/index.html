@@ -1,0 +1,977 @@
+<!doctype html>
+<html lang="en">
+  <style>
+:root {
+  --light-bg: #faf4ed;
+  --light-purple: #907aa9;
+  --light-text: #575279;
+
+  --dark-bg: #232136;
+  --dark-purple: #c4a7e7;
+  --dark-text: #e0def4;
+}
+
+body {
+  font-family: JetBrains Mono;
+}
+
+li {
+  font-family: Inter;
+}
+.chroma {
+  font-size: 1rem !important;
+  border: 2px solid red;
+  border-radius: 10px;
+  padding-left: 10px;
+}
+a {
+  text-decoration: underline solid transparent;
+  transition: text-decoration 0.75s ease;
+}
+
+a:hover {
+  text-decoration: underline solid Currentcolor;
+}
+
+code {
+  font-family: JetBrains Mono !important;
+}
+.dark code {
+  color: var(--dark-purple);
+}
+.light code {
+  color: var(--light-purple);
+}
+
+.dark hr {
+  background-color: var(--light-text);
+}
+.light hr {
+  background-color: var(--dark-text);
+}
+
+.dark .chroma {
+  border: 1px solid var(--dark-purple);
+}
+.light .chroma {
+  border: 0px;
+}
+
+.dark {
+  background-color: var(--dark-bg);
+  color: var(--dark-text);
+  border-color: var(--dark-purple) !important;
+  
+}
+.dark a {
+  color: var(--dark-purple);
+}
+
+
+.light {
+  background-color: var(--light-bg);
+  color: var(--light-text);
+  border-color: var(--light-purple);
+}
+.light a {
+  color: var(--light-purple);
+}
+
+
+.container {
+  max-width: 800px;
+}
+
+
+main p {
+  font-family: Inter;
+}
+
+
+.dark .btn-outline-dark {
+  border-color: var(--dark-purple);
+}
+.dark .btn-outline-dark:hover {
+  background-color: var(--dark-purple);
+  color: var(--dark-bg);
+}
+.light .btn-outline-dark {
+  border-color: var(--light-purple);
+}
+.light .btn-outline-dark:hover {
+  background-color: var(--light-purple);
+  color: var(--light-bg);
+}
+
+#content {
+  font-family: Inter;
+}
+
+#nav a {
+  font-weight: bold;
+  color: inherit;
+}
+
+#nav-border {
+  border-bottom: 1px solid;
+}
+#main {
+  margin-top: 1em;
+  margin-bottom: 4em;
+}
+#home-jumbotron {
+  background-color: inherit;
+}
+.font-125 {
+  font-size: 125%;
+}
+.tag-btn {
+  margin-bottom: 0.3em;
+}
+img {
+  max-width: 100%;
+}
+
+
+
+.highlight-wrapper {
+  display: block;
+}
+
+.highlight {
+  position: relative;
+  z-index: 0;
+  padding: 0;
+  margin: 0;
+  border-radius: 4px;
+}
+
+.highlight > .chroma {
+  position: static;
+  z-index: 1;
+  border-radius: 4px;
+  padding: 10px;
+}
+
+.chroma .lntd:first-child {
+  padding: 7px 7px 7px 10px;
+  margin: 0;
+}
+
+.chroma .lntd:last-child {
+  padding: 7px 10px 7px 7px;
+  margin: 0;
+}
+
+.copy-code-button {
+  position: absolute;
+  font-family: Inter;
+  z-index: 2;
+  right: 0;
+  top: 0;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 14px;
+  letter-spacing: 0.5px;
+  width: 65px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 4px;
+  white-space: nowrap;
+  padding: 4px 4px 5px 4px;
+  margin: 0 0 0 1px;
+  cursor: pointer;
+  opacity: 0.6;
+}
+
+.dark .copy-code-button {
+  color: var(--dark-text);
+  background-color: var(--dark-bg);
+  border: 1.25px solid var(--dark-purple);
+}
+
+.light .copy-code-button {
+  color: var(--dark-text);
+  background-color: var(--dark-bg);
+  border: 1.25px solid var(--dark-purple);
+}
+
+.copy-code-button:hover,
+.copy-code-button:focus,
+.copy-code-button:active,
+.dark .copy-code-button:active:hover {
+  color: var(--dark-bg);
+  background-color: var(--dark-purple);
+  opacity: 0.8;
+}
+
+.copyable-text-area {
+  position: absolute;
+  height: 0;
+  z-index: -1;
+  opacity: .01;
+}
+
+.socials a {
+  text-decoration: none;
+}
+.socials a:hover {
+  text-decoration: none;
+}
+
+.social {
+  display: inline;
+  margin-right: 3px;
+}
+.social2 {
+  display: inline;
+  margin-right: 8px;
+}
+
+blockquote {
+  margin: 1.5em 0px;
+  padding: 0.5em 15px;
+  border-left: 3px solid ;
+}
+
+.light blockquote {
+  border-color: var(--light-text);
+}
+.dark blockquote {
+  border-color: var(--dark-text);
+}
+
+blockquote p {
+  display: inline;
+  font-style: italic;
+}
+
+.dark #TableOfContents {
+  width: 50%;
+  border: var(--dark-text);
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 4px;
+  padding-top: 10px;
+  font-style: italic;
+  margin: 20px;
+}
+
+.light #TableOfContents {
+  width: 50%;
+  border: var(--light-text);
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 4px;
+  padding-top: 10px;
+  font-style: italic;
+  margin: 20px;
+}
+
+figcaption {
+  text-align: center;
+  font-family: Inter;
+}
+
+figcaption h4 {
+  margin-top: 4px;
+  font-size: 13px;
+  font-style: italic;
+}
+</style>
+
+
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="generator" content="Hugo 0.126.1">
+
+  
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+  <link>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter&family=JetBrains+Mono:ital@0;1&display=swap" rel="stylesheet">
+  
+  
+
+  
+  <link rel="stylesheet" href="/css/syntax.css">
+  <link rel="alternate" type="application/rss+xml" href="https://www.andreano.dev//feed.xml" title="Caleb Andreano">
+
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+  
+  <link rel="stylesheet" href="/css/resume.css">
+
+  <title>Formula Hybrid &#43; Electric 2024 | Caleb Andreano</title>
+  <style>
+:root {
+  --light-bg: #faf4ed;
+  --light-purple: #907aa9;
+  --light-text: #575279;
+
+  --dark-bg: #232136;
+  --dark-purple: #c4a7e7;
+  --dark-text: #e0def4;
+}
+
+body {
+  font-family: JetBrains Mono;
+}
+
+li {
+  font-family: Inter;
+}
+.chroma {
+  font-size: 1rem !important;
+  border: 2px solid red;
+  border-radius: 10px;
+  padding-left: 10px;
+}
+a {
+  text-decoration: underline solid transparent;
+  transition: text-decoration 0.75s ease;
+}
+
+a:hover {
+  text-decoration: underline solid Currentcolor;
+}
+
+code {
+  font-family: JetBrains Mono !important;
+}
+.dark code {
+  color: var(--dark-purple);
+}
+.light code {
+  color: var(--light-purple);
+}
+
+.dark hr {
+  background-color: var(--light-text);
+}
+.light hr {
+  background-color: var(--dark-text);
+}
+
+.dark .chroma {
+  border: 1px solid var(--dark-purple);
+}
+.light .chroma {
+  border: 0px;
+}
+
+.dark {
+  background-color: var(--dark-bg);
+  color: var(--dark-text);
+  border-color: var(--dark-purple) !important;
+  
+}
+.dark a {
+  color: var(--dark-purple);
+}
+
+
+.light {
+  background-color: var(--light-bg);
+  color: var(--light-text);
+  border-color: var(--light-purple);
+}
+.light a {
+  color: var(--light-purple);
+}
+
+
+.container {
+  max-width: 800px;
+}
+
+
+main p {
+  font-family: Inter;
+}
+
+
+.dark .btn-outline-dark {
+  border-color: var(--dark-purple);
+}
+.dark .btn-outline-dark:hover {
+  background-color: var(--dark-purple);
+  color: var(--dark-bg);
+}
+.light .btn-outline-dark {
+  border-color: var(--light-purple);
+}
+.light .btn-outline-dark:hover {
+  background-color: var(--light-purple);
+  color: var(--light-bg);
+}
+
+#content {
+  font-family: Inter;
+}
+
+#nav a {
+  font-weight: bold;
+  color: inherit;
+}
+
+#nav-border {
+  border-bottom: 1px solid;
+}
+#main {
+  margin-top: 1em;
+  margin-bottom: 4em;
+}
+#home-jumbotron {
+  background-color: inherit;
+}
+.font-125 {
+  font-size: 125%;
+}
+.tag-btn {
+  margin-bottom: 0.3em;
+}
+img {
+  max-width: 100%;
+}
+
+
+
+.highlight-wrapper {
+  display: block;
+}
+
+.highlight {
+  position: relative;
+  z-index: 0;
+  padding: 0;
+  margin: 0;
+  border-radius: 4px;
+}
+
+.highlight > .chroma {
+  position: static;
+  z-index: 1;
+  border-radius: 4px;
+  padding: 10px;
+}
+
+.chroma .lntd:first-child {
+  padding: 7px 7px 7px 10px;
+  margin: 0;
+}
+
+.chroma .lntd:last-child {
+  padding: 7px 10px 7px 7px;
+  margin: 0;
+}
+
+.copy-code-button {
+  position: absolute;
+  font-family: Inter;
+  z-index: 2;
+  right: 0;
+  top: 0;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 14px;
+  letter-spacing: 0.5px;
+  width: 65px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 4px;
+  white-space: nowrap;
+  padding: 4px 4px 5px 4px;
+  margin: 0 0 0 1px;
+  cursor: pointer;
+  opacity: 0.6;
+}
+
+.dark .copy-code-button {
+  color: var(--dark-text);
+  background-color: var(--dark-bg);
+  border: 1.25px solid var(--dark-purple);
+}
+
+.light .copy-code-button {
+  color: var(--dark-text);
+  background-color: var(--dark-bg);
+  border: 1.25px solid var(--dark-purple);
+}
+
+.copy-code-button:hover,
+.copy-code-button:focus,
+.copy-code-button:active,
+.dark .copy-code-button:active:hover {
+  color: var(--dark-bg);
+  background-color: var(--dark-purple);
+  opacity: 0.8;
+}
+
+.copyable-text-area {
+  position: absolute;
+  height: 0;
+  z-index: -1;
+  opacity: .01;
+}
+
+.socials a {
+  text-decoration: none;
+}
+.socials a:hover {
+  text-decoration: none;
+}
+
+.social {
+  display: inline;
+  margin-right: 3px;
+}
+.social2 {
+  display: inline;
+  margin-right: 8px;
+}
+
+blockquote {
+  margin: 1.5em 0px;
+  padding: 0.5em 15px;
+  border-left: 3px solid ;
+}
+
+.light blockquote {
+  border-color: var(--light-text);
+}
+.dark blockquote {
+  border-color: var(--dark-text);
+}
+
+blockquote p {
+  display: inline;
+  font-style: italic;
+}
+
+.dark #TableOfContents {
+  width: 50%;
+  border: var(--dark-text);
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 4px;
+  padding-top: 10px;
+  font-style: italic;
+  margin: 20px;
+}
+
+.light #TableOfContents {
+  width: 50%;
+  border: var(--light-text);
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 4px;
+  padding-top: 10px;
+  font-style: italic;
+  margin: 20px;
+}
+
+figcaption {
+  text-align: center;
+  font-family: Inter;
+}
+
+figcaption h4 {
+  margin-top: 4px;
+  font-size: 13px;
+  font-style: italic;
+}
+</style>
+
+
+    
+
+</head>
+
+  <body class="light">
+
+    
+    
+    
+      <div id="nav-border" class="container">
+  <nav id="nav" class="nav justify-content-left">
+  <div class="toggle" style="background-color: var(--dark-bg);">
+  <div id="icon-sun">
+    <pre data-feather="sun"></pre>
+  </div>
+  <div id="icon-moon" style="display: none;">
+    <pre data-feather="moon"></pre>
+  </div>
+</div>
+
+
+<style>
+  .toggle {
+    position: relative;
+    background-color: red;
+    width: 40px;
+    height: 40px;
+
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+  }
+</style>
+
+
+<script>
+
+  var body = document.body;
+  var toggle = document.getElementsByClassName('toggle')[0];
+  var sun = document.getElementById('icon-sun');
+  var moon = document.getElementById('icon-moon');
+
+
+  toggle.addEventListener("click", function () {
+    console.log("click");
+    if (body.classList.contains('light')) {
+      onDark();
+    } else {
+      onLight();
+    }
+  });
+
+  if (localStorage.getItem('dark')) {
+    onDark();
+  } else {
+    onLight();
+  }
+
+  function onDark() {
+    body.classList.remove('light');
+    body.classList.add('dark');
+
+    sun.style.display = 'none';
+    moon.style.display = '';
+
+    toggle.style.backgroundColor = "var(--dark-bg)";
+
+    if (!localStorage.getItem('dark')) {
+      localStorage.setItem('dark', 'true');
+    }
+  }
+
+  function onLight() {
+    body.classList.remove('dark');
+    body.classList.add('light');
+
+    sun.style.display = '';
+    moon.style.display = 'none';
+
+    toggle.style.backgroundColor = "var(--light-bg)";
+
+    if (localStorage.getItem('dark')) {
+      localStorage.removeItem('dark', 'true');
+    }
+  }
+
+</script>
+
+   
+    
+    
+    
+    <a class="nav-link" href="/">home</a>
+   
+    
+    
+    
+    <a class="nav-link" href="/posts/">posts</a>
+   
+    
+    
+    
+    <a class="nav-link" href="/about">about</a>
+  
+  </nav>
+</div>
+
+    
+    
+
+    <div class="container">
+      <main id="main">
+        
+
+<main>
+
+<article>
+   
+    <header>
+    <h1>Formula Hybrid &#43; Electric 2024</h1>
+    
+
+
+<time datetime="2024-05-20">May 20, 2024</time>
+
+
+    <br><br>
+    </header>
+  
+
+  <figure><img src="/images/formula_hybrid_2024/team_photo.JPG"><figcaption>
+      <h4>Mozee Motorsports 2024</h4>
+    </figcaption>
+</figure>
+
+<p>Formula Hybrid is one of the SAE collegiate design competitions. Our team builds a formula style hybrid racecar and competes in a bunch of static and dynamic events. This season was our first year in a two-year design cycle for our car, the MP6. We designed and manufactured the chassis and drivetrain from scratch this year with a new IC engine, redesigned the high-voltage and low-voltage systems, and used the first iteration of a new software stack to control the MP6&rsquo;s powertrain and other subsystems. I had the opportunity this year to work as the design lead for the software team, and we worked on a new codebase prioritizing real-time performance and asynchronous execution using <a href="https://github.com/embassy-rs/embassy"><code>embassy-rs</code></a>.</p>
+<p>In summary, we were the only hybrid team to pass all inspections and move under our own power. We won first place for project management, second in design, and first overall for the hybrid category. I&rsquo;m super proud of the work we did this year, and what follows is a day-by day of
+the competition from my end.</p>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#sunday-lobster-rolls">Sunday: Lobster Rolls</a></li>
+    <li><a href="#monday-pre-check-and-design-judging">Monday: Pre-check and Design Judging</a></li>
+    <li><a href="#tuesday-electrical--mechanical-tech">Tuesday: Electrical + Mechanical Tech</a></li>
+    <li><a href="#wednesday-tilt-break-and-rain-test">Wednesday: Tilt, break, and rain test</a></li>
+    <li><a href="#thursday-we-win">Thursday: we win</a></li>
+    <li><a href="#thoughts">Thoughts</a></li>
+    <li><a href="#further-reading">Further Reading</a></li>
+  </ul>
+</nav>
+<h2 id="sunday-lobster-rolls">Sunday: Lobster Rolls</h2>
+<figure><img src="/images/formula_hybrid_2024/boston_building.jpg"><figcaption>
+      <h4>some random building in Boston</h4>
+    </figcaption>
+</figure>
+
+<p>I flew into Boston-Logan from O&rsquo;Hare Sunday morning. We stayed in Boston briefly for some lunch and then drove the hour to New Hampshire Motor Speedway.</p>
+<figure><img src="/images/formula_hybrid_2024/lobster_rolls.jpg"><figcaption>
+      <h4>Former president Dan Foster with a New England lobster roll</h4>
+    </figcaption>
+</figure>
+
+<figure><img src="/images/formula_hybrid_2024/nhms_entrance.jpg"><figcaption>
+      <h4>Home for the next week</h4>
+    </figcaption>
+</figure>
+
+<p>Technically, competition doesn&rsquo;t officially start until Monday, so we set up in the outfield parking lot. The software team&rsquo;s main task was getting the ready-to-drive alarm up and running, which is supposed to sound when the safety system signals OK and the driver flips the ready-to-drive switch. We rigged up the 12V power signal from the safety system to a relay to switch 3.3V logic into the microcontroller, and then have the microcontroller 3.3V send 12V power to the alarm with a BJT. Yeah, not ideal but functional enough.</p>
+<figure><img src="/images/formula_hybrid_2024/outside.jpg"><figcaption>
+      <h4>Posted up in the parking lot</h4>
+    </figcaption>
+</figure>
+
+<h2 id="monday-pre-check-and-design-judging">Monday: Pre-check and Design Judging</h2>
+<p>On Monday, we got to the track at 7:30 to get our entrance passes as early as possible and move our car and equipment into our paddock. We spent most of the day tuning the throttle-by-wire system for the combustion engine air intake. The competition rules require short-to-ground and short-to-high detection for any throttle by wire system, which we accomplished by wiring the two linear potentiometers on the acceleration pedal in reverse polarity. This means that flooring the pedal will send one pot to ground and one to high, and floating the pedal will do the same but reversed. This means that if we a) see two grounds b) see two highs or c) see one reading held to ground or high and the other somewhere in between, we detect a fault and can close the air intake.  Otherwise, the microcontroller reads the throttle input at a fixed rate, and translates that to a PWM signal sent to the servo.</p>
+<figure><img src="/images/formula_hybrid_2024/paddock.jpg"><figcaption>
+      <h4>Attention in the paddocks, attention in the paddocks!</h4>
+    </figcaption>
+</figure>
+
+<p>At about noon, we took the car to electrical pre-check and passed.</p>
+<figure><img src="/images/formula_hybrid_2024/precheck_ok.jpg"><figcaption>
+      <h4>Passing pre-check</h4>
+    </figcaption>
+</figure>
+
+<p>We also had our design report and interviews on Monday afternoon. Each sub-team gave a brief overview of what they had worked on this year, and then the design judges grilled team members on design decisions and what they had worked on specifically. For next year, we learned that the electrical design judges really wanted to see a regenerative braking system in place, so we plan on prioritizing that for next year&rsquo;s competition.</p>
+<h2 id="tuesday-electrical--mechanical-tech">Tuesday: Electrical + Mechanical Tech</h2>
+<p>On Tuesday, we were rained out for most of the morning, so we were not allowed to work on the anything electrical until the weather cleared up. After final touches, like fixing a mysterious electrical arc in the engine compartment and wrapping bare-copper grounding wires to the suspension arms, we went electrical tech inspection and miraculously passed on the first try. If I had had a dollar for every time our inspector said &ldquo;well, you guys don&rsquo;t have a running tractive control system&rdquo;, I might have been able to afford the large lobster roll instead of the small.</p>
+<p>We decided to run this year as hybrid-in-progress, mainly because we were not quite able to get our Tractive System (high-voltage side) working. We are running a Parker-Hannifin electric motor provided from an all-electric Polaris forklift with a SevCon Gen4 motor controller. We ran into numerous issues trying to configure the motor controller over CAN, including burning out our USB-CAN adapter (likely due to the adapter ground, my laptop chassis, floating with respect to the car&rsquo;s chassis ground). We were never able to fully communicate with the motor controller, so we were unfortunately not able to get the e-motor running this year.</p>
+<figure><img src="/images/formula_hybrid_2024/echeck.jpg"><figcaption>
+      <h4>Passed Electrical Tech</h4>
+    </figcaption>
+</figure>
+
+<p>Later in the evening, we took the last slot in the day for mechanical inspection. After multiple clarifications on which one of Michael Royce&rsquo;s legs we were pulling, we were dismissed from mechanical tech with a surprisingly small number of fixes to be made. We closed out Tuesday night by taking a sawzall to our seat, and I finally learned the bare minimum basics on how the mechanical side of the car works.</p>
+<figure><img src="/images/formula_hybrid_2024/grillmaster_dan.jpg"><figcaption>
+      <h4>Grillmaster Dan</h4>
+    </figcaption>
+</figure>
+
+<h2 id="wednesday-tilt-break-and-rain-test">Wednesday: Tilt, break, and rain test</h2>
+<p>Wednesday was our most eventful day by far. We kicked off the day by rushing back to mechanical inspection and passing. This was no small feat. On the electrical side, we had a non-zero number of requirements waived for us, because as previously mentioned, we didn&rsquo;t have a running tractive system. However, the chassis, powertrain, controls, safety/ergo, and sidepods teams had more-or-less finished what they set out to do this year, so they were subjected to the full scrutiny of the mechanical tech inspection. I felt like this was a huge achievement for the team: we didn&rsquo;t really expect to pass at all this year, but the months of hard work and dedication meant that we had actually had a shot at driving on track.</p>
+<figure><img src="/images/formula_hybrid_2024/mcheck.jpg"><figcaption>
+      <h4>Passing mechanical tech</h4>
+    </figcaption>
+</figure>
+
+<p>After (probably) fixing a phantom oil leak, replacing our accumulator with a state-of-the-art solid state silicon power cell (50lb sandbag), and fueling up, we were off to the tilt test. The car with driver is raised into the air and tilted at a 45\degree angle to test for leaks, and then to a 60\degree angle to test for slippage, simulating the forces experienced in a high-G turn.</p>
+<figure><img src="/images/formula_hybrid_2024/tilt.JPG"><figcaption>
+      <h4>60 degree tilt test</h4>
+    </figcaption>
+</figure>
+
+<p>After the tilt test, we were trying to add a dead zone to the throttle range as requested by the drivers. The car was up on jack stands, and someone or another decided it would be a good idea to lower the front of the car and roll it forward while we had a laptop plugged in. The USB port on our microcontroller snapped clean off, and since this was already our spare (we burned a hole through the first one), it was like driving over a nail right after you put on the donut. Luckily, we had a working firmware flashed to the board, but that put an end to any software tuning we were yet to do.</p>
+<p>Next, we had the brake test. The requirement to pass was to accelerate to a reasonable speed, and to have all four wheels lock. This test was the first time that we had seen our car drive under it&rsquo;s own power at competition. However, after eight or nine runs on the test loop, one of our wheels was failing to lock. Additionally, our driver was noticing a lot of flutter in the throttle valve that hadn&rsquo;t been present when the engine was off. We took the car back to the garage, and us electrical guys narrowed the problem down to latent EMI from the ignition interacting with the PWM signal wire controlling the throttle valve. Our solution was just wrapping the PWM signal wire in tin foil, and the flutter vanished.</p>
+<figure><img src="/images/formula_hybrid_2024/wires.jpg"><figcaption>
+      <h4>A very smart aesthetic decision</h4>
+    </figcaption>
+</figure>
+
+<p>Dan and I had volunteered to work on the track for a dynamic event, and we were called over to help out with the autocross event. This was a highlight of the competition for me: we got to watch the top electric-only teams compete for the fastest time in the autocross, the biggest test for both engineering and driver skill. We were able to interact with the drivers and teammates from other schools while they were pitted or when we helped them off track, and were able to glean a few ideas for next time around from them. Funnily enough, multiple other teams had run into EMI issues, and had also resorted to wrapping whichever wire in tin foil. Big thanks to University of Southern Alabama for bringing tin foil, it sounds like that one roll saved saved six or seven teams.</p>
+<figure><img src="/images/formula_hybrid_2024/track.jpg"><figcaption>
+      <h4>Working the track</h4>
+    </figcaption>
+</figure>
+
+<figure><img src="/images/formula_hybrid_2024/interview.jpg"><figcaption>
+      <h4>Former president Dan Foster interviewed by local news</h4>
+    </figcaption>
+</figure>
+
+<p>After the autocross, we resorted to taking off the brake pads and roughing them up to try to squeeze as much stopping power as possible out of them. Once we got to our problem wheel, we found that the brake pad was covered in grease. Go figure.</p>
+<p>Our last test for the day was the rain test, where we had to survive two minutes under a sprinkler with no electrical hard faults. We accomplished this through pure determination, ingenious sidepod design and not having working high-voltage system to fault in the first place.</p>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/nL0YYyNewoA?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+<br>
+<h2 id="thursday-we-win">Thursday: we win</h2>
+<p>Thursday morning, we went to brake test and passed. The brake test inspectors let us do some practice laps around the parking lot, and the microcontroller board rattled out of it&rsquo;s socket and killed itself, meaning we lost throttle. So, with nothing left to do, we packed up the trailer, cleaned out the garage, and waited for the awards ceremony. Although we didn&rsquo;t make it on track, we were the only hybrid car to drive at competition this year.</p>
+<figure><img src="/images/formula_hybrid_2024/trophy.JPG"><figcaption>
+      <h4>Vermont evening</h4>
+    </figcaption>
+</figure>
+
+<h2 id="thoughts">Thoughts</h2>
+<p>Overall, I thoroughly enjoyed competition this year and learned a lot. This really did feel like a culmination of a lot of my education so far, and throughout the year and at competition I got to interact with real things that were previously only concepts or isolated in a lab environment. To put it in business-marketing jargon, our cross-functional team successfully developed a cutting-edge hybrid race car from conceptualization to completion, leveraging interdisciplinary expertise to optimize performance and efficiency, resulting in a competitive edge in the automotive industry landscape, or whatever.</p>
+<p>As far as the competition itself goes, while taking first place was nice and all, it was a little bittersweet. Out of thirty-some-odd teams that registered this year, only five teams total and four that showed up registered in the hybrid category. From listening to other people at competition, I think that it&rsquo;s fairly well established that Hybrid is the harder engineering challenge. It sounds like both FSAE ICE-only and tractive-only cars are able to use a lot more things off the shelf, while Hybrid requires a custom drivetrain and computer/software stack by design. For instance, our transfer case was designed from scratch, iterated on by our team, and (mostly) manufactured in-house. What that seems to come to in practice is the electric category starts to slide towards a competition of scale and budget rather than raw engineering. Additionally, while we did win in-class this year, I wish that more teams ran hybrid if only to see more hybrid teams run and compete in dynamic events. I would think that larger teams with a higher budget would be <em>more</em> capable of doing Hybrid, but the teams that ran Hybrid this year were all on the smaller side. I would hate to see the Hybrid class keep shrinking in the future. Even though it might be harder than a non-hybrid car, I think that once we get the MP6 fully running, it will be more fulfilling and exciting than if we ran ICE only or electric only.</p>
+<p>For next year, I am going switching to a more hardware-oriented role. There&rsquo;s still work to do on the high-voltage side, and I want to redesign the Hybrid Control Board, the baseboard for the microcontroller, into a more modular system that can have modules swapped in and out if one thing breaks. I&rsquo;d like to build some more transient protection circuitry for the microcontroller, and possibly build a hardware-only throttle plausibility device that offloads the short detection functionality from the microcontroller.</p>
+<figure><img src="/images/formula_hybrid_2024/team_photo_2.JPG"><figcaption>
+      <h4>whip</h4>
+    </figcaption>
+</figure>
+
+<figure><img src="/images/formula_hybrid_2024/vermont.jpg"><figcaption>
+      <h4>Vermont</h4>
+    </figcaption>
+</figure>
+
+<figure><img src="/images/formula_hybrid_2024/kyle.JPG"><figcaption>
+      <h4>Captain Ahab</h4>
+    </figcaption>
+</figure>
+
+<figure><img src="/images/formula_hybrid_2024/drivers.JPG"><figcaption>
+      <h4>Four Horsemen</h4>
+    </figcaption>
+</figure>
+
+<figure><img src="/images/formula_hybrid_2024/underway.JPG"><figcaption>
+      <h4>Underway</h4>
+    </figcaption>
+</figure>
+
+<figure><img src="/images/formula_hybrid_2024/ahmed.jpg"><figcaption>
+      <h4>norwood</h4>
+    </figcaption>
+</figure>
+
+<figure><img src="/images/formula_hybrid_2024/other_cars.jpg"><figcaption>
+      <h4>Southern Alabama and University of Victoria</h4>
+    </figcaption>
+</figure>
+
+<figure><img src="/images/formula_hybrid_2024/red_40.jpg"><figcaption>
+      <h4>Red 40</h4>
+    </figcaption>
+</figure>
+
+<h2 id="further-reading">Further Reading</h2>
+<ul>
+<li><a href="https://www.msoe.edu/about-msoe/news/details/msoe-sae-formula-hybrid-team-earns-third-world-championship-title-at-new-hampshire-motor-speedway/">MSOE News article about us</a></li>
+<li><a href="https://www.nhms.com/media/news/nhms-host-north-america-top-engineering-students-for-annual-formula-hybrid-electric-competition.html">NHMS article about comp</a></li>
+</ul>
+
+
+</article>
+</main>
+
+
+      </main>
+    </div>
+    
+<script src="/js/feather.min.js"></script>
+<script>
+  feather.replace();
+
+</script><script>
+  function createCopyButton(highlightDiv) {
+  const button = document.createElement("button");
+  button.className = "copy-code-button";
+  button.type = "button";
+  button.innerText = "Copy";
+  button.addEventListener("click", () => copyCodeToClipboard(button, highlightDiv));
+  addCopyButtonToDom(button, highlightDiv);
+}
+
+async function copyCodeToClipboard(button, highlightDiv) {
+  const codeToCopy = highlightDiv.querySelector(":last-child > .chroma > code").innerText;
+  try {
+    result = await navigator.permissions.query({ name: "clipboard-write" });
+    if (result.state == "granted" || result.state == "prompt") {
+      await navigator.clipboard.writeText(codeToCopy);
+    } else {
+      copyCodeBlockExecCommand(codeToCopy, highlightDiv);
+    }
+  } catch (_) {
+    copyCodeBlockExecCommand(codeToCopy, highlightDiv);
+  }
+  finally {
+    codeWasCopied(button);
+  }
+}
+
+function copyCodeBlockExecCommand(codeToCopy, highlightDiv) {
+  const textArea = document.createElement("textArea");
+  textArea.contentEditable = 'true'
+  textArea.readOnly = 'false'
+  textArea.className = "copyable-text-area";
+  textArea.value = codeToCopy;
+  highlightDiv.insertBefore(textArea, highlightDiv.firstChild);
+  const range = document.createRange()
+  range.selectNodeContents(textArea)
+  const sel = window.getSelection()
+  sel.removeAllRanges()
+  sel.addRange(range)
+  textArea.setSelectionRange(0, 999999)
+  document.execCommand("copy");
+  highlightDiv.removeChild(textArea);
+}
+
+function codeWasCopied(button) {
+  button.blur();
+  button.innerText = "Copied!";
+  setTimeout(function() {
+    button.innerText = "Copy";
+  }, 2000);
+}
+
+function addCopyButtonToDom(button, highlightDiv) {
+  highlightDiv.insertBefore(button, highlightDiv.firstChild);
+  const wrapper = document.createElement("div");
+  wrapper.className = "highlight-wrapper";
+  highlightDiv.parentNode.insertBefore(wrapper, highlightDiv);
+  wrapper.appendChild(highlightDiv);
+}
+
+document.querySelectorAll(".highlight")
+  .forEach(highlightDiv => createCopyButton(highlightDiv));
+</script>
+
+
+      <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+      <script>
+        AOS.init();
+      </script>
+  </body>
+</html>

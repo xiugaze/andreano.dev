@@ -28,7 +28,7 @@ publishDir = "docs"
     weight = 3
 
 [params]
-  containerMaxWidth = "1000px"
+  containerMaxWidth = "800px"
   dateFormat = "Jan 2, 2006"
   homeText = "You just made a Hugo blog from scratch."
   sun = "sun"
