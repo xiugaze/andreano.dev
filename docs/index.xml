@@ -3,14 +3,14 @@
   <channel>
     <title>Caleb Andreano</title>
     <link>https://andreano.dev/</link>
-    <description>Posts on my blog</description><atom:link href="https://www.andreano.dev/index.xml" rel="self" type="application/rss+xml" />
+    <description>Posts on my blog</description><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Formula Hybrid &#43; Electric 2024</title>
-      <link>https://www.andreano.dev/posts/formula_hybrid_2024/</link>
+      <link>http://localhost:1313/posts/formula_hybrid_2024/</link>
       <pubDate>Mon, 20 May 2024 17:33:44 -0500</pubDate>
       
-      <guid>https://www.andreano.dev/posts/formula_hybrid_2024/</guid>
-      <description>&lt;figure&gt;&lt;img src=&#34;https://www.andreano.dev/images/formula_hybrid_2024/team_photo.JPG&#34;&gt;&lt;figcaption&gt;
+      <guid>http://localhost:1313/posts/formula_hybrid_2024/</guid>
+      <description>&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/formula_hybrid_2024/team_photo.JPG&#34;&gt;&lt;figcaption&gt;
       &lt;h4&gt;Mozee Motorsports 2024&lt;/h4&gt;
     &lt;/figcaption&gt;
 &lt;/figure&gt;
@@ -30,37 +30,37 @@ the competition from my end.&lt;/p&gt;
   &lt;/ul&gt;
 &lt;/nav&gt;
 &lt;h2 id=&#34;sunday-lobster-rolls&#34;&gt;Sunday: Lobster Rolls&lt;/h2&gt;
-&lt;figure&gt;&lt;img src=&#34;https://www.andreano.dev/images/formula_hybrid_2024/boston_building.jpg&#34;&gt;&lt;figcaption&gt;
+&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/formula_hybrid_2024/boston_building.jpg&#34;&gt;&lt;figcaption&gt;
       &lt;h4&gt;some random building in Boston&lt;/h4&gt;
     &lt;/figcaption&gt;
 &lt;/figure&gt;
 
 &lt;p&gt;I flew into Boston-Logan from O&amp;rsquo;Hare Sunday morning. We stayed in Boston briefly for some lunch and then drove the hour to New Hampshire Motor Speedway.&lt;/p&gt;
-&lt;figure&gt;&lt;img src=&#34;https://www.andreano.dev/images/formula_hybrid_2024/lobster_rolls.jpg&#34;&gt;&lt;figcaption&gt;
+&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/formula_hybrid_2024/lobster_rolls.jpg&#34;&gt;&lt;figcaption&gt;
       &lt;h4&gt;Former president Dan Foster with a New England lobster roll&lt;/h4&gt;
     &lt;/figcaption&gt;
 &lt;/figure&gt;
 
-&lt;figure&gt;&lt;img src=&#34;https://www.andreano.dev/images/formula_hybrid_2024/nhms_entrance.jpg&#34;&gt;&lt;figcaption&gt;
+&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/formula_hybrid_2024/nhms_entrance.jpg&#34;&gt;&lt;figcaption&gt;
       &lt;h4&gt;Home for the next week&lt;/h4&gt;
     &lt;/figcaption&gt;
 &lt;/figure&gt;
 
 &lt;p&gt;Technically, competition doesn&amp;rsquo;t officially start until Monday, so we set up in the outfield parking lot. The software team&amp;rsquo;s main task was getting the ready-to-drive alarm up and running, which is supposed to sound when the safety system signals OK and the driver flips the ready-to-drive switch. We rigged up the 12V power signal from the safety system to a relay to switch 3.3V logic into the microcontroller, and then have the microcontroller 3.3V send 12V power to the alarm with a BJT. Yeah, not ideal but functional enough.&lt;/p&gt;
-&lt;figure&gt;&lt;img src=&#34;https://www.andreano.dev/images/formula_hybrid_2024/outside.jpg&#34;&gt;&lt;figcaption&gt;
+&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/formula_hybrid_2024/outside.jpg&#34;&gt;&lt;figcaption&gt;
       &lt;h4&gt;Posted up in the parking lot&lt;/h4&gt;
     &lt;/figcaption&gt;
 &lt;/figure&gt;
 
 &lt;h2 id=&#34;monday-pre-check-and-design-judging&#34;&gt;Monday: Pre-check and Design Judging&lt;/h2&gt;
 &lt;p&gt;On Monday, we got to the track at 7:30 to get our entrance passes as early as possible and move our car and equipment into our paddock. We spent most of the day tuning the throttle-by-wire system for the combustion engine air intake. The competition rules require short-to-ground and short-to-high detection for any throttle by wire system, which we accomplished by wiring the two linear potentiometers on the acceleration pedal in reverse polarity. This means that flooring the pedal will send one pot to ground and one to high, and floating the pedal will do the same but reversed. This means that if we a) see two grounds b) see two highs or c) see one reading held to ground or high and the other somewhere in between, we detect a fault and can close the air intake.  Otherwise, the microcontroller reads the throttle input at a fixed rate, and translates that to a PWM signal sent to the servo.&lt;/p&gt;
-&lt;figure&gt;&lt;img src=&#34;https://www.andreano.dev/images/formula_hybrid_2024/paddock.jpg&#34;&gt;&lt;figcaption&gt;
+&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/formula_hybrid_2024/paddock.jpg&#34;&gt;&lt;figcaption&gt;
       &lt;h4&gt;Attention in the paddocks, attention in the paddocks!&lt;/h4&gt;
     &lt;/figcaption&gt;
 &lt;/figure&gt;
 
 &lt;p&gt;At about noon, we took the car to electrical pre-check and passed.&lt;/p&gt;
-&lt;figure&gt;&lt;img src=&#34;https://www.andreano.dev/images/formula_hybrid_2024/precheck_ok.jpg&#34;&gt;&lt;figcaption&gt;
+&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/formula_hybrid_2024/precheck_ok.jpg&#34;&gt;&lt;figcaption&gt;
       &lt;h4&gt;Passing pre-check&lt;/h4&gt;
     &lt;/figcaption&gt;
 &lt;/figure&gt;
@@ -69,44 +69,44 @@ the competition from my end.&lt;/p&gt;
 &lt;h2 id=&#34;tuesday-electrical--mechanical-tech&#34;&gt;Tuesday: Electrical + Mechanical Tech&lt;/h2&gt;
 &lt;p&gt;On Tuesday, we were rained out for most of the morning, so we were not allowed to work on the anything electrical until the weather cleared up. After final touches, like fixing a mysterious electrical arc in the engine compartment and wrapping bare-copper grounding wires to the suspension arms, we went electrical tech inspection and miraculously passed on the first try. If I had had a dollar for every time our inspector said &amp;ldquo;well, you guys don&amp;rsquo;t have a running tractive control system&amp;rdquo;, I might have been able to afford the large lobster roll instead of the small.&lt;/p&gt;
 &lt;p&gt;We decided to run this year as hybrid-in-progress, mainly because we were not quite able to get our Tractive System (high-voltage side) working. We are running a Parker-Hannifin electric motor provided from an all-electric Polaris forklift with a SevCon Gen4 motor controller. We ran into numerous issues trying to configure the motor controller over CAN, including burning out our USB-CAN adapter (likely due to the adapter ground, my laptop chassis, floating with respect to the car&amp;rsquo;s chassis ground). We were never able to fully communicate with the motor controller, so we were unfortunately not able to get the e-motor running this year.&lt;/p&gt;
-&lt;figure&gt;&lt;img src=&#34;https://www.andreano.dev/images/formula_hybrid_2024/echeck.jpg&#34;&gt;&lt;figcaption&gt;
+&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/formula_hybrid_2024/echeck.jpg&#34;&gt;&lt;figcaption&gt;
       &lt;h4&gt;Passed Electrical Tech&lt;/h4&gt;
     &lt;/figcaption&gt;
 &lt;/figure&gt;
 
 &lt;p&gt;Later in the evening, we took the last slot in the day for mechanical inspection. After multiple clarifications on which one of Michael Royce&amp;rsquo;s legs we were pulling, we were dismissed from mechanical tech with a surprisingly small number of fixes to be made. We closed out Tuesday night by taking a sawzall to our seat, and I finally learned the bare minimum basics on how the mechanical side of the car works.&lt;/p&gt;
-&lt;figure&gt;&lt;img src=&#34;https://www.andreano.dev/images/formula_hybrid_2024/grillmaster_dan.jpg&#34;&gt;&lt;figcaption&gt;
+&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/formula_hybrid_2024/grillmaster_dan.jpg&#34;&gt;&lt;figcaption&gt;
       &lt;h4&gt;Grillmaster Dan&lt;/h4&gt;
     &lt;/figcaption&gt;
 &lt;/figure&gt;
 
 &lt;h2 id=&#34;wednesday-tilt-break-and-rain-test&#34;&gt;Wednesday: Tilt, break, and rain test&lt;/h2&gt;
 &lt;p&gt;Wednesday was our most eventful day by far. We kicked off the day by rushing back to mechanical inspection and passing. This was no small feat. On the electrical side, we had a non-zero number of requirements waived for us, because as previously mentioned, we didn&amp;rsquo;t have a running tractive system. However, the chassis, powertrain, controls, safety/ergo, and sidepods teams had more-or-less finished what they set out to do this year, so they were subjected to the full scrutiny of the mechanical tech inspection. I felt like this was a huge achievement for the team: we didn&amp;rsquo;t really expect to pass at all this year, but the months of hard work and dedication meant that we had actually had a shot at driving on track.&lt;/p&gt;
-&lt;figure&gt;&lt;img src=&#34;https://www.andreano.dev/images/formula_hybrid_2024/mcheck.jpg&#34;&gt;&lt;figcaption&gt;
+&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/formula_hybrid_2024/mcheck.jpg&#34;&gt;&lt;figcaption&gt;
       &lt;h4&gt;Passing mechanical tech&lt;/h4&gt;
     &lt;/figcaption&gt;
 &lt;/figure&gt;
 
 &lt;p&gt;After (probably) fixing a phantom oil leak, replacing our accumulator with a state-of-the-art solid state silicon power cell (50lb sandbag), and fueling up, we were off to the tilt test. The car with driver is raised into the air and tilted at a 45\degree angle to test for leaks, and then to a 60\degree angle to test for slippage, simulating the forces experienced in a high-G turn.&lt;/p&gt;
-&lt;figure&gt;&lt;img src=&#34;https://www.andreano.dev/images/formula_hybrid_2024/tilt.JPG&#34;&gt;&lt;figcaption&gt;
+&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/formula_hybrid_2024/tilt.JPG&#34;&gt;&lt;figcaption&gt;
       &lt;h4&gt;60 degree tilt test&lt;/h4&gt;
     &lt;/figcaption&gt;
 &lt;/figure&gt;
 
 &lt;p&gt;After the tilt test, we were trying to add a dead zone to the throttle range as requested by the drivers. The car was up on jack stands, and someone or another decided it would be a good idea to lower the front of the car and roll it forward while we had a laptop plugged in. The USB port on our microcontroller snapped clean off, and since this was already our spare (we burned a hole through the first one), it was like driving over a nail right after you put on the donut. Luckily, we had a working firmware flashed to the board, but that put an end to any software tuning we were yet to do.&lt;/p&gt;
 &lt;p&gt;Next, we had the brake test. The requirement to pass was to accelerate to a reasonable speed, and to have all four wheels lock. This test was the first time that we had seen our car drive under it&amp;rsquo;s own power at competition. However, after eight or nine runs on the test loop, one of our wheels was failing to lock. Additionally, our driver was noticing a lot of flutter in the throttle valve that hadn&amp;rsquo;t been present when the engine was off. We took the car back to the garage, and us electrical guys narrowed the problem down to latent EMI from the ignition interacting with the PWM signal wire controlling the throttle valve. Our solution was just wrapping the PWM signal wire in tin foil, and the flutter vanished.&lt;/p&gt;
-&lt;figure&gt;&lt;img src=&#34;https://www.andreano.dev/images/formula_hybrid_2024/wires.jpg&#34;&gt;&lt;figcaption&gt;
+&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/formula_hybrid_2024/wires.jpg&#34;&gt;&lt;figcaption&gt;
       &lt;h4&gt;A very smart aesthetic decision&lt;/h4&gt;
     &lt;/figcaption&gt;
 &lt;/figure&gt;
 
 &lt;p&gt;Dan and I had volunteered to work on the track for a dynamic event, and we were called over to help out with the autocross event. This was a highlight of the competition for me: we got to watch the top electric-only teams compete for the fastest time in the autocross, the biggest test for both engineering and driver skill. We were able to interact with the drivers and teammates from other schools while they were pitted or when we helped them off track, and were able to glean a few ideas for next time around from them. Funnily enough, multiple other teams had run into EMI issues, and had also resorted to wrapping whichever wire in tin foil. Big thanks to University of Southern Alabama for bringing tin foil, it sounds like that one roll saved saved six or seven teams.&lt;/p&gt;
-&lt;figure&gt;&lt;img src=&#34;https://www.andreano.dev/images/formula_hybrid_2024/track.jpg&#34;&gt;&lt;figcaption&gt;
+&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/formula_hybrid_2024/track.jpg&#34;&gt;&lt;figcaption&gt;
       &lt;h4&gt;Working the track&lt;/h4&gt;
     &lt;/figcaption&gt;
 &lt;/figure&gt;
 
-&lt;figure&gt;&lt;img src=&#34;https://www.andreano.dev/images/formula_hybrid_2024/interview.jpg&#34;&gt;&lt;figcaption&gt;
+&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/formula_hybrid_2024/interview.jpg&#34;&gt;&lt;figcaption&gt;
       &lt;h4&gt;Former president Dan Foster interviewed by local news&lt;/h4&gt;
     &lt;/figcaption&gt;
 &lt;/figure&gt;
@@ -124,7 +124,7 @@ the competition from my end.&lt;/p&gt;
 &lt;br&gt;
 &lt;h2 id=&#34;thursday-we-win&#34;&gt;Thursday: we win&lt;/h2&gt;
 &lt;p&gt;Thursday morning, we went to brake test and passed. The brake test inspectors let us do some practice laps around the parking lot, and the microcontroller board rattled out of it&amp;rsquo;s socket and killed itself, meaning we lost throttle. So, with nothing left to do, we packed up the trailer, cleaned out the garage, and waited for the awards ceremony. Although we didn&amp;rsquo;t make it on track, we were the only hybrid car to drive at competition this year.&lt;/p&gt;
-&lt;figure&gt;&lt;img src=&#34;https://www.andreano.dev/images/formula_hybrid_2024/trophy.JPG&#34;&gt;&lt;figcaption&gt;
+&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/formula_hybrid_2024/trophy.JPG&#34;&gt;&lt;figcaption&gt;
       &lt;h4&gt;Vermont evening&lt;/h4&gt;
     &lt;/figcaption&gt;
 &lt;/figure&gt;
@@ -133,42 +133,42 @@ the competition from my end.&lt;/p&gt;
 &lt;p&gt;Overall, I thoroughly enjoyed competition this year and learned a lot. This really did feel like a culmination of a lot of my education so far, and throughout the year and at competition I got to interact with real things that were previously only concepts or isolated in a lab environment. To put it in business-marketing jargon, our cross-functional team successfully developed a cutting-edge hybrid race car from conceptualization to completion, leveraging interdisciplinary expertise to optimize performance and efficiency, resulting in a competitive edge in the automotive industry landscape, or whatever.&lt;/p&gt;
 &lt;p&gt;As far as the competition itself goes, while taking first place was nice and all, it was a little bittersweet. Out of thirty-some-odd teams that registered this year, only five teams total and four that showed up registered in the hybrid category. From listening to other people at competition, I think that it&amp;rsquo;s fairly well established that Hybrid is the harder engineering challenge. It sounds like both FSAE ICE-only and tractive-only cars are able to use a lot more things off the shelf, while Hybrid requires a custom drivetrain and computer/software stack by design. For instance, our transfer case was designed from scratch, iterated on by our team, and (mostly) manufactured in-house. What that seems to come to in practice is the electric category starts to slide towards a competition of scale and budget rather than raw engineering. Additionally, while we did win in-class this year, I wish that more teams ran hybrid if only to see more hybrid teams run and compete in dynamic events. I would think that larger teams with a higher budget would be &lt;em&gt;more&lt;/em&gt; capable of doing Hybrid, but the teams that ran Hybrid this year were all on the smaller side. I would hate to see the Hybrid class keep shrinking in the future. Even though it might be harder than a non-hybrid car, I think that once we get the MP6 fully running, it will be more fulfilling and exciting than if we ran ICE only or electric only.&lt;/p&gt;
 &lt;p&gt;For next year, I am going switching to a more hardware-oriented role. There&amp;rsquo;s still work to do on the high-voltage side, and I want to redesign the Hybrid Control Board, the baseboard for the microcontroller, into a more modular system that can have modules swapped in and out if one thing breaks. I&amp;rsquo;d like to build some more transient protection circuitry for the microcontroller, and possibly build a hardware-only throttle plausibility device that offloads the short detection functionality from the microcontroller.&lt;/p&gt;
-&lt;figure&gt;&lt;img src=&#34;https://www.andreano.dev/images/formula_hybrid_2024/team_photo_2.JPG&#34;&gt;&lt;figcaption&gt;
+&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/formula_hybrid_2024/team_photo_2.JPG&#34;&gt;&lt;figcaption&gt;
       &lt;h4&gt;whip&lt;/h4&gt;
     &lt;/figcaption&gt;
 &lt;/figure&gt;
 
-&lt;figure&gt;&lt;img src=&#34;https://www.andreano.dev/images/formula_hybrid_2024/vermont.jpg&#34;&gt;&lt;figcaption&gt;
+&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/formula_hybrid_2024/vermont.jpg&#34;&gt;&lt;figcaption&gt;
       &lt;h4&gt;Vermont&lt;/h4&gt;
     &lt;/figcaption&gt;
 &lt;/figure&gt;
 
-&lt;figure&gt;&lt;img src=&#34;https://www.andreano.dev/images/formula_hybrid_2024/kyle.JPG&#34;&gt;&lt;figcaption&gt;
+&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/formula_hybrid_2024/kyle.JPG&#34;&gt;&lt;figcaption&gt;
       &lt;h4&gt;Captain Ahab&lt;/h4&gt;
     &lt;/figcaption&gt;
 &lt;/figure&gt;
 
-&lt;figure&gt;&lt;img src=&#34;https://www.andreano.dev/images/formula_hybrid_2024/drivers.JPG&#34;&gt;&lt;figcaption&gt;
+&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/formula_hybrid_2024/drivers.JPG&#34;&gt;&lt;figcaption&gt;
       &lt;h4&gt;Four Horsemen&lt;/h4&gt;
     &lt;/figcaption&gt;
 &lt;/figure&gt;
 
-&lt;figure&gt;&lt;img src=&#34;https://www.andreano.dev/images/formula_hybrid_2024/underway.JPG&#34;&gt;&lt;figcaption&gt;
+&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/formula_hybrid_2024/underway.JPG&#34;&gt;&lt;figcaption&gt;
       &lt;h4&gt;Underway&lt;/h4&gt;
     &lt;/figcaption&gt;
 &lt;/figure&gt;
 
-&lt;figure&gt;&lt;img src=&#34;https://www.andreano.dev/images/formula_hybrid_2024/ahmed.jpg&#34;&gt;&lt;figcaption&gt;
+&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/formula_hybrid_2024/ahmed.jpg&#34;&gt;&lt;figcaption&gt;
       &lt;h4&gt;norwood&lt;/h4&gt;
     &lt;/figcaption&gt;
 &lt;/figure&gt;
 
-&lt;figure&gt;&lt;img src=&#34;https://www.andreano.dev/images/formula_hybrid_2024/other_cars.jpg&#34;&gt;&lt;figcaption&gt;
+&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/formula_hybrid_2024/other_cars.jpg&#34;&gt;&lt;figcaption&gt;
       &lt;h4&gt;Southern Alabama and University of Victoria&lt;/h4&gt;
     &lt;/figcaption&gt;
 &lt;/figure&gt;
 
-&lt;figure&gt;&lt;img src=&#34;https://www.andreano.dev/images/formula_hybrid_2024/red_40.jpg&#34;&gt;&lt;figcaption&gt;
+&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/images/formula_hybrid_2024/red_40.jpg&#34;&gt;&lt;figcaption&gt;
       &lt;h4&gt;Red 40&lt;/h4&gt;
     &lt;/figcaption&gt;
 &lt;/figure&gt;
@@ -183,10 +183,10 @@ the competition from my end.&lt;/p&gt;
     
     <item>
       <title>How to Schedule for Classes at MSOE</title>
-      <link>https://www.andreano.dev/posts/msoe_scraper/</link>
+      <link>http://localhost:1313/posts/msoe_scraper/</link>
       <pubDate>Thu, 18 May 2023 09:30:38 -0500</pubDate>
       
-      <guid>https://www.andreano.dev/posts/msoe_scraper/</guid>
+      <guid>http://localhost:1313/posts/msoe_scraper/</guid>
       <description>  &lt;div class=&#34;socials&#34;&gt;
     &lt;div class=&#34;social2&#34;&gt;
 	&lt;a href=&#34;https://github.com/xiugaze/msoe-open-seat&#34;&gt;
@@ -225,7 +225,7 @@ To distract us, let&amp;rsquo;s learn how to build a simple web scraper together
 &lt;p&gt;Web scraping is a way of programatically retrieving data or content from a website.
 We can use these techniques to automatically extract the static HTML data from a website, and with it, potentially database contents that gets served alongside the static website.&lt;/p&gt;
 &lt;p&gt;For our little application, I&amp;rsquo;m going to just pick a &lt;a href=&#34;https://resources.msoe.edu/sched/courses/all&#34;&gt;random website&lt;/a&gt; that we can easily pull some data off of.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://www.andreano.dev/images/scheduler.png&#34; alt=&#34;targets&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/scheduler.png&#34; alt=&#34;targets&#34;&gt;&lt;/p&gt;
 &lt;p&gt;We&amp;rsquo;re going to have two major dependencies for our Python script: &lt;code&gt;request&lt;/code&gt; from the standard library for our HTTP functions, and a library called &lt;a href=&#34;https://www.crummy.com/software/BeautifulSoup/bs4/doc/&#34;&gt;Beautiful Soup&lt;/a&gt; (&lt;code&gt;bs4&lt;/code&gt;) for pulling elements from the DOM and packaging them as Python objects.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;requests&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;bs4&lt;/span&gt; &lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;BeautifulSoup&lt;/span&gt;

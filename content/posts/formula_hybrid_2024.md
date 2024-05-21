@@ -3,6 +3,7 @@ title: "Formula Hybrid + Electric 2024"
 date: 2024-05-20T17:33:44-05:00
 tags: []
 draft: false
+summary: "We built a racecar"
 ---
 
 {{< figure src="/images/formula_hybrid_2024/team_photo.JPG"
