@@ -71,7 +71,7 @@ Wednesday was our most eventful day by far. We kicked off the day by rushing bac
 {{< figure src="/images/formula_hybrid_2024/mcheck.jpg"
 title="Passing mechanical tech" >}}
 
-After (probably) fixing a phantom oil leak, replacing our accumulator with a state-of-the-art solid state silicon power cell (50lb sandbag), and fueling up, we were off to the tilt test. The car with driver is raised into the air and tilted at a 45\degree angle to test for leaks, and then to a 60\degree angle to test for slippage, simulating the forces experienced in a high-G turn. 
+After (probably) fixing a phantom oil leak, replacing our accumulator with a state-of-the-art solid state silicon power cell (50lb sandbag), and fueling up, we were off to the tilt test. The car with driver is raised into the air and tilted at a 45° angle to test for leaks, and then to a 60° angle to test for slippage, simulating the forces experienced in a high-G turn. 
 
 {{< figure src="/images/formula_hybrid_2024/tilt.JPG"
 title="60 degree tilt test" >}}
