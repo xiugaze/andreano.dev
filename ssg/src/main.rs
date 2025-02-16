@@ -1,10 +1,16 @@
 use pulldown_cmark::{Parser, Options};
-use std::{fs::{self, File}, io::Write};
+use std::{fmt::write, fs::{self, File}, io::Write};
+use ramhorns::{Template, Content};
 
 mod preprocessor;
 
+#[derive(Content)]
+struct Post<'a> {
+    title: &'a str,
+}
+
 fn main() -> std::io::Result<()> {
-    let ex = "Hello, $x^2 = 2$";
+    let ex = "# {{title}}\n\nHello, $x^2 = 2$";
     let options = Options::ENABLE_MATH
         | Options::ENABLE_FOOTNOTES;
 
@@ -14,7 +20,12 @@ fn main() -> std::io::Result<()> {
     let mut output = String::new();
     pulldown_cmark::html::push_html(&mut output, preprocessor);
 
+    let rendered = Template::new(output).unwrap().render(
+        &Post {
+            title: "Test title!",
+        },
+    );
 
-    fs::write("test.html", output)?;
+    fs::write("test.html", rendered)?;
     Ok(())
 }
