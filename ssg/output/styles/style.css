@@ -1,3 +1,23 @@
-p {
-  color: red;
+@import url("color.css");
+
+body {
+    font-family: monospace;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    background-color: var(--uchu-red-2);
 }
+
+.container {
+    /*max-width: 800px;*/
+    font-size: 1.1rem;
+    color: var(--uchu-yin-9);
+    max-width: 60ch; /* Ensures about 80 characters per line */
+    width: 90%; /* Ensures responsiveness */
+    background: var(--uchu-red-2);
+    padding: 20px;
+    margin: 40px 0;
+    line-height: 1.6; /* Helps with readability */
+}
+

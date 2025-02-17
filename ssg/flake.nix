@@ -13,13 +13,21 @@
       });
     in {
       devShells = forEachSupportedSystem ({ pkgs }: {
-        default = pkgs.mkShell {
-          buildInputs = with pkgs; [ ];
-          nativeBuildInputs = with pkgs; [ ];
+        default = with pkgs; mkShell.override { stdenv = clangStdenv; } {
+          buildInputs = with pkgs; [
+            llvmPackages.libclang
+            llvmPackages.clang
+          ];
+
+          LIBCLANG_PATH = "${llvmPackages.libclang.lib}/lib";
+          BINDGEN_EXTRA_CLANG_ARGS = "-isystem ${llvmPackages.libclang.lib}/lib/clang/${lib.getVersion clang}/include";
+
           packages = with pkgs; [
             # rust 
             rust-bin.stable.latest.default
             rust-analyzer
+
+            cmake
           ];
         };
       });

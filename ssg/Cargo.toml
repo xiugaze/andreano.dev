@@ -7,9 +7,5 @@ edition = "2021"
 pulldown-cmark = "^0.12.2"
 latex2mathml = "0.2.3"
 ramhorns = "1.0.1"
-
-# for web server
-warp = "0.3"
-notify = "5.0"
-tokio = { version = "1", features = ["full"] }
-futures = "0.3"
+serde_yaml="0.9"
+tidier = "0.5.3"
