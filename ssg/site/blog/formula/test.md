@@ -17,3 +17,16 @@ $x = 2$
 
 ### Test Image
 ![image of dan](/grillmaster_dan.jpg "Grillmaster Dan")
+
+## Other symbols
+
+> This is a test quote.
+
+This is some `inline code`. 
+
+```c
+void main(void) {
+    printf("this is a test fenced code block");
+}
+
+```
