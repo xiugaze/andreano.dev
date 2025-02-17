@@ -15,3 +15,5 @@ This some math:
 $x = 2$
 
 
+### Test Image
+![image of dan](/grillmaster_dan.jpg "Grillmaster Dan")

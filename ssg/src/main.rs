@@ -2,16 +2,16 @@ use pulldown_cmark::{Parser, Options};
 use server::serve;
 use tidier::FormatOptions;
 use std::fs::{self};
+use std::path::Path;
 use ramhorns::{Template, Content};
 
 mod preprocessor;
 mod server;
 
-use std::collections::HashMap;
+use std::collections::{HashMap, VecDeque};
 use std::io;
-//use tidy::Document;
 
-fn parse_frontmatter_content(file_path: &str) -> io::Result<(Option<HashMap<String, String>>, String)> {
+fn parse_frontmatter_content(file_path: &Path) -> io::Result<(Option<HashMap<String, String>>, String)> {
     let content = fs::read_to_string(file_path)?;
     if content.starts_with("---\n") {
         let mut parts = content.splitn(3, "---\n");
@@ -26,31 +26,18 @@ fn parse_frontmatter_content(file_path: &str) -> io::Result<(Option<HashMap<Stri
     Ok((None, content.trim().to_string()))
 }
 
-fn parse_post_markdown(input_path: &str, output_path: &str) -> std::io::Result<()> {
+fn parse_post_markdown(input_path: &Path, output_path: &str) -> std::io::Result<()> {
     let (frontmatter, content) = parse_frontmatter_content(&input_path)?;
     let options = Options::ENABLE_MATH
-        | Options::ENABLE_FOOTNOTES;
+        | Options::ENABLE_FOOTNOTES
+        | Options::ENABLE_YAML_STYLE_METADATA_BLOCKS;
     let parser = preprocessor::Preprocessor::new(Parser::new_ext(&content, options));
 
 
     let mut html_content = String::new();
     pulldown_cmark::html::push_html(&mut html_content, parser);
 
-    /* note: in mustache, {{{ is an unescaped template */
-    let template = 
-        "<!DOCTYPE html>
-            <html>
-            <head>
-                <title>{{ title }}</title>
-                <link href=\"styles/style.css\" rel=\"stylesheet\"/>
-            </head>
-            <body>
-                <div class=\"container\">
-                    {{{ content }}}
-                </div>
-            </body>
-            </html>
-        ";
+    let template = fs::read_to_string("templates/post.html")?;
 
     let rendered = Template::new(template).unwrap().render(
         &Post {
@@ -70,6 +57,33 @@ fn parse_post_markdown(input_path: &str, output_path: &str) -> std::io::Result<(
     Ok(())
 }
 
+fn traverse_directory(start_dir: &str) -> std::io::Result<()> {
+    let start_dir = Path::new(start_dir).to_path_buf();
+    let mut stack = VecDeque::new();
+    stack.push_back(start_dir);
+
+    while let Some(cur) = stack.pop_front() {
+        if cur.is_dir() {
+            for entry in fs::read_dir(cur)? {
+                let entry = entry?;
+                let path = entry.path();
+
+                if path.is_file() && path.extension().map_or(false, |ext| ext == "md") {
+                    println!("{}", path.display());
+                    let _ = parse_post_markdown(path.as_path(), "output/blog/test.html");
+                }
+
+
+                if path.is_dir() {
+                    stack.push_back(path);
+                }
+            }
+        }
+    }
+
+    Ok(())
+}
+
 
 #[derive(Content)]
 struct Post<'a> {
@@ -83,9 +97,7 @@ fn main() -> std::io::Result<()> {
 
     if args.len() > 1 && args[1] == "serve" {
         serve("output", "9090");
-    } else {
-        let _ = parse_post_markdown("./input/test.md", "./output/test.html");
     }
-
-    Ok(())
+    //parse_post_markdown("./input/test.md", "./output/test.html")
+    traverse_directory("./blog")
 }
