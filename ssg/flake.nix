@@ -61,6 +61,9 @@
 
                   # js
                   bun
+
+                  # tools
+                  libwebp
                 ];
             };
         }

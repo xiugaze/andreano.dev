@@ -6,6 +6,10 @@
     </title>
     <link href="../styles/style.css" rel="stylesheet">
     <link href="../styles/prism.css" rel="stylesheet">
+    <script>
+    /*to prevent Firefox FOUC, this must be here*/
+    let FF_FOUC_FIX;
+    </script>
   </head>
   <body>
     <div class="container">
@@ -22,7 +26,7 @@
         design cycle for our car, the MP6. We designed and manufactured the
         chassis and drivetrain from scratch this year with a new IC engine,
         redesigned the high-voltage and low-voltage systems, and used the first
-        iteration of a new software stack to control the MP6's powertrain and
+        iteration of a new software stack to control the MP6’s powertrain and
         other subsystems. I had the opportunity this year to work as the design
         lead for the software team, and we worked on a new codebase
         prioritizing real-time performance and asynchronous execution using
@@ -32,15 +36,13 @@
       <p>
         In summary, we were the only hybrid team to pass all inspections and
         move under our own power. We won first place for project management,
-        second in design, and first overall for the hybrid category. I'm super
+        second in design, and first overall for the hybrid category. I’m super
         proud of the work we did this year, and what follows is a day-by day of
         the competition from my end.
       </p>
       <p>
-        This some math:
-      </p>
-      <p>
-        <math xmlns="http://www.w3.org/1998/Math/MathML" display="inline">
+        This some inline math: <math xmlns="http://www.w3.org/1998/Math/MathML"
+        display="inline">
         <mi>
           x
         </mi>
@@ -49,13 +51,83 @@
         </mo>
         <mn>
           2
-        </mn></math>
+        </mn></math><sup class="footnote-reference"><a href="#1">1</a></sup>
+      </p>
+      <p>
+        <math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+        <mi>
+          I
+        </mi>
+        <mo>
+          =
+        </mo>
+        <mrow>
+          <mo stretchy="true" form="prefix">
+            [
+          </mo>
+          <mtable>
+            <mtr>
+              <mtd>
+                <mn>
+                  1
+                </mn>
+              </mtd>
+              <mtd>
+                <mn>
+                  0
+                </mn>
+              </mtd>
+              <mtd>
+                <mn>
+                  0
+                </mn>
+              </mtd>
+            </mtr>
+            <mtr>
+              <mtd>
+                <mn>
+                  0
+                </mn>
+              </mtd>
+              <mtd>
+                <mn>
+                  1
+                </mn>
+              </mtd>
+              <mtd>
+                <mn>
+                  0
+                </mn>
+              </mtd>
+            </mtr>
+            <mtr>
+              <mtd>
+                <mn>
+                  0
+                </mn>
+              </mtd>
+              <mtd>
+                <mn>
+                  0
+                </mn>
+              </mtd>
+              <mtd>
+                <mn>
+                  1
+                </mn>
+              </mtd>
+            </mtr>
+          </mtable>
+          <mo stretchy="true" form="postfix">
+            ]
+          </mo>
+        </mrow></math>
       </p>
       <h3>
         Test Image
       </h3>
       <figure>
-        <img src="/grillmaster_dan.jpg" alt="image of dan" title=
+        <img src="/grillmaster_dan.webp" alt="image of dan" title=
         "Grillmaster Dan">
         <figcaption>
           Grillmaster Dan
@@ -64,6 +136,13 @@
       <h2>
         Other symbols
       </h2>
+      <p>
+        <del>strikethrough</del> this is <sub>subscript</sub> and
+        <sup>superscript</sup>.
+      </p>
+      <p>
+        This – is some… “smart” ‘punctuation’.
+      </p>
       <blockquote>
         <p>
           This is a test quote.
@@ -78,6 +157,15 @@ void main(void) {
     printf("this is a test fenced code block");
 }
 </code></pre>
+      <h2>
+        References
+      </h2>
+      <div class="footnote-definition" id="1">
+        <sup class="footnote-definition-label">1</sup>
+        <p>
+          And some block math.
+        </p>
+      </div>
     </div>
     <script src="../scripts/prism.js"></script>
   </body>

@@ -42,7 +42,7 @@ fn handle_request(mut stream: TcpStream, dir: &str) {
             Some("jpg") | Some("jpeg") => "image/jpeg",
             Some("png") => "image/png",
             Some("gif") => "image/gif",
-            Some("html") => "text/html",
+            Some("html") => "text/html; charset=utf-8",
             Some("css") => "text/css",
             Some("js") => "application/javascript",
             _ => "application/octet-stream", // Default to binary data

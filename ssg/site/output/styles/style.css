@@ -1,7 +1,7 @@
 @import url("color.css");
 
 body {
-    font-family: monospace;
+    font-family: JetBrains Mono, monospace;
     margin: 0;
     padding: 0;
     display: flex;
@@ -53,10 +53,3 @@ body {
     overflow-x: auto; 
     line-height: 1.5; 
 }
-
-/*.container pre code {*/
-/*    background-color: transparent; /* Remove background for nested code */*/
-/*    padding: 0; /* Remove padding for nested code */*/
-/*    border: none; /* Remove border for nested code */*/
-/*    color: inherit; /* Inherit text color from <pre> */*/
-/*}*/

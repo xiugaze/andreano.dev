@@ -10,15 +10,27 @@ Formula Hybrid is one of the SAE collegiate design competitions. Our team builds
 In summary, we were the only hybrid team to pass all inspections and move under our own power. We won first place for project management, second in design, and first overall for the hybrid category. I'm super proud of the work we did this year, and what follows is a day-by day of 
 the competition from my end. 
 
-This some math: 
+This some inline math: $x = 2$[^1]
 
-$x = 2$
+$$
+I = 
+\begin{bmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 1
+\end{bmatrix}
+$$
 
 
 ### Test Image
-![image of dan](/grillmaster_dan.jpg "Grillmaster Dan")
+![image of dan](/grillmaster_dan.webp "Grillmaster Dan")
 
 ## Other symbols
+
+~~strikethrough~~ this is <sub>subscript</sub> and <sup>superscript</sup>. 
+
+This -- is some... "smart" 'punctuation'. 
+
 
 > This is a test quote.
 
@@ -31,3 +43,5 @@ void main(void) {
     printf("this is a test fenced code block");
 }
 ```
+## References
+[^1]: And some block math.

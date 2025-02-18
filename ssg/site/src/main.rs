@@ -30,7 +30,14 @@ fn parse_post_markdown(input_path: &Path, output_path: &str) -> std::io::Result<
     let (frontmatter, content) = parse_frontmatter_content(&input_path)?;
     let options = Options::ENABLE_MATH
         | Options::ENABLE_FOOTNOTES
-        | Options::ENABLE_YAML_STYLE_METADATA_BLOCKS;
+        | Options::ENABLE_YAML_STYLE_METADATA_BLOCKS
+        | Options::ENABLE_FOOTNOTES
+        | Options::ENABLE_SUPERSCRIPT
+        | Options::ENABLE_SUBSCRIPT
+        | Options::ENABLE_MATH
+        | Options::ENABLE_STRIKETHROUGH
+        | Options::ENABLE_SMART_PUNCTUATION;
+
     let parser = preprocessor::Preprocessor::new(Parser::new_ext(&content, options));
 
 
