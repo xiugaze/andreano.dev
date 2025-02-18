@@ -5,6 +5,7 @@
       test title
     </title>
     <link href="../styles/style.css" rel="stylesheet">
+    <link href="../styles/prism.css" rel="stylesheet">
   </head>
   <body>
     <div class="container">
@@ -71,11 +72,13 @@
       <p>
         This is some <code>inline code</code>.
       </p>
-      <pre><code class="language-c">void main(void) {
+      <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+void main(void) {
     printf("this is a test fenced code block");
 }
-
 </code></pre>
     </div>
+    <script src="../scripts/prism.js"></script>
   </body>
 </html>

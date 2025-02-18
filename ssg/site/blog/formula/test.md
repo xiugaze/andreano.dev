@@ -25,8 +25,9 @@ $x = 2$
 This is some `inline code`. 
 
 ```c
+#include <stdio.h>
+
 void main(void) {
     printf("this is a test fenced code block");
 }
-
 ```
