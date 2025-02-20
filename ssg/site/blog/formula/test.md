@@ -23,7 +23,7 @@ $$
 
 
 ### Test Image
-![image of dan](/grillmaster_dan.webp "Grillmaster Dan")
+![image of dan](/images/grillmaster_dan.webp "Grillmaster Dan")
 
 ## Other symbols
 

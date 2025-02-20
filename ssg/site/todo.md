@@ -1,0 +1,2 @@
+- [ ] figure out why Math isn't rendering correctly on chrome
+- [ ] building an index

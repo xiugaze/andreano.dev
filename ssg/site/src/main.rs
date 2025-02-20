@@ -3,13 +3,14 @@ use server::serve;
 use tidier::FormatOptions;
 use std::fs::{self};
 use std::path::Path;
+use std::process::exit;
 use ramhorns::{Template, Content};
 
 mod preprocessor;
 mod server;
 
 use std::collections::{HashMap, VecDeque};
-use std::io;
+use std::{env, io};
 
 fn parse_frontmatter_content(file_path: &Path) -> io::Result<(Option<HashMap<String, String>>, String)> {
     let content = fs::read_to_string(file_path)?;
@@ -76,8 +77,12 @@ fn traverse_directory(start_dir: &str) -> std::io::Result<()> {
                 let path = entry.path();
 
                 if path.is_file() && path.extension().map_or(false, |ext| ext == "md") {
-                    println!("{}", path.display());
-                    let _ = parse_post_markdown(path.as_path(), "output/blog/test.html");
+                    if let Some(file_name) = path.file_stem() {
+                        if let Some(file_name) = file_name.to_str() {
+                            println!("found {}", file_name);
+                            let _ = parse_post_markdown(path.as_path(), &format!("output/blog/{}.html", file_name));
+                        }
+                    }
                 }
 
 
@@ -101,10 +106,12 @@ struct Post<'a> {
 
 fn main() -> std::io::Result<()> {
     let args: Vec<String> = std::env::args().collect();
-
+    let cwd = match env::current_dir() {
+        Ok(path) => path.display().to_string(),
+        Err(e) => {println!("Failed to get current directory: {}", e); exit(1) }
+    };
     if args.len() > 1 && args[1] == "serve" {
-        serve("output", "9090");
+        serve(&cwd, "9090");
     }
-    //parse_post_markdown("./input/test.md", "./output/test.html")
     traverse_directory("./blog")
 }

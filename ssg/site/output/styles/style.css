@@ -1,18 +1,26 @@
 @import url("color.css");
 
 body {
-    font-family: JetBrains Mono, monospace;
+    font-family: monospace;
     margin: 0;
     padding: 0;
     display: flex;
     justify-content: center;
     background-color: var(--uchu-pink-4);
+    color: var(--uchu-yin-9);
+    font-size: 16px;
+}
+
+@font-face {
+    font-family: 'NFMono';
+    src: url('nfmono.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 }
 
 .container {
     /*max-width: 800px;*/
     font-size: 1.1rem;
-    color: var(--uchu-yin-9);
     max-width: 60ch; 
     width: 90%; 
     padding: 20px;
@@ -53,3 +61,30 @@ body {
     overflow-x: auto; 
     line-height: 1.5; 
 }
+
+.home-container {
+    width: 100%;
+    height: 60vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.home-container > h1 {
+    font-size: 2.5rem;
+    margin: 0px;
+}
+
+.home-container .links-container {
+    margin-top: 10px;
+}
+
+.links-container > a.icon {
+    text-decoration: none;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-family: NFMono;
+}
+
