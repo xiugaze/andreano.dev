@@ -1,5 +1,5 @@
 ---
-title: Title1
+title: Formula Hybrid 2024
 ---
 # Header 1
 
@@ -23,7 +23,7 @@ $$
 
 
 ### Test Image
-![image of dan](/images/grillmaster_dan.webp "Grillmaster Dan")
+![image of dan](./img/grillmaster_dan.webp "Grillmaster Dan")
 
 ## Other symbols
 

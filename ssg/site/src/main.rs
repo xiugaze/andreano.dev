@@ -47,9 +47,15 @@ fn parse_post_markdown(input_path: &Path, output_path: &str) -> std::io::Result<
 
     let template = fs::read_to_string("templates/post.html")?;
 
+    let frontmatter = frontmatter.unwrap();
+    let title = match frontmatter.get("title") {
+        Some(title) => title,
+        None => "default title",
+    };
+
     let rendered = Template::new(template).unwrap().render(
         &Post {
-            title: "test title",
+            title,
             content: &html_content,
         },
     );
@@ -61,7 +67,11 @@ fn parse_post_markdown(input_path: &Path, output_path: &str) -> std::io::Result<
         .indent(2);
     let formatted = tidier::format(rendered, false, &opts).unwrap();
 
-    fs::write(&output_path, formatted)?;
+    let output_path = Path::new(output_path);
+    if let Some(parent) = output_path.parent() {
+        fs::create_dir_all(parent)?;
+    }
+    fs::write(output_path, formatted)?;
     Ok(())
 }
 
@@ -77,14 +87,16 @@ fn traverse_directory(start_dir: &str) -> std::io::Result<()> {
                 let path = entry.path();
 
                 if path.is_file() && path.extension().map_or(false, |ext| ext == "md") {
-                    if let Some(file_name) = path.file_stem() {
-                        if let Some(file_name) = file_name.to_str() {
-                            println!("found {}", file_name);
-                            let _ = parse_post_markdown(path.as_path(), &format!("output/blog/{}.html", file_name));
+                    if let (Some(parent), Some(file_name)) = (path.parent().and_then(|p| p.file_stem()), path.file_stem()) {
+                        if let (Some(parent), Some(file_name)) = (parent.to_str(), file_name.to_str()) {
+                            println!("found {}/{}", parent, file_name);
+                            match parse_post_markdown(path.as_path(), &format!("output/blog/{}/{}.html", parent, file_name)) {
+                                Ok(_) => println!("wrote output/blog/{}/{}.html", parent, file_name),
+                                Err(e) => println!("error: {}", e),
+                            };
                         }
                     }
                 }
-
 
                 if path.is_dir() {
                     stack.push_back(path);

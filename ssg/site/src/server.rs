@@ -32,6 +32,7 @@ pub fn serve(dir: &str, port: &str) {
 
     let mut router = Router::new();
     router.add_route("/", "/index.html");
+    router.add_route("/blog/formula", "/blog/formula/test.html");
     let router = Arc::new(router);
 
     for stream in listener.incoming() {
