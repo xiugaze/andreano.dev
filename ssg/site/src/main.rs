@@ -8,6 +8,7 @@ use ramhorns::{Template, Content};
 
 mod preprocessor;
 mod server;
+mod server2;
 
 use std::collections::{HashMap, VecDeque};
 use std::{env, io};
@@ -116,14 +117,15 @@ struct Post<'a> {
 }
 
 
-fn main() -> std::io::Result<()> {
+#[tokio::main]
+async fn main() -> std::io::Result<()> {
     let args: Vec<String> = std::env::args().collect();
     let cwd = match env::current_dir() {
         Ok(path) => path.display().to_string(),
         Err(e) => {println!("Failed to get current directory: {}", e); exit(1) }
     };
     if args.len() > 1 && args[1] == "serve" {
-        serve(&cwd, "9090");
+        server2::run_server().await;
     }
     traverse_directory("./blog")
 }
