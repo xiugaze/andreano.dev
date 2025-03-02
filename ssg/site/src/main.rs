@@ -1,5 +1,4 @@
 use pulldown_cmark::{Parser, Options};
-use server::serve;
 use tidier::FormatOptions;
 use std::fs::{self};
 use std::path::Path;
@@ -8,7 +7,6 @@ use ramhorns::{Template, Content};
 
 mod preprocessor;
 mod server;
-mod server2;
 
 use std::collections::{HashMap, VecDeque};
 use std::{env, io};
@@ -28,8 +26,24 @@ fn parse_frontmatter_content(file_path: &Path) -> io::Result<(Option<HashMap<Str
     Ok((None, content.trim().to_string()))
 }
 
-fn parse_post_markdown(input_path: &Path, output_path: &str) -> std::io::Result<()> {
+
+#[derive(Content)]
+struct PostTemplate<'a> {
+    title: &'a str,
+    path: &'a str,
+    content: &'a str,
+}
+
+struct Post {
+    title: String,
+    url: String,
+    date: chrono::DateTime<chrono::FixedOffset>
+}
+
+fn parse_post_markdown(input_path: &Path, output_path: &str) -> std::io::Result<Post> {
+
     let (frontmatter, content) = parse_frontmatter_content(&input_path)?;
+
     let options = Options::ENABLE_MATH
         | Options::ENABLE_FOOTNOTES
         | Options::ENABLE_YAML_STYLE_METADATA_BLOCKS
@@ -42,11 +56,13 @@ fn parse_post_markdown(input_path: &Path, output_path: &str) -> std::io::Result<
 
     let parser = preprocessor::Preprocessor::new(Parser::new_ext(&content, options));
 
-
+    /* convert markdown to html */
     let mut html_content = String::new();
     pulldown_cmark::html::push_html(&mut html_content, parser);
 
+    /* render template */
     let template = fs::read_to_string("templates/post.html")?;
+    let parent = input_path.parent().unwrap().display();
 
     let frontmatter = frontmatter.unwrap();
     let title = match frontmatter.get("title") {
@@ -54,13 +70,34 @@ fn parse_post_markdown(input_path: &Path, output_path: &str) -> std::io::Result<
         None => "default title",
     };
 
+    let date = match frontmatter.get("date") {
+        Some(date) => {
+            match chrono::DateTime::parse_from_rfc3339(date) {
+                Ok(dt) => dt,
+                Err(e) => { 
+                    println!("error parsing {}", e); 
+                    chrono::DateTime::default()
+                },
+            }
+        },
+        None => chrono::DateTime::default(),
+    };
+
     let rendered = Template::new(template).unwrap().render(
-        &Post {
+        &PostTemplate {
             title,
+            path: &format!("/{}/", parent.to_string()),
             content: &html_content,
         },
     );
 
+    let post = Post {
+        title: title.to_string(),
+        url: format!("/{}", parent.to_string()),
+        date: date.fixed_offset(),
+    };
+
+    /* format the output html */
     let opts = FormatOptions::new()
         .tabs(false)
         .strip_comments(true)
@@ -73,13 +110,16 @@ fn parse_post_markdown(input_path: &Path, output_path: &str) -> std::io::Result<
         fs::create_dir_all(parent)?;
     }
     fs::write(output_path, formatted)?;
-    Ok(())
+
+    Ok(post)
 }
 
 fn traverse_directory(start_dir: &str) -> std::io::Result<()> {
     let start_dir = Path::new(start_dir).to_path_buf();
     let mut stack = VecDeque::new();
     stack.push_back(start_dir);
+
+    let mut posts: Vec<Post> = Vec::new();
 
     while let Some(cur) = stack.pop_front() {
         if cur.is_dir() {
@@ -92,7 +132,10 @@ fn traverse_directory(start_dir: &str) -> std::io::Result<()> {
                         if let (Some(parent), Some(file_name)) = (parent.to_str(), file_name.to_str()) {
                             println!("found {}/{}", parent, file_name);
                             match parse_post_markdown(path.as_path(), &format!("output/blog/{}/{}.html", parent, file_name)) {
-                                Ok(_) => println!("wrote output/blog/{}/{}.html", parent, file_name),
+                                Ok(post) => {
+                                    println!("wrote output/blog/{}/{}.html", parent, file_name);
+                                    posts.push(post);
+                                }
                                 Err(e) => println!("error: {}", e),
                             };
                         }
@@ -106,26 +149,27 @@ fn traverse_directory(start_dir: &str) -> std::io::Result<()> {
         }
     }
 
+    let mut index_html = String::new();
+    posts.sort_by(|i, j| (&i.date).cmp(&j.date));
+    for p in posts {
+        let date_str = p.date.format("%Y-%m-%d").to_string();
+        println!("<{}> {} href={}", date_str, p.title, p.url);
+        index_html.push_str(&format!("<a href=\"{}\">&lt{}&gt {}</a>\n", p.url, date_str, p.title));
+    }
+    fs::write("output/blog/index.html", index_html)?;
+
     Ok(())
 }
 
 
-#[derive(Content)]
-struct Post<'a> {
-    title: &'a str,
-    content: &'a str,
-}
-
-
-#[tokio::main]
-async fn main() -> std::io::Result<()> {
+fn main() -> std::io::Result<()> {
     let args: Vec<String> = std::env::args().collect();
     let cwd = match env::current_dir() {
         Ok(path) => path.display().to_string(),
         Err(e) => {println!("Failed to get current directory: {}", e); exit(1) }
     };
     if args.len() > 1 && args[1] == "serve" {
-        server2::run_server().await;
-    }
-    traverse_directory("./blog")
+        server::serve(&cwd, "8080");
+    } 
+    traverse_directory("blog")
 }

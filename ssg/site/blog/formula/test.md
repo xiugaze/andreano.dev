@@ -1,6 +1,8 @@
 ---
-title: Formula Hybrid 2024
+title: "Formula Hybrid + Electric 2024"
+date: "2024-05-20T17:33:44-05:00"
 ---
+
 # Header 1
 
 ## Header 2

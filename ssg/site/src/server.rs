@@ -32,9 +32,10 @@ pub fn serve(dir: &str, port: &str) {
 
     let mut router = Router::new();
     router.add_route("/", "/index.html");
-    router.add_route("/blog/formula/", "/blog/formula/test.html");
-    let router = Arc::new(router);
+    router.add_route("/blog", "/blog/index.html");
+    router.add_route("/blog/formula", "/blog/formula/test.html");
 
+    let router = Arc::new(router);
     for stream in listener.incoming() {
         match stream {
             Ok(stream) => {
@@ -62,8 +63,8 @@ fn handle_request(mut stream: TcpStream, dir: &str, router: &Router) {
         .and_then(|line| line.split_whitespace().nth(1))
         .unwrap_or("/").to_string();
 
+    /* if path is an external link */
     if path.starts_with("http://") || path.starts_with("https://") {
-        // Redirect the client to the external URL
         let response = format!(
             "HTTP/1.1 302 Found\r\nLocation: {}\r\n\r\n",
             path
@@ -76,7 +77,7 @@ fn handle_request(mut stream: TcpStream, dir: &str, router: &Router) {
     let file_name = router.resolve(&path).unwrap_or(&path);
     println!("file_name: {}", file_name);
     println!("dir: {}", dir);
-    let mut file_path = Path::new(dir).join(&file_name[1..]);
+    let file_path = Path::new(dir).join(&file_name[1..]);
     println!("file_path: {}", file_path.to_str().unwrap());
     if file_path.exists() && file_path.is_file() {
         println!("Fetching {}", file_path.display());

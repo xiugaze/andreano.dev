@@ -1,3 +1,4 @@
 - [ ] figure out why Math isn't rendering correctly on chrome
 - [ ] building an index
-- [ ] <base> tags + generating routes on serve
+- [x] <base> tags + generating routes on serve
+- [ ] comment engine
