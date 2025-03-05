@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Blog</title>
+    <title>{{ title }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <base
-      href="/blog/"
+      href="{{{ path }}}"
   >
     <link href="/styles/style.css" rel="stylesheet">
     <script>
@@ -15,10 +15,7 @@
   <body>
     <div class="container">
       <div class="index-container">
-        <a href="/blog/test">&lt2024-05-20&gt Test Webpage</a>
-<a href="/blog/formula-hybrid-2024">&lt2024-05-20&gt Formula Hybrid + Electric 2024</a>
-<a href="/blog/msoe-scraper">&lt2023-05-18&gt How to Schedule for Classes at MSOE</a>
-
+        {{{ content }}}
       </div>
     </div>
   </body>

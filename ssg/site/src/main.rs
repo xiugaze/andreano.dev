@@ -1,4 +1,4 @@
-use pulldown_cmark::{Parser, Options};
+use pulldown_cmark::{Event, Options, Parser, Tag};
 use tidier::FormatOptions;
 use std::fs::{self};
 use std::path::Path;
@@ -28,10 +28,12 @@ fn parse_frontmatter_content(file_path: &Path) -> io::Result<(Option<HashMap<Str
 
 
 #[derive(Content)]
-struct PostTemplate<'a> {
+struct BaseTemplate<'a> {
     title: &'a str,
     path: &'a str,
     content: &'a str,
+    styles: &'a str,
+    scripts: &'a str,
 }
 
 struct Post {
@@ -54,11 +56,20 @@ fn parse_post_markdown(input_path: &Path, output_path: &str) -> std::io::Result<
         | Options::ENABLE_STRIKETHROUGH
         | Options::ENABLE_SMART_PUNCTUATION;
 
-    let parser = preprocessor::Preprocessor::new(Parser::new_ext(&content, options));
+    let mut has_code = false;
+    let parser = preprocessor::Preprocessor::new(Parser::new_ext(&content, options)).map(|e| {
+        if let Event::Start(tag) = &e {
+            if let Tag::CodeBlock(_) = tag {
+                has_code = true;
+            }
+        }
+        e
+    });
 
     /* convert markdown to html */
     let mut html_content = String::new();
     pulldown_cmark::html::push_html(&mut html_content, parser);
+    println!("has code: {has_code}");
 
     /* render template */
     let template = fs::read_to_string("templates/post.html")?;
@@ -83,19 +94,25 @@ fn parse_post_markdown(input_path: &Path, output_path: &str) -> std::io::Result<
         None => chrono::DateTime::default(),
     };
 
+    let mut styles = String::new();
+    let mut scripts = String::new();
+
+    if has_code {
+        styles.push_str("<link href=\"/styles/prism.css\" rel=\"stylesheet\">");
+        scripts.push_str("<script src=\"/scripts/prism.js\"></script>");
+    }
+
+
     let rendered = Template::new(template).unwrap().render(
-        &PostTemplate {
+        &BaseTemplate {
             title,
             path: &format!("/{}/", parent.to_string()),
             content: &html_content,
+            styles: &styles,
+            scripts: &scripts,
         },
     );
 
-    let post = Post {
-        title: title.to_string(),
-        url: format!("/{}", parent.to_string()),
-        date: date.fixed_offset(),
-    };
 
     /* format the output html */
     let opts = FormatOptions::new()
@@ -111,6 +128,12 @@ fn parse_post_markdown(input_path: &Path, output_path: &str) -> std::io::Result<
     }
     fs::write(output_path, formatted)?;
 
+    /* metadata */
+    let post = Post {
+        title: title.to_string(),
+        url: format!("/{}", parent.to_string()),
+        date: date.fixed_offset(),
+    };
     Ok(post)
 }
 
@@ -149,14 +172,28 @@ fn traverse_directory(start_dir: &str) -> std::io::Result<()> {
         }
     }
 
-    let mut index_html = String::new();
-    posts.sort_by(|i, j| (&i.date).cmp(&j.date));
+    /* build an index page */
+    let mut html_content = String::new();
+    posts.sort_by(|i, j| (&j.date).cmp(&i.date)); // reverse comparison
     for p in posts {
         let date_str = p.date.format("%Y-%m-%d").to_string();
         println!("<{}> {} href={}", date_str, p.title, p.url);
-        index_html.push_str(&format!("<a href=\"{}\">&lt{}&gt {}</a>\n", p.url, date_str, p.title));
+        html_content.push_str(&format!("<a href=\"{}\">&lt{}&gt {}</a>\n", p.url, date_str, p.title));
     }
-    fs::write("output/blog/index.html", index_html)?;
+
+    let template = fs::read_to_string("templates/index.html")?;
+    let rendered = Template::new(template).unwrap().render(
+        &BaseTemplate {
+            title: "Blog",
+            path: "/blog/",
+            content: &html_content,
+            scripts: "",
+            styles: "",
+        },
+    );
+
+
+    fs::write("output/blog/index.html", rendered)?;
 
     Ok(())
 }

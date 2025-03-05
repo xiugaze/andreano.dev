@@ -1,4 +1,10 @@
 @import url("color.css");
+@font-face {
+    font-family: 'NFMono';
+    src: url('/styles/nfmono.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 
 body {
     font-family: monospace;
@@ -11,12 +17,18 @@ body {
     font-size: 16px;
 }
 
-@font-face {
-    font-family: 'NFMono';
-    src: url('nfmono.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+code {
+    font-weight: bold;
+    color: var(--uchu-purple-9);
 }
+
+a.icon {
+    text-decoration: none;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-family: NFMono;
+}
+
 
 .container {
     /*max-width: 800px;*/
@@ -79,12 +91,31 @@ body {
 
 .home-container .links-container {
     margin-top: 10px;
+    margin-bottom: 10px;
 }
 
-.links-container > a.icon {
+.links-container > a {
+    color: var(--uchu-yin-8);
     text-decoration: none;
-    margin-left: 10px;
-    margin-right: 10px;
-    font-family: NFMono;
+}
+
+.links-container > a:hover {
+    text-decoration: underline;
+}
+
+
+.icon-container > a {
+    color: var(--uchu-yin-8);
+    text-decoration: none;
+}
+
+.index-container > a {
+    display: block;
+    text-decoration: none;
+    color: var(--uchu-yin-9);
+}
+
+.index-container > a:hover {
+    text-decoration: underline;
 }
 
