@@ -44,6 +44,11 @@ Later in the evening, we took the last slot in the day for mechanical inspection
 
 Wednesday was our most eventful day by far. We kicked off the day by rushing back to mechanical inspection and passing. This was no small feat. On the electrical side, we had a non-zero number of requirements waived for us, because as previously mentioned, we didn't have a running tractive system. However, the chassis, powertrain, controls, safety/ergo, and sidepods teams had more-or-less finished what they set out to do this year, so they were subjected to the full scrutiny of the mechanical tech inspection. I felt like this was a huge achievement for the team: we didn't really expect to pass at all this year, but the months of hard work and dedication meant that we had actually had a shot at driving on track. 
 
+<video controls>
+    <source src="./vid/raintest.webm" type="video/webm">
+    Download the
+    <a href="/shared-assets/videos/flower.webm">WEBM</a>
+</video>
 
 After (probably) fixing a phantom oil leak, replacing our accumulator with a state-of-the-art solid state silicon power cell (50lb sandbag), and fueling up, we were off to the tilt test. The car with driver is raised into the air and tilted at a 45° angle to test for leaks, and then to a 60° angle to test for slippage, simulating the forces experienced in a high-G turn. 
 

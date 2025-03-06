@@ -3,7 +3,7 @@ use tidier::FormatOptions;
 use std::fs::{self};
 use std::path::Path;
 use std::process::exit;
-use ramhorns::{Template, Content};
+use ramhorns::{Content, Ramhorns, Template};
 
 mod preprocessor;
 mod server;
@@ -69,13 +69,15 @@ fn parse_post_markdown(input_path: &Path, output_path: &str) -> std::io::Result<
     /* convert markdown to html */
     let mut html_content = String::new();
     pulldown_cmark::html::push_html(&mut html_content, parser);
-    println!("has code: {has_code}");
+    //println!("has code: {has_code}");
 
     /* render template */
-    let template = fs::read_to_string("templates/post.html")?;
+    let tpls: Ramhorns = Ramhorns::from_folder("./templates").unwrap();
+    let template = tpls.get("post.html").unwrap();
+
     let parent = input_path.parent().unwrap().display();
 
-    let frontmatter = frontmatter.unwrap();
+    let frontmatter = frontmatter.unwrap_or(HashMap::new());
     let title = match frontmatter.get("title") {
         Some(title) => title,
         None => "default title",
@@ -103,7 +105,7 @@ fn parse_post_markdown(input_path: &Path, output_path: &str) -> std::io::Result<
     }
 
 
-    let rendered = Template::new(template).unwrap().render(
+    let rendered = template.render(
         &BaseTemplate {
             title,
             path: &format!("/{}/", parent.to_string()),
@@ -137,6 +139,30 @@ fn parse_post_markdown(input_path: &Path, output_path: &str) -> std::io::Result<
     Ok(post)
 }
 
+use std::process::Command;
+use std::str;
+
+fn get_git_commit_hash() -> Result<String, String> {
+    let output = Command::new("git")
+        .args(["rev-parse", "HEAD"])
+        .output()
+        .map_err(|e| format!("Failed to execute git command: {}", e))?;
+
+    if output.status.success() {
+        let hash = str::from_utf8(&output.stdout)
+            .map_err(|e| format!("Invalid UTF-8 in git output: {}", e))?
+            .trim()
+            .to_string();
+        Ok(hash)
+    } else {
+        let error = str::from_utf8(&output.stderr)
+            .map_err(|e| format!("Invalid UTF-8 in git error: {}", e))?
+            .trim()
+            .to_string();
+        Err(format!("Git command failed: {}", error))
+    }
+}
+
 fn traverse_directory(start_dir: &str) -> std::io::Result<()> {
     let start_dir = Path::new(start_dir).to_path_buf();
     let mut stack = VecDeque::new();
@@ -153,10 +179,10 @@ fn traverse_directory(start_dir: &str) -> std::io::Result<()> {
                 if path.is_file() && path.extension().map_or(false, |ext| ext == "md") {
                     if let (Some(parent), Some(file_name)) = (path.parent().and_then(|p| p.file_stem()), path.file_stem()) {
                         if let (Some(parent), Some(file_name)) = (parent.to_str(), file_name.to_str()) {
-                            println!("found {}/{}", parent, file_name);
+                            //println!("found {}/{}", parent, file_name);
                             match parse_post_markdown(path.as_path(), &format!("output/blog/{}/{}.html", parent, file_name)) {
                                 Ok(post) => {
-                                    println!("wrote output/blog/{}/{}.html", parent, file_name);
+                                    //println!("wrote output/blog/{}/{}.html", parent, file_name);
                                     posts.push(post);
                                 }
                                 Err(e) => println!("error: {}", e),
@@ -175,16 +201,17 @@ fn traverse_directory(start_dir: &str) -> std::io::Result<()> {
     /* build an index page */
     let mut html_content = String::new();
     posts.sort_by(|i, j| (&j.date).cmp(&i.date)); // reverse comparison
+    html_content.push_str("<h1>blog</h1>");
     for p in posts {
         let date_str = p.date.format("%Y-%m-%d").to_string();
-        println!("<{}> {} href={}", date_str, p.title, p.url);
-        html_content.push_str(&format!("<a href=\"{}\">&lt{}&gt {}</a>\n", p.url, date_str, p.title));
+        //println!("<{}> {} href={}", date_str, p.title, p.url);
+        html_content.push_str(&format!("<a href=\"{}\">&lt;{}&gt; {}</a>\n", p.url, date_str, p.title));
     }
 
     let template = fs::read_to_string("templates/index.html")?;
     let rendered = Template::new(template).unwrap().render(
         &BaseTemplate {
-            title: "Blog",
+            title: "blog",
             path: "/blog/",
             content: &html_content,
             scripts: "",
@@ -208,5 +235,7 @@ fn main() -> std::io::Result<()> {
     if args.len() > 1 && args[1] == "serve" {
         server::serve(&cwd, "8080");
     } 
+    let hash = get_git_commit_hash().unwrap();
+    println!("Deploying from commit {}", &hash[0..6]);
     traverse_directory("blog")
 }

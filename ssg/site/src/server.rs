@@ -32,6 +32,8 @@ pub fn serve(dir: &str, port: &str) {
 
     let mut router = Router::new();
     router.add_route("/", "/index.html");
+    router.add_route("/about", "/about.html");
+    router.add_route("/etc", "/etc.html");
     router.add_route("/blog", "/blog/index.html");
     router.add_route("/blog/test", "/blog/test/test.html");
     router.add_route("/blog/formula-hybrid-2024", "/blog/formula-hybrid-2024/formula-hybrid-2024.html");
@@ -85,19 +87,21 @@ fn handle_request(mut stream: TcpStream, dir: &str, router: &Router) {
         println!("Fetching {}", file_path.display());
 
         let content_type = match file_path.extension().and_then(|ext| ext.to_str()) {
-            Some("jpg") | Some("jpeg") => "image/jpeg",
-            Some("png") => "image/png",
-            Some("gif") => "image/gif",
             Some("html") => "text/html; charset=utf-8",
             Some("css") => "text/css",
             Some("js") => "application/javascript",
+            Some("jpg") | Some("jpeg") => "image/jpeg",
+            Some("png") => "image/png",
+            Some("gif") => "image/gif",
+            Some("svg") => "image/svg+xml",
+            Some("webm") => "video/webm",
             _ => "application/octet-stream", // Default to binary data
         };
 
         let contents = fs::read(&file_path).unwrap_or_else(|_| Vec::new());
 
         let response = format!(
-            "HTTP/1.1 200 OK\r\nContent-Type: {}\r\nContent-Length: {}\r\n\r\n",
+            "HTTP/1.1 200 OK\r\nContent-Type: {}\r\nContent-Length: {}\r\nAccept-Ranges: bytes'\r\n\r\n",
             content_type,
             contents.len()
         );

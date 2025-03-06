@@ -1,16 +1,26 @@
+# pre deploy
 - [x] building an index
 - [x] <base> tags + generating routes on serve
+- [x] menu bar
 - [ ] comment engine
-
+- [x] server supports webm locally
+- [ ] footnote formatting
 - [ ] conditional includes
     - [x] conditional syntax highlighting inclusion if page contains code
     - [ ] conditional math font inclusion if page contains math (need to choose a math font)
 
-- [ ] menu bar
+- [ ] routing table builds gets created on site build
+- [ ] footer with deployment information (commit), last modified, etc
+
+# post deploy
+- [x] menu bar as component
+
 - [ ] convert images to webp, wrap them in links to png or jpg
     - [x] wrap in link
     - [ ] link to jpg version
     - [ ] use source tags
     - [ ] maybe they should be resized to the viewport width
 - [ ] for latex2mathml, image, consume closing tag
-- [ ] footnote formatting
+- [ ] rss feed
+- [ ] text-only sitemap generation
+- [ ] md directory can have scripts and css, should get copied and included automatically

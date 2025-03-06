@@ -1,10 +1,10 @@
 @import url("color.css");
-@font-face {
-    font-family: 'NFMono';
-    src: url('/styles/nfmono.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
+/*@font-face {*/
+/*    font-family: 'NFMono';*/
+/*    src: url('/styles/nfmono.woff') format('woff');*/
+/*    font-weight: normal;*/
+/*    font-style: normal;*/
+/*}*/
 
 body {
     font-family: monospace;
@@ -22,11 +22,31 @@ code {
     color: var(--uchu-purple-9);
 }
 
-a.icon {
+.container video {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5); 
+}
+
+.feather {
+  width: 24px;
+  height: 24px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+a {
+    color: var(--uchu-yin-9);
     text-decoration: none;
-    margin-left: 10px;
-    margin-right: 10px;
-    font-family: NFMono;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+
+a.icon:hover {
+    text-decoration: none;
 }
 
 
@@ -94,16 +114,13 @@ a.icon {
     margin-bottom: 10px;
 }
 
-.links-container > a {
-    color: var(--uchu-yin-8);
-    text-decoration: none;
+.links-container {
+    font-size: 1.2rem;
 }
 
-.links-container > a:hover {
-    text-decoration: underline;
+.icon-container {
+    margin-top: 10px;
 }
-
-
 .icon-container > a {
     color: var(--uchu-yin-8);
     text-decoration: none;
@@ -119,3 +136,7 @@ a.icon {
     text-decoration: underline;
 }
 
+.menu {
+    border-bottom: solid;
+    border-width: 2px;
+}

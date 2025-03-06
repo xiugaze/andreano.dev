@@ -1,0 +1,76 @@
+@import url("color.css");
+
+.timeline {
+    margin-top: 40px;
+    position: relative; /* line is relative to the parent */
+    max-width: 100%; /* of the parent */
+    margin-left: 4%; /* push out a little */
+}
+
+.timeline::before {
+    content: '';
+    position: absolute; /* within it's container */
+    top: 0;
+    bottom: 0;
+    width: 0px;
+    border: solid;
+    border-width: 1px;
+    border-radius: 1px;
+
+    color: var(--uchu-yin-9);
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5); 
+    left: 10px; /* Position the line */
+    transform: translateX(-1px); /* Center the circle on the line */
+}
+
+.entry {
+    padding-top: 20px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding-bottom: 20px;
+    padding-left: 40px; /* Space for the circle and line */
+}
+
+.circle {
+    position: absolute;
+    left: 10px; /* Align to the timeline line */
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    transform: translateX(-50%); /* Center the circle on the line */
+    border: solid;
+    border-width: 2px;
+
+    box-shadow: inset 1px 1px 4px rgba(0, 0, 0, 0.5), 1px 1px 4px rgba(0, 0, 0, 0.5); 
+    background: var(--uchu-pink-4);
+    color: var(--uchu-yin-9);
+}
+
+.content {
+    flex-direction: column;
+    padding: 15px;
+    border: solid;
+    border-width: 2px;
+    background-color: var(--uchu-yang);
+    border-radius: 4px;
+    box-shadow: 4px 4px 8px var(--uchu-yin-9); 
+}
+
+h3 {
+    margin: 0;
+    font-size: 18px;
+    color: var(--uchu-yin-9);
+}
+
+.date {
+    margin: 0;
+    font-size: 14px;
+    color: var(--uchu-yin-5);
+}
+
+.position {
+    margin: 0;
+    font-size: 14px;
+    color: var(--uchu-yin-9);
+}
