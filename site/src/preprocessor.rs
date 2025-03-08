@@ -1,7 +1,4 @@
-use std::fmt::format;
-
-// adapted from grego/cmark-syntax
-use pulldown_cmark::{Event, Tag, TagEnd};
+use pulldown_cmark::{Event, Tag};
 
 #[derive(Debug, Default)]
 

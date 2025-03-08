@@ -2,6 +2,8 @@
 - [x] building an index
 - [x] <base> tags + generating routes on serve
 - [x] menu bar
+
+- [x] right now, the blog index page is static. **this needs to be on the fly**
 - [ ] comment engine
 - [x] server supports webm locally
 - [ ] footnote formatting
@@ -14,6 +16,11 @@
 
 # post deploy
 - [x] menu bar as component
+- [ ] incremental rebuild
+- [x] include absolute styles from frontmatter
+- [ ] include absolute scripts from frontmatter
+- [ ] include relative scripts from directory
+- [ ] include relative scripts from directory
 
 - [ ] convert images to webp, wrap them in links to png or jpg
     - [x] wrap in link

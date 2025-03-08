@@ -22,6 +22,21 @@ code {
     color: var(--uchu-purple-9);
 }
 
+.footnote-definition {
+  display: flex; 
+  align-items: flex-start; 
+  margin-bottom: 1em; 
+}
+
+.footnote-definition-label {
+  margin-right: 0.5em; 
+  font-weight: bold; 
+}
+
+.footnote-definition p {
+  margin: 0; 
+}
+
 .container video {
     width: 100%;
     border-radius: 10px;
@@ -116,6 +131,10 @@ a.icon:hover {
 
 .links-container {
     font-size: 1.2rem;
+}
+
+.links-container > a{
+    font-style: italic
 }
 
 .icon-container {
