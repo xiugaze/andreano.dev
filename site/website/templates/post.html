@@ -1,25 +1,29 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-  <title>{{ title }}</title>
-  <link href="/styles/style.css" rel="stylesheet">
-  {{{ styles }}}
-  <link href="/styles/prism.css" rel="stylesheet">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <base href="{{{ path }}}" > 
-  <script>
-    /*to prevent Firefox FOUC, this must be here*/
+  <head>
+    <title>{{ title }}</title>
+    <link href="/styles/style.css" rel="stylesheet">
+    {{{ styles }}}
+    <link href="/styles/prism.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <base
+      href="{{{ path }}}"
+  >
+    <script>
+      /*to prevent Firefox FOUC, this must be here*/
     let FF_FOUC_FIX;
-  </script>
-</head>
-
-<body>
-  <div class="container">
-    {{>menu.html}}
-    {{{ content }}}
-  </div>
-  {{{ scripts }}}
-</body>
-
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="content-wrap">
+        {{>menu.html}}
+        {{{ content }}}
+      </div>
+      <footer>
+        This site is on  main/{{{ commit }}}
+      </footer>
+    </div>
+    {{{ scripts }}}
+  </body>
 </html>

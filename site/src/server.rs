@@ -34,6 +34,7 @@ pub fn serve(dir: &str, port: &str) {
     router.add_route("/", "/index.html");
     router.add_route("/about", "/about.html");
     router.add_route("/etc", "/etc.html");
+    router.add_route("/site", "/site.html");
     router.add_route("/blog", "/blog/index.html");
     router.add_route("/blog/test", "/blog/test/test.html");
     router.add_route("/blog/formula-hybrid-2024", "/blog/formula-hybrid-2024/formula-hybrid-2024.html");
@@ -90,6 +91,7 @@ fn handle_request(mut stream: TcpStream, dir: &str, router: &Router) {
             Some("html") => "text/html; charset=utf-8",
             Some("css") => "text/css",
             Some("js") => "application/javascript",
+            Some("wasm") => "application/wasm",
             Some("jpg") | Some("jpeg") => "image/jpeg",
             Some("png") => "image/png",
             Some("gif") => "image/gif",

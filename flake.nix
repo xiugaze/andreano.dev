@@ -58,6 +58,7 @@
                   cmake
                   python3
                   sqlite
+                  lld
 
                   # js
                   bun

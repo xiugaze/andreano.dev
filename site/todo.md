@@ -13,6 +13,7 @@
 
 - [ ] routing table builds gets created on site build
 - [ ] footer with deployment information (commit), last modified, etc
+    - [x] commit (no link)
 
 # post deploy
 - [x] menu bar as component

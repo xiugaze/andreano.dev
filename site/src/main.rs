@@ -39,6 +39,7 @@ struct BaseTemplate<'a> {
     content: &'a str,
     styles: &'a str,
     scripts: &'a str,
+    commit: &'a str,
 }
 
 struct Post {
@@ -47,7 +48,7 @@ struct Post {
     date: chrono::DateTime<chrono::FixedOffset>,
 }
 
-fn parse_post_markdown(input_path: &Path, output_path: &Path) -> std::io::Result<Post> {
+fn parse_post_markdown(input_path: &Path, output_path: &Path, commit: &str) -> std::io::Result<Post> {
 
     let (frontmatter, content) = parse_frontmatter_content(&input_path)?;
 
@@ -134,6 +135,7 @@ fn parse_post_markdown(input_path: &Path, output_path: &Path) -> std::io::Result
         content: &html_content,
         styles: &styles,
         scripts: &scripts,
+        commit,
     });
 
     /* format the output html */
@@ -201,6 +203,8 @@ fn copy_traverse(input: &Path, output: &Path) -> io::Result<()> {
         fs::create_dir_all(output)?;
     }
 
+    let commit = &get_git_commit_hash().unwrap()[0..6];
+
     let mut todo = VecDeque::new();
     todo.push_back((input.to_path_buf(), output.to_path_buf()));
 
@@ -224,7 +228,7 @@ fn copy_traverse(input: &Path, output: &Path) -> io::Result<()> {
                         "md" => { 
                             println!("{:?} is markdown", path); 
                             new_path.set_extension("html");
-                            let Ok(post) = parse_post_markdown(&path, &new_path) else {
+                            let Ok(post) = parse_post_markdown(&path, &new_path, &commit) else {
                                 println!("error parsing post {:?}", &path);
                                 break;
                             };
@@ -261,6 +265,7 @@ fn copy_traverse(input: &Path, output: &Path) -> io::Result<()> {
         content: &blog_index_content,
         scripts: "",
         styles: "",
+        commit: &commit,
     });
 
     fs::write("static/blog/index.html", rendered)?;
@@ -283,7 +288,6 @@ fn main() -> std::io::Result<()> {
     if args.len() > 1 && args[1] == "serve" {
         server::serve(&cwd, "8080");
     }
-    let hash = get_git_commit_hash().unwrap();
 
     let blog = PathBuf::from("input");
     let blog2 = PathBuf::from("static");

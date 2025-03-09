@@ -31,6 +31,30 @@
           <img class="feather" src="assets/linkedin.svg">
         </a>
       </div>
+      <canvas id="canvas" width="100" height="100"></canvas>
     </div>
+
+    <script type="module">
+        import init, { SpinningCube } from '/scripts/cube/spinning_square.js';
+
+        async function run() {
+            await init();
+
+            const canvas = document.getElementById('canvas');
+            const ctx = canvas.getContext('2d');
+
+            const cube = SpinningCube.new();
+
+            function animate() {
+                cube.update();
+                cube.render(ctx, canvas.width, canvas.height);
+                requestAnimationFrame(animate);
+            }
+
+            animate();
+        }
+
+        run();
+    </script>
   </body>
 </html>

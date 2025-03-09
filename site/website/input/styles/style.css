@@ -67,12 +67,14 @@ a.icon:hover {
 
 .container {
     /*max-width: 800px;*/
+    position: relative;
     font-size: 1.1rem;
     max-width: 60ch; 
     width: 90%; 
-    padding: 20px;
-    margin: 40px 0;
+    /*padding: 20px;*/
+    /*margin: 40px 0;*/
     line-height: 1.6; 
+    min-height: 100vh;
 }
 
 .container img {
@@ -156,6 +158,22 @@ a.icon:hover {
 }
 
 .menu {
+    padding-top: 10px;
     border-bottom: solid;
     border-width: 2px;
+}
+
+#content-wrap {
+  padding-bottom: 1.2rem;    /* Footer height */
+}
+
+footer {
+  color: var(--uchu-yin-6);
+  text-align: center;
+  font-size: 0.8rem;
+  position: absolute;
+  padding-bottom: 0.4rem;
+  bottom: 0;
+  width: 100%;
+  height: 1.2rem;            /* Footer height */
 }
