@@ -1,3 +1,5 @@
+use std::path::Path;
+
 use pulldown_cmark::{Event, Tag};
 
 #[derive(Debug, Default)]
@@ -21,7 +23,7 @@ impl<'a, I: Iterator<Item = Event<'a>>> Iterator for Preprocessor<'a, I> {
             /* math */
             Event::Start(Tag::Image {
                 link_type,
-                dest_url,
+                mut dest_url,
                 title,
                 id,
             }) => {
@@ -31,31 +33,39 @@ impl<'a, I: Iterator<Item = Event<'a>>> Iterator for Preprocessor<'a, I> {
                 }
                 let mut html = String::new();
                 html.push_str("<figure>\n");
-                html.push_str(format!("<a href=\"{}\">", dest_url).as_str());
+                html.push_str(format!("<a href=\"{}\">\n", dest_url).as_str());
+                html.push_str("<picture>\n");
+
+                if dest_url.ends_with(".jpg") | dest_url.ends_with(".png") | dest_url.ends_with(".jpeg") {
+                    let dest_str = dest_url.to_string();
+                    let extension = Path::new(&dest_str).extension().and_then(|ext| ext.to_str()).unwrap();
+                    html.push_str(
+                        format!(
+                            "
+                                <source srcset=\"{}\" type=\"image/{}\">
+                            ",
+                            dest_url,
+                            extension
+                        )
+                        .as_str(),
+                    );
+                    dest_url = dest_url.replace(extension, "webp").into();
+                }
                 html.push_str(
                     format!(
                         "
-                            <img src=\"{}\" alt=\"{}\" title=\"{}\">
+                            <img loading=\"lazy\" src=\"{}\" alt=\"{}\" title=\"{}\">
                         ",
                         dest_url, alttext, title
                     )
                     .as_str(),
                 );
-                html.push_str("</a>");
+                html.push_str("</picture>\n");
+                html.push_str("</a>\n");
                 html.push_str(format!("<figcaption>{}</figcaption>", title).as_str());
                 html.push_str("</figure>\n");
                 Some(Event::Html(html.into()))
             }
-            Event::InlineMath(c) => Some(Event::Html(
-                latex2mathml::latex_to_mathml(c.as_ref(), latex2mathml::DisplayStyle::Inline)
-                    .unwrap_or_else(|e| e.to_string())
-                    .into(),
-            )),
-            Event::DisplayMath(c) => Some(Event::Html(
-                latex2mathml::latex_to_mathml(c.as_ref(), latex2mathml::DisplayStyle::Block)
-                    .unwrap_or_else(|e| e.to_string())
-                    .into(),
-            )),
             other => return Some(other),
         };
         return event;

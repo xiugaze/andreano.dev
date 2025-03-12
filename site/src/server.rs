@@ -31,14 +31,14 @@ pub fn serve(dir: &str, port: &str) {
     println!("listening at http://127.0.0.1:{}", port);
 
     let mut router = Router::new();
+
     router.add_route("/", "/index.html");
-    router.add_route("/about", "/about.html");
-    router.add_route("/etc", "/etc.html");
-    router.add_route("/site", "/site.html");
     router.add_route("/blog", "/blog/index.html");
-    router.add_route("/blog/test", "/blog/test/test.html");
-    router.add_route("/blog/formula-hybrid-2024", "/blog/formula-hybrid-2024/formula-hybrid-2024.html");
-    router.add_route("/blog/msoe-scraper", "/blog/msoe-scraper/msoe-scraper.html");
+
+    let routes: HashMap<String, String> = serde_json::from_str(&fs::read_to_string("routes.json").unwrap()).unwrap();
+    for (k, v) in routes.iter() {
+        router.add_route(k, v);
+    }
 
     let router = Arc::new(router);
     for stream in listener.incoming() {
@@ -62,11 +62,12 @@ fn handle_request(mut stream: TcpStream, dir: &str, router: &Router) {
     stream.read(&mut buffer).unwrap();
 
     let request = String::from_utf8_lossy(&buffer);
-    let mut path = request
+    let path = request
         .lines()
         .next()
         .and_then(|line| line.split_whitespace().nth(1))
         .unwrap_or("/").to_string();
+
 
     /* if path is an external link */
     if path.starts_with("http://") || path.starts_with("https://") {
@@ -80,10 +81,8 @@ fn handle_request(mut stream: TcpStream, dir: &str, router: &Router) {
     }
 
     let file_name = router.resolve(&path).unwrap_or(&path);
-    println!("file_name: {}", file_name);
-    println!("dir: {}", dir);
     let file_path = Path::new(dir).join(&file_name[1..]);
-    println!("file_path: {}", file_path.to_str().unwrap());
+    println!("got request for {:?}", file_path);
     if file_path.exists() && file_path.is_file() {
         println!("Fetching {}", file_path.display());
 
@@ -97,6 +96,10 @@ fn handle_request(mut stream: TcpStream, dir: &str, router: &Router) {
             Some("gif") => "image/gif",
             Some("svg") => "image/svg+xml",
             Some("webm") => "video/webm",
+            Some("woff") => "font/woff",
+            Some("woff2") => "font/woff2",
+            Some("ttf") => "font/ttf",
+            Some("otf") => "font/otf",
             _ => "application/octet-stream", // Default to binary data
         };
 
