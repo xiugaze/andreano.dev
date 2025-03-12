@@ -1,5 +1,22 @@
 @import url("color.css");
 
+:root {
+    --bg-color: var(--uchu-pink-2);
+    --text-color: var(--uchu-yin-9);
+    --accent-color: var(--uchu-pink-5);
+}
+
+html[data-theme="dark"] {
+    --bg-color: var(--uchu-yin-9);
+    --text-color: var(--uchu-pink-2);
+    --accent-color: var(--uchu-yin-7);
+}
+
+html[data-theme="reader"] {
+    --bg-color: white;
+    --text-color: black;
+    --accent-color: grey;
+}
 
 body {
     font-family: monospace;
@@ -7,8 +24,8 @@ body {
     padding: 0;
     display: flex;
     justify-content: center;
-    background-color: var(--uchu-pink-2);
-    color: var(--uchu-yin-9);
+    background-color: var(--bg-color);
+    color: var(--text-color);
     font-size: 16px;
 }
 
@@ -41,7 +58,7 @@ code {
 
 
 a {
-    color: var(--uchu-yin-9);
+    color: var(--text-color);
     text-decoration: none;
 }
 
