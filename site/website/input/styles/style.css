@@ -95,21 +95,21 @@ a:hover {
 }
 
 .container figcaption {
+    padding-top: 5px;
     font-size: 0.9rem;
-    color: var(--uchu-pink-9); 
-    margin-top: 5px;
+    color: var(--accent-color);
 }
 
 .container blockquote {
     font-style: italic;
-    color: var(--uchu-yin-7);
+    color: var(--accent-color);
 }
 .container pre {
     box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5); 
     font-family: monospace;
     background-color: var(--uchu-red-1);
-    padding: 16px; /* Larger padding */
-    border-radius: 8px; /* More rounded corners */
+    padding: 16px; 
+    border-radius: 8px; 
     overflow-x: auto; 
     line-height: 1.5; 
 }
@@ -117,7 +117,7 @@ a:hover {
 .index-container > a {
     display: block;
     text-decoration: none;
-    color: var(--uchu-yin-9);
+    color: var(--text-color);
 }
 
 .index-container > a:hover {
