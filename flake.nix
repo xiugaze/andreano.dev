@@ -60,6 +60,9 @@
                   sqlite
                   lld
 
+                  cargo-flamegraph
+                  linuxKernel.packages.linux_latest_libre.perf
+
                   # js
                   bun
 
