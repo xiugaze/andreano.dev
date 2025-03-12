@@ -1,10 +1,5 @@
 @import url("color.css");
-/*@font-face {*/
-/*    font-family: 'NFMono';*/
-/*    src: url('/styles/nfmono.woff') format('woff');*/
-/*    font-weight: normal;*/
-/*    font-style: normal;*/
-/*}*/
+
 
 body {
     font-family: monospace;
@@ -12,7 +7,7 @@ body {
     padding: 0;
     display: flex;
     justify-content: center;
-    background-color: var(--uchu-pink-4);
+    background-color: var(--uchu-pink-2);
     color: var(--uchu-yin-9);
     font-size: 16px;
 }
@@ -22,6 +17,7 @@ code {
     color: var(--uchu-purple-9);
 }
 
+/* footnotes */
 .footnote-definition {
   display: flex; 
   align-items: flex-start; 
@@ -43,12 +39,6 @@ code {
     box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5); 
 }
 
-.feather {
-  width: 24px;
-  height: 24px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
 
 a {
     color: var(--uchu-yin-9);
@@ -57,23 +47,19 @@ a {
 
 a:hover {
     text-decoration: underline;
+    font-weight: bold;
 }
 
-
-a.icon:hover {
-    text-decoration: none;
-}
 
 
 .container {
     /*max-width: 800px;*/
     position: relative;
-    font-size: 1.1rem;
-    max-width: 60ch; 
+    margin: auto;
+    font-size: 1.25em;
+    max-width: 70ch; 
     width: 90%; 
-    /*padding: 20px;*/
-    /*margin: 40px 0;*/
-    line-height: 1.6; 
+    line-height: 1.75; 
     min-height: 100vh;
 }
 
@@ -111,42 +97,6 @@ a.icon:hover {
     line-height: 1.5; 
 }
 
-.home-container {
-    width: 100%;
-    height: 60vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-}
-
-.home-container > h1 {
-    font-size: 2.5rem;
-    margin: 0px;
-}
-
-.home-container .links-container {
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-.links-container {
-    font-size: 1.2rem;
-}
-
-.links-container > a{
-    font-style: italic
-}
-
-.icon-container {
-    margin-top: 10px;
-}
-.icon-container > a {
-    color: var(--uchu-yin-8);
-    text-decoration: none;
-}
-
 .index-container > a {
     display: block;
     text-decoration: none;
@@ -163,17 +113,24 @@ a.icon:hover {
     border-width: 2px;
 }
 
-#content-wrap {
-  padding-bottom: 1.2rem;    /* Footer height */
+/* footer */
+
+/* always have an extra 3rem at the bottom */
+.content-wrap { 
+  padding-bottom: 3rem;
 }
 
 footer {
-  color: var(--uchu-yin-6);
+  color: var(--uchu-pink-7);
   text-align: center;
   font-size: 0.8rem;
   position: absolute;
-  padding-bottom: 0.4rem;
   bottom: 0;
   width: 100%;
-  height: 1.2rem;            /* Footer height */
+  height: 3rem;
 }
+
+footer > p {
+    padding-top: 1.2rem;
+}
+

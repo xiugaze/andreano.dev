@@ -2,8 +2,9 @@
 <html>
   <head>
     <title>andreano.dev</title>
-    <link href="styles/style.css" rel="stylesheet">
-    <link rel="icon" href="favicon.gif">
+    <link href="/styles/style.css" rel="stylesheet">
+    <link href="/styles/home.css" rel="stylesheet">
+    <link rel="icon" href="/favicon.gif">
     <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
     <script>
       let FF_FOUC_FIX;
@@ -20,41 +21,32 @@
         <a href="/etc">etc</a>
       </div>
       <div class="icon-container">
-        <img class="feather" src="assets/sun.svg">
-        <a href="">
-          <img class="feather" src="assets/mail.svg">
+        <div class="icon-wheel">
+          <div class="icon main-icon" data-icon="icon1">
+            <!--<img class="feather" src="img/sun.svg">-->
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sun"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+          </div>
+          <div class="icon" data-icon="icon2">
+            <!--<img class="feather" src="img/moon.svg">-->
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-moon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          </div>
+          <div class="icon" data-icon="icon3">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-book"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+            <!--<img class="feather" src="img/book.svg">-->
+          </div>
+        </div>
+        <a href="mailto:calebandreano@gmail.com">
+          <img class="feather" src="img/mail.svg">
         </a>
-        <a href="">
-          <img class="feather" src="assets/github.svg">
+        <a href="https://github.com/xiugaze">
+          <img class="feather" src="img/github.svg">
         </a>
-        <a href="">
-          <img class="feather" src="assets/linkedin.svg">
+        <a href="https://www.linkedin.com/in/caleb-andreano/">
+          <img class="feather" src="img/linkedin.svg">
         </a>
       </div>
       <canvas id="canvas" width="100" height="100"></canvas>
     </div>
-
-    <script type="module">
-        import init, { SpinningCube } from '/scripts/cube/spinning_square.js';
-
-        async function run() {
-            await init();
-
-            const canvas = document.getElementById('canvas');
-            const ctx = canvas.getContext('2d');
-
-            const cube = SpinningCube.new();
-
-            function animate() {
-                cube.update();
-                cube.render(ctx, canvas.width, canvas.height);
-                requestAnimationFrame(animate);
-            }
-
-            animate();
-        }
-
-        run();
-    </script>
+    <script type="module" src="/scripts/home.js"></script>
   </body>
 </html>

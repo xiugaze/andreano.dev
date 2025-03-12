@@ -1,0 +1,103 @@
+@import url("color.css");
+
+.home-container {
+    width: 100%;
+    height: 60vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.home-container > h1 {
+    font-size: 2.5rem;
+    margin: 0px;
+}
+
+.home-container .links-container {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.links-container {
+    font-size: 1.2rem;
+}
+
+.links-container > a{
+    font-style: italic
+}
+
+.icon-container {
+    margin-top: 10px;
+    display: flex;
+}
+
+.icon-container > a {
+    color: var(--uchu-yin-8);
+    text-decoration: none;
+}
+
+a.icon:hover {
+    text-decoration: none;
+}
+
+.feather {
+  width: 24px;
+  height: 24px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+/* for the theme picker wheel */
+.icon-wheel {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.icon {
+    font-size: 24px;
+    cursor: pointer;
+    transition: transform var(--transition-duration, 0.3s) ease, opacity var(--transition-duration, 0.3s) ease, stroke var(--transition-duration, 0.3s) ease;
+    position: absolute;
+    opacity: 0; 
+}
+
+.icon > svg {
+    stroke: var(--uchu-pink-7);
+}
+
+.main-icon > svg {
+    stroke: var(--uchu-yin-9);
+}
+
+.main-icon {
+    position: relative;
+    opacity: 1; 
+}
+
+.icon-wheel:hover .icon:not(.main-icon) {
+    opacity: 1;
+}
+
+.icon:not(.main-icon) {
+}
+
+.icon-wheel:hover .main-icon {
+    transform: translateX(-100%);
+}
+
+.icon-wheel:hover .main-icon .feather {
+  transition: stroke var(--transition-duration, 0.3s) ease;
+}
+
+.icon-wheel:hover .icon[data-icon="icon1"] {
+    transform: translateX(-30%) translateY(-50%);
+}
+.icon-wheel:hover .icon[data-icon="icon2"] {
+    transform: translateX(-100%);
+}
+.icon-wheel:hover .icon[data-icon="icon3"] {
+    transform: translateX(-30%) translateY(50%);
+}

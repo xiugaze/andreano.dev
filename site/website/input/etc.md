@@ -1,3 +1,0 @@
-# ...et cetera
-
-- [site](/site)

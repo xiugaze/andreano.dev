@@ -45,7 +45,7 @@ We can use these techniques to automatically extract the static HTML data from a
 
 For our little application, I'm going to just pick a [random website](https://resources.msoe.edu/sched/courses/all) that we can easily pull some data off of. 
 
-![targets](/images/scheduler.png)
+![scheduler](./img/scheduler.png)
 
 We're going to have two major dependencies for our Python script: `request` from the standard library for our HTTP functions, and a library called [Beautiful Soup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/) (`bs4`) for pulling elements from the DOM and packaging them as Python objects. 
 
