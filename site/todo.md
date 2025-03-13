@@ -1,16 +1,30 @@
-# pre deploy
+# Before Done
+
+## colors
+
+- [x] fix color fading from default on homepage
+- [x] cube color
+- [ ] fenced code colors
+- [ ] about page list colors
+
+
+## server
+- [x] routing table builds gets created on site build
+- [x] server supports webm locally
+- [ ] routing table includes index pages
+- [ ] comment engine 
+    - [ ] rebuild the web server to support this
+
+## page generation
 - [x] building an index
 - [x] <base> tags + generating routes on serve
 - [x] menu bar
-
-- [x] right now, the blog index page is static. **this needs to be on the fly**
-- [x] server supports webm locally
 - [x] footnote formatting
 - [x] conditional includes
     - [x] conditional syntax highlighting inclusion if page contains code
     - [x] conditional math font inclusion if page contains math (need to choose a math font)
 
-- [ ] routing table builds gets created on site build
+- [x] right now, the blog index page is static. **this needs to be on the fly**
 - [ ] footer with deployment information (commit), last modified, etc
     - [x] commit (no link)
 
@@ -21,8 +35,6 @@
     - [ ] maybe they should be resized to the viewport width: we can do this with while let in render step
     - [ ] images definitely need a size... how to do this? To prevent content rearranging
 - [ ] don't build drafts
-- [ ] comment engine 
-    - [ ] rebuild the web server to support this
 - [ ] incremental rebuilds with file hashing
 - [ ] adopt old posts to new format
     - [x] fh
@@ -30,7 +42,12 @@
 - [ ] table of contents (sidecar?)
     can do this with while let
 
-# post deploy
+## chrome problems
+- [ ] math fonts
+- [ ] theme switch transitions
+    - [x] calling this fixed 
+
+# After Done
 - [ ] collapsable headings
 - [x] menu bar as component
 - [x] include absolute styles from frontmatter

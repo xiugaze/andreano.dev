@@ -11,9 +11,6 @@ document.addEventListener('DOMContentLoaded', function () {
     function loadSavedPreferences() {
         const savedIconData = localStorage.getItem('mainIconData');
         const savedTheme = localStorage.getItem('selectedTheme');
-        if (savedTheme) {
-            applyTheme(savedTheme);
-        }
         if (savedIconData) {
             const savedIcon = document.querySelector(`.icon[data-icon="${savedIconData}"]`);
             if (savedIcon) {
@@ -24,11 +21,15 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
         mainIcon = document.querySelector('.main-icon');
-        if (mainIcon) {
+        if (mainIcon && !savedTheme) {
             applyTheme(mainIcon.getAttribute('data-theme'));
         }
     }
     loadSavedPreferences();
+    const earlyStyleElement = document.querySelector('style[data-early-icon-fix]');
+    if (earlyStyleElement) {
+        earlyStyleElement.remove();
+    }
     icons.forEach(icon => {
         icon.addEventListener('click', function () {
             if (this === mainIcon) return;
@@ -42,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-import init, { SpinningCube } from '/scripts/cube/spinning_square.js';
+import init, { Cube } from '/scripts/cube/spinning_square.js';
 
   async function run() {
       await init();
@@ -50,11 +51,10 @@ import init, { SpinningCube } from '/scripts/cube/spinning_square.js';
       const canvas = document.getElementById('canvas');
       const ctx = canvas.getContext('2d');
 
-      const cube = SpinningCube.new();
+      const cube = Cube.new();
 
       function animate() {
           var color = getComputedStyle(document.documentElement).getPropertyValue('--text-color').trim();
-          console.log(color)
           cube.update();
           cube.render(ctx, canvas.width, canvas.height, color);
           requestAnimationFrame(animate);

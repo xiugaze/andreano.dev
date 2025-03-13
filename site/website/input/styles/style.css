@@ -4,18 +4,21 @@
     --bg-color: var(--uchu-pink-2);
     --text-color: var(--uchu-yin-9);
     --accent-color: var(--uchu-pink-5);
+    --hl-color: var(--uchu-purple-6);
 }
 
 html[data-theme="dark"] {
     --bg-color: var(--uchu-yin-9);
     --text-color: var(--uchu-pink-2);
     --accent-color: var(--uchu-yin-7);
+    --hl-color: var(--uchu-purple-3);
 }
 
 html[data-theme="reader"] {
     --bg-color: white;
     --text-color: black;
     --accent-color: grey;
+    --hl-color: black;
 }
 
 body {
@@ -31,7 +34,7 @@ body {
 
 code {
     font-weight: bold;
-    color: var(--uchu-purple-9);
+    color: var(--hl-color);
 }
 
 /* footnotes */
