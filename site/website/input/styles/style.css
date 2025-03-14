@@ -73,11 +73,10 @@ a:hover {
 
 
 .container {
-    /*max-width: 800px;*/
+    max-width: 800px;
     position: relative;
     margin: auto;
     font-size: 1.25em;
-    max-width: 70ch; 
     width: 90%; 
     line-height: 1.75; 
     min-height: 100vh;

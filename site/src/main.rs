@@ -1,4 +1,5 @@
-use image::ImageFormat;
+use image::{image_dimensions, ImageFormat};
+use image::io::Reader as ImageReader;
 use pulldown_cmark::{CowStr, Event, Options, Parser, Tag};
 use ramhorns::{Content, Ramhorns, Template};
 use serde_yaml::Value;
@@ -9,8 +10,8 @@ use std::path::{Path, PathBuf};
 use std::process::{exit, Command};
 use std::{env, io, str};
 
-mod server;
 mod preprocessor;
+mod server;
 
 struct Post {
     title: String,
@@ -51,10 +52,8 @@ impl Post {
                 };
 
                 let draft = match frontmatter.get("draft") {
-                    Some(Value::Bool(d)) => {
-                        *d
-                    }, 
-                    _ => false
+                    Some(Value::Bool(d)) => *d,
+                    _ => false,
                 };
 
                 let styles = match frontmatter.get("styles") {
@@ -131,7 +130,7 @@ struct HtmlContent {
     has_math: bool,
 }
 
-fn chew(content: &mut String) -> HtmlContent {
+fn chew(content: &mut String, path: &Path) -> HtmlContent {
     let options = Options::ENABLE_MATH
         | Options::ENABLE_FOOTNOTES
         | Options::ENABLE_YAML_STYLE_METADATA_BLOCKS
@@ -142,34 +141,105 @@ fn chew(content: &mut String) -> HtmlContent {
         | Options::ENABLE_STRIKETHROUGH
         | Options::ENABLE_SMART_PUNCTUATION;
 
+    let mut parser = Parser::new_ext(&content, options).peekable();
     let mut has_code = false;
     let mut has_math = false;
-    let parser = preprocessor::Preprocessor::new(Parser::new_ext(&content, options)).map(|e| match &e {
-        Event::Start(tag) => {
-            if let Tag::CodeBlock(_) = tag {
-                has_code = true;
-            }
-            e
-        }
-        Event::DisplayMath(c) => {
-            let text: CowStr<'_> =
-                latex2mathml::latex_to_mathml(c.as_ref(), latex2mathml::DisplayStyle::Block)
-                    .unwrap_or_else(|e| e.to_string())
-                    .into();
-            has_math = true;
-            Event::Html(text)
-        }
-        Event::InlineMath(c) => {
-            let text: CowStr<'_> =
-                latex2mathml::latex_to_mathml(c.as_ref(), latex2mathml::DisplayStyle::Inline)
-                    .unwrap_or_else(|e| e.to_string())
-                    .into();
-            has_math = true;
-            Event::Html(text)
-        }
-        _ => e,
-    });
 
+    let mut events = Vec::new();
+
+    while let Some(event) = parser.next() {
+        let e = match event {
+            Event::Start(Tag::Image {
+                link_type,
+                mut dest_url,
+                title,
+                id,
+            }) => {
+                let mut alttext = String::new();
+                let parent = path.parent().unwrap();
+                let image_path = match dest_url.strip_prefix("./") {
+                    Some(p) => p,
+                    None => &dest_url,
+                };
+                let img_path = parent.join(image_path);
+                let mut img_path = Path::new("./").join(img_path);
+                img_path.set_extension("webp");
+                let dimensions = match image_dimensions(&img_path) {
+                    Ok(dim) => dim,
+                    Err(_) => (800, 400),
+                };
+                println!("{:?}: {:?}", img_path, dimensions);
+
+                
+                if let Some(Event::Text(alt)) = parser.next() {
+                    alttext.push_str(&alt);
+                }
+                let mut html = String::new();
+                html.push_str("<figure>\n");
+                html.push_str(format!("<a href=\"{}\">\n", dest_url).as_str());
+                html.push_str("<picture>\n");
+
+                if dest_url.ends_with(".jpg") | dest_url.ends_with(".png") | dest_url.ends_with(".jpeg") {
+                    let dest_str = dest_url.to_string();
+                    let extension = Path::new(&dest_str).extension().and_then(|ext| ext.to_str()).unwrap();
+                    html.push_str(
+                        format!(
+                            "
+                                <source srcset=\"{}\" type=\"image/{}\">
+                            ",
+                            dest_url.replace(extension, "webp"),
+                            extension
+                        )
+                        .as_str(),
+                    );
+                }
+
+                html.push_str(
+                    format!(
+                        "
+                            <img loading=\"lazy\" width=\"{}\" height=\"{}\" src=\"{}\" alt=\"{}\" title=\"{}\">
+                        ",
+                        dimensions.0, dimensions.1, dest_url, alttext, title
+                    )
+                    .as_str(),
+                );
+
+                html.push_str("</picture>\n");
+                html.push_str("</a>\n");
+                html.push_str(format!("<figcaption>{}</figcaption>", title).as_str());
+                html.push_str("</figure>\n");
+                Event::Html(html.into())
+            }
+
+            Event::Start(tag) => {
+                if let Tag::CodeBlock(_) = tag {
+                    has_code = true;
+                }
+                Event::Start(tag)
+            }
+            Event::DisplayMath(c) => {
+                let text: CowStr<'_> =
+                    latex2mathml::latex_to_mathml(c.as_ref(), latex2mathml::DisplayStyle::Block)
+                        .unwrap_or_else(|e| e.to_string())
+                        .into();
+                has_math = true;
+                Event::Html(text)
+            }
+            Event::InlineMath(c) => {
+                let text: CowStr<'_> =
+                    latex2mathml::latex_to_mathml(c.as_ref(), latex2mathml::DisplayStyle::Inline)
+                        .unwrap_or_else(|e| e.to_string())
+                        .into();
+                has_math = true;
+                Event::Html(text)
+            }
+            _ => event,
+        };
+
+        events.push(e);
+    }
+
+    let parser = events.into_iter();
     let mut html_content = String::new();
     pulldown_cmark::html::push_html(&mut html_content, parser);
     HtmlContent {
@@ -184,7 +254,6 @@ fn parse_post_markdown(
     output_path: &Path,
     commit: &str,
 ) -> std::io::Result<PostMetadata> {
-
     let mut post = Post::from_path(&input_path)?;
 
     if post.draft {
@@ -192,12 +261,11 @@ fn parse_post_markdown(
             title: post.title,
             date: post.date,
             url: "".to_string(),
-            draft: post.draft
-        })
+            draft: post.draft,
+        });
     }
 
-
-    let rendered_content: HtmlContent = chew(&mut post.content);
+    let rendered_content: HtmlContent = chew(&mut post.content, &input_path);
 
     /* render template */
     let tpls: Ramhorns = Ramhorns::from_folder("./templates").unwrap();
@@ -354,7 +422,10 @@ fn copy_traverse(input: &Path, output: &Path, full: bool) -> io::Result<()> {
         }
     }
 
-    fs::write("static/routes.json", serde_json::to_string(&routes).unwrap())?;
+    fs::write(
+        "static/routes.json",
+        serde_json::to_string(&routes).unwrap(),
+    )?;
 
     let mut blog_index_content = String::new();
     posts.sort_by(|i, j| (&j.date).cmp(&i.date)); // reverse comparison
@@ -405,6 +476,8 @@ fn main() -> std::io::Result<()> {
         }
     }
 
+    let path = Path::new("./input/blog/formula-hybrid-2024/img/paddock.jpg");
+    println!("{:?}", path.exists());
     copy_traverse(&input, &output, false)
 
     //println!("Deploying from commit {}", &hash[0..6]);
