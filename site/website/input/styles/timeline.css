@@ -1,5 +1,9 @@
 @import url("color.css");
 
+body, a {
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+
 .timeline {
     margin-top: 40px;
     position: relative; /* line is relative to the parent */
@@ -17,7 +21,8 @@
     border-width: 1px;
     border-radius: 1px;
 
-    color: var(--uchu-yin-9);
+    transition: all 0.5s ease;
+    color: var(--text-color);
     box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5); 
     left: 10px; 
     transform: translateX(-1px); 
@@ -41,10 +46,11 @@
     transform: translateX(-50%); 
     border: solid;
     border-width: 2px;
+    transition: all 0.5s ease;
 
     box-shadow: inset 1px 1px 4px rgba(0, 0, 0, 0.5), 1px 1px 4px rgba(0, 0, 0, 0.5); 
-    background: var(--uchu-pink-2);
-    color: var(--uchu-yin-9);
+    background: var(--bg-color);
+    color: var(--text-color);
 }
 
 .content {
@@ -52,25 +58,30 @@
     padding: 15px;
     border: solid;
     border-width: 2px;
-    background-color: var(--uchu-yang);
+    background-color: var(--bg-color);
     border-radius: 4px;
     box-shadow: 4px 4px 8px var(--uchu-yin-9); 
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+.content * {
+    transition: background-color 0.5s ease, color 0.5s ease;
 }
 
 h3 {
     margin: 0;
     font-size: 18px;
-    color: var(--uchu-yin-9);
+    color: var(--text-color);
 }
 
 .date {
     margin: 0;
     font-size: 14px;
-    color: var(--uchu-yin-5);
+    color: var(--accent-color);
 }
 
 .position {
     margin: 0;
     font-size: 14px;
-    color: var(--uchu-yin-9);
+    color: var(--text-color);
 }
