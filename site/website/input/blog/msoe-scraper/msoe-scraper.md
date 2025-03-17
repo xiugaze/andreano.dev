@@ -3,7 +3,7 @@ title: "How to Schedule for Classes at MSOE"
 date: 2023-05-18T09:30:38-05:00
 ---
 
-<a class="icon" href="https://github.com/xiugaze/msoe-open-seat"> msoe-open-seat</a>
+[github: `msoe-open-seat`](https://github.com/xiugaze/msoe-open-seat)
 
 Scheduling for new classes at MSOE can be somewhat confusing and stressful. 
 In this article, I want to quickly share a few tips and tricks I've learned from my time here at school.

@@ -42,12 +42,13 @@ svg {
 }
 
 .icon {
+    padding-left: 20px; /* for overlap */
     cursor: pointer;
     position: absolute;
     opacity: 0; 
-    display: flex;         /* Add this */
-    align-items: center;   /* Add this */
-    justify-content: center; /* Add this */
+    display: flex;         
+    align-items: center;   
+    justify-content: center; 
 }
 
 .icon > svg {
@@ -71,8 +72,8 @@ svg {
     transform: translateX(0);
 }
 .icon-wheel:hover .icon[data-icon="moon"] {
-    transform: translateX(-120%);
+    transform: translateX(-80%);
 }
 .icon-wheel:hover .icon[data-icon="book"] {
-    transform: translateX(-240%);
+    transform: translateX(-160%);
 }
