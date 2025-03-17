@@ -1,18 +1,13 @@
 # Before Done
 
-
 **NOTE TO SELF**
-Table of contents: works right now, but only because
-of {{{ toc }}} in base template html, not in the markdown thing. 
-Maybe we need a pre-render step for inserting the TOC html
-at the correct location in the markdown? Or inserting the rendered
-html body content into memory and then re-rendering for page...
-Also, header text is consumed with parser.next(), so doesn't
-end up in final page. Also, headers with the ' character get cut 
+Headers with the ' character get cut 
 for some reason, why is that? this should probably get fixed. 
 
-Also, because of relative paths, if the href of an a is like #header-1, the 
-browser requests post/#header-1 instead of post#header-1. How to fix this?
+## nix stuff
+- [ ] build ssg
+- [ ] build site (run ssg)
+- [ ] deploy site (run server)
 
 
 ## colors
@@ -42,15 +37,15 @@ browser requests post/#header-1 instead of post#header-1. How to fix this?
 
 - [x] right now, the blog index page is static. **this needs to be on the fly**
 - [ ] footer with deployment information (commit), last modified, etc
-    - [x] commit (no link)
+    - [x] commit
 
 - [x] convert images to webp, wrap them in links to png or jpg
     - [x] wrap in link
     - [x] link to jpg version
     - [x] use source tags
-    - [ ] maybe they should be resized to the viewport width: we can do this with while let in render step
+    - [ ] maybe the actual image should be resized to the viewport width: we can do this with while let in render step
     - [x] images definitely need a size... how to do this? To prevent content rearranging
-- [ ] don't build drafts
+- [x] don't build drafts
 - [ ] incremental rebuilds with file hashing
 - [ ] adopt old posts to new format
     - [x] fh
@@ -60,8 +55,8 @@ browser requests post/#header-1 instead of post#header-1. How to fix this?
 
 ## chrome problems
 - [ ] math fonts
-- [ ] theme switch transitions
-    - [x] calling this fixed 
+- [x] theme switch transitions
+    - [x] calling this fixed, but it's not really. Nothing I can do here.
 
 # After Done
 - [ ] collapsable headings

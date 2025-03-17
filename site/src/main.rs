@@ -1,8 +1,11 @@
-use image::io::Reader as ImageReader;
 use image::{image_dimensions, ImageFormat};
-use pulldown_cmark::{CowStr, Event, HeadingLevel, Options, Parser, Tag};
+use pulldown_cmark::{CodeBlockKind, CowStr, Event, HeadingLevel, Options, Parser, Tag, TagEnd};
 use ramhorns::{Content, Ramhorns, Template};
 use serde_yaml::Value;
+
+use syntect::highlighting::ThemeSet;
+use syntect::html::highlighted_html_for_string;
+use syntect::parsing::{SyntaxReference, SyntaxSet};
 
 use std::collections::{HashMap, VecDeque};
 use std::fs::{self, File};
@@ -191,15 +194,54 @@ fn chew(content: &mut String, path: &Path) -> HtmlContent {
         | Options::ENABLE_STRIKETHROUGH
         | Options::ENABLE_SMART_PUNCTUATION;
 
+    let ss = SyntaxSet::load_defaults_newlines();
+    let ts = ThemeSet::load_defaults();
+
+    let theme = &ts.themes["base16-ocean.light"];
+    println!("{:?}", ts.themes.keys());
+    let mut syntax: Option<&SyntaxReference> = None; 
+
     let mut parser = Parser::new_ext(&content, options).peekable();
     let mut has_code = false;
     let mut has_math = false;
+
+    let mut to_highlight = String::new();
+    let mut in_code_block = false;
 
     let mut toc = Vec::new();
     let mut events = Vec::new();
 
     while let Some(event) = parser.next() {
         match event {
+            Event::Start(Tag::CodeBlock(kind)) => {
+                println!("kind: {:?}", kind);
+                // In actual use you'd probably want to keep track of what language this code is
+                //syntax = ss.find_syntax_by_name(kind.)
+                if let CodeBlockKind::Fenced(lang) = kind {
+                    syntax = ss.find_syntax_by_token(&lang);
+                }
+                in_code_block = true;
+            },
+            Event::End(TagEnd::CodeBlock) => {
+                has_code = true;
+                if in_code_block {
+                    let html = match syntax {
+                        Some(syn) => highlighted_html_for_string(&to_highlight, &ss, &syn, &theme).unwrap(),
+                        None => to_highlight,
+                    };
+                    events.push(Event::Html(html.into()));
+                    to_highlight = String::new();
+                    in_code_block = false;
+                }
+            },
+            Event::Text(t) => {
+                if in_code_block {
+                    // If we're in a code block, build up the string of text
+                    to_highlight.push_str(&t);
+                } else {
+                    events.push(Event::Text(t))
+                }
+            },
             Event::Start(Tag::Heading {
                 level,
                 id,
@@ -290,14 +332,7 @@ fn chew(content: &mut String, path: &Path) -> HtmlContent {
                 html.push_str(format!("<figcaption>{}</figcaption>", title).as_str());
                 html.push_str("</figure>\n");
                 events.push(Event::Html(html.into()))
-            }
-
-            Event::Start(tag) => {
-                if let Tag::CodeBlock(_) = tag {
-                    has_code = true;
-                }
-                events.push(Event::Start(tag))
-            }
+            },
             Event::DisplayMath(c) => {
                 let text: CowStr<'_> =
                     latex2mathml::latex_to_mathml(c.as_ref(), latex2mathml::DisplayStyle::Block)
@@ -305,7 +340,7 @@ fn chew(content: &mut String, path: &Path) -> HtmlContent {
                         .into();
                 has_math = true;
                 events.push(Event::Html(text))
-            }
+            },
             Event::InlineMath(c) => {
                 let text: CowStr<'_> =
                     latex2mathml::latex_to_mathml(c.as_ref(), latex2mathml::DisplayStyle::Inline)
@@ -356,11 +391,6 @@ fn parse_post_markdown(
     /* render template */
     let tpls: Ramhorns = Ramhorns::from_folder("./templates").unwrap();
     let template = tpls.get("post.html").unwrap();
-
-    if rendered_content.has_code {
-        post.add_style("/styles/prism.css");
-        post.add_script("/scripts/prism.js");
-    }
 
     if rendered_content.has_math {
         post.add_style("/styles/math.css");
