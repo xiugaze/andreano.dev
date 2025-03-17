@@ -3,7 +3,7 @@
 :root {
     --bg-color: var(--uchu-pink-2);
     --text-color: var(--uchu-yin-9);
-    --accent-color: var(--uchu-pink-5);
+    --accent-color: var(--uchu-pink-6);
     --hl-color: var(--uchu-purple-6);
 }
 
@@ -161,7 +161,7 @@ a:hover {
 }
 
 footer {
-  color: var(--uchu-pink-7);
+  color: var(--accent-color);
   text-align: center;
   font-size: 0.8rem;
   position: absolute;
@@ -170,7 +170,7 @@ footer {
   height: 3rem;
 }
 
-footer > p {
-    padding-top: 1.2rem;
-}
+/*footer > p {*/
+/*    padding-top: 1.2rem;*/
+/*}*/
 

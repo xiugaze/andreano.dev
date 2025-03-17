@@ -14,7 +14,7 @@
     let FF_FOUC_FIX;
     </script>
     <script>
-        (function() {
+      (function() {
           const savedTheme = localStorage.getItem('selectedTheme');
           if (savedTheme) {
             document.documentElement.setAttribute('data-theme', savedTheme);
@@ -24,10 +24,17 @@
   </head>
   <body>
     <div class="container">
-      {{>menu.html}}
-      <div class="index-container">
-        {{{ content }}}
+      <div class="content-wrap">
+        {{>menu.html}}
+        <div class="index-container">
+          {{{ content }}}
+        </div>
       </div>
+      <footer>
+        <p>
+          This site is on  main/{{{ commit }}}
+        </p>
+      </footer>
     </div>
     <script src="/scripts/theme.js"></script>
   </body>
