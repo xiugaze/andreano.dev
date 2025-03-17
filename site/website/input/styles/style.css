@@ -126,10 +126,31 @@ a:hover {
     text-decoration: underline;
 }
 
-.menu {
-    padding-top: 10px;
-    border-bottom: solid;
+
+.toc {
+    border-radius: 5px;
     border-width: 2px;
+    padding: 10px;
+    font-size: 1rem;
+}
+
+.toc h4 {
+    margin: 5px auto;
+}
+
+.toc > ul {
+    margin: 5px auto;
+}
+.toc ul {
+    list-style-type: none;
+    padding-left: 10px;
+}
+
+.toc li {
+    padding-left: 0px;
+}
+.toc > a {
+    display: block;
 }
 
 /* footer */

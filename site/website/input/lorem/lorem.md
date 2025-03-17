@@ -3,6 +3,8 @@ title: "Lorem Ipsum"
 date: "2024-05-20T17:33:44-05:00"
 ---
 
+{{ toc }}
+
 # Header 1
 
 

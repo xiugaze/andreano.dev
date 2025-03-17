@@ -3,6 +3,7 @@
   <head>
     <title>{{ title }}</title>
     <link href="/styles/style.css" rel="stylesheet">
+    <link href="/styles/menu.css" rel="stylesheet">
     {{{ styles }}}
     <link rel="icon" href="/favicon.gif">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -13,12 +14,21 @@
       /*to prevent Firefox FOUC, this must be here*/
     let FF_FOUC_FIX;
     </script>
+    <script>
+        (function() {
+          const savedTheme = localStorage.getItem('selectedTheme');
+          if (savedTheme) {
+            document.documentElement.setAttribute('data-theme', savedTheme);
+          }
+        })();
+    </script>
   </head>
   <body>
     <div class="container">
       <div class="content-wrap">
         {{>menu.html}}
         <h1>{{ title }}</h1>
+        {{{ toc }}}
         {{{ content }}}
       </div>
       <footer>
@@ -29,5 +39,18 @@
     </div>
     {{{ scripts }}}
     <script src="/scripts/theme.js"></script>
+    <script>
+      /* fix for anchor links */
+      document.addEventListener('DOMContentLoaded', function() {
+        document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+          anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const hash = this.getAttribute('href');
+            const baseUrl = window.location.pathname.replace(/\/$/, '');
+            window.location.href = baseUrl + hash;
+          });
+        });
+      });
+    </script>
   </body>
 </html>

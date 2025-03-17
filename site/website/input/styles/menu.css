@@ -1,0 +1,78 @@
+body, a {
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+svg {
+    transition: 
+        color 0.5s ease;
+}
+
+.icon {
+    transition: 
+        transform 0.5s ease,
+        color 0.5s ease,
+        opacity 0.5s ease;
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 10px;
+    border-bottom: solid;
+    border-width: 2px;
+}
+
+.menu a {
+  margin-right: 10px;
+}
+
+.icon-container {
+  margin-left: auto;
+  height: 24px;
+}
+
+
+.icon-wheel {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 24px;
+}
+
+.icon {
+    cursor: pointer;
+    position: absolute;
+    opacity: 0; 
+    display: flex;         /* Add this */
+    align-items: center;   /* Add this */
+    justify-content: center; /* Add this */
+}
+
+.icon > svg {
+    stroke: var(--accent-color);
+}
+
+.main-icon > svg {
+    stroke: var(--text-color);
+}
+
+.main-icon {
+    position: relative;
+    opacity: 1; 
+}
+
+.icon-wheel:hover .icon:not(.main-icon) {
+    opacity: 1;
+}
+
+.icon-wheel:hover .icon[data-icon="sun"] {
+    transform: translateX(0);
+}
+.icon-wheel:hover .icon[data-icon="moon"] {
+    transform: translateX(-120%);
+}
+.icon-wheel:hover .icon[data-icon="book"] {
+    transform: translateX(-240%);
+}

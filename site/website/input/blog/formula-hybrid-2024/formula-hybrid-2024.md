@@ -11,7 +11,9 @@ Formula Hybrid is one of the SAE collegiate design competitions. Our team builds
 In summary, we were the only hybrid team to pass all inspections and move under our own power. We won first place for project management, second in design, and first overall for the hybrid category. I'm super proud of the work we did this year, and what follows is a day-by day of 
 the competition from my end. 
 
-## Sunday: Lobster Rolls
+{{ toc }}
+
+# Sunday: Lobster Rolls
 
 ![Image of a building in Boston](./img/boston_building.jpg "random building in Boston")
 
@@ -26,7 +28,7 @@ Technically, competition doesn't officially start until Monday, so we set up in 
 
 ![](./img/outside.jpg "Posted up in the parking lot")
 
-## Monday: Pre-check and Design Judging
+# Monday: Pre-check and Design Judging
 On Monday, we got to the track at 7:30 to get our entrance passes as early as possible and move our car and equipment into our paddock. We spent most of the day tuning the throttle-by-wire system for the combustion engine air intake. The competition rules require short-to-ground and short-to-high detection for any throttle by wire system, which we accomplished by wiring the two linear potentiometers on the acceleration pedal in reverse polarity. This means that flooring the pedal will send one pot to ground and one to high, and floating the pedal will do the same but reversed. This means that if we a) see two grounds b) see two highs or c) see one reading held to ground or high and the other somewhere in between, we detect a fault and can close the air intake.  Otherwise, the microcontroller reads the throttle input at a fixed rate, and translates that to a PWM signal sent to the servo. 
 
 ![](./img/paddock.jpg "attention in the paddocks")
@@ -37,7 +39,7 @@ At about noon, we took the car to electrical pre-check and passed.
 
 We also had our design report and interviews on Monday afternoon. Each sub-team gave a brief overview of what they had worked on this year, and then the design judges grilled team members on design decisions and what they had worked on specifically. For next year, we learned that the electrical design judges really wanted to see a regenerative braking system in place, so we plan on prioritizing that for next year's competition. 
 
-## Tuesday: Electrical + Mechanical Tech
+# Tuesday: Electrical + Mechanical Tech
 
 On Tuesday, we were rained out for most of the morning, so we were not allowed to work on the anything electrical until the weather cleared up. After final touches, like fixing a mysterious electrical arc in the engine compartment and wrapping bare-copper grounding wires to the suspension arms, we went electrical tech inspection and miraculously passed on the first try. If I had had a dollar for every time our inspector said "well, you guys don't have a running tractive control system", I might have been able to afford the large lobster roll instead of the small. 
 
@@ -49,7 +51,7 @@ Later in the evening, we took the last slot in the day for mechanical inspection
 
 ![](./img/grillmaster_dan.jpg "grillmaster dan")
 
-## Wednesday: Tilt, break, and rain test
+# Wednesday: Tilt, break, and rain test
 
 Wednesday was our most eventful day by far. We kicked off the day by rushing back to mechanical inspection and passing. This was no small feat. On the electrical side, we had a non-zero number of requirements waived for us, because as previously mentioned, we didn't have a running tractive system. However, the chassis, powertrain, controls, safety/ergo, and sidepods teams had more-or-less finished what they set out to do this year, so they were subjected to the full scrutiny of the mechanical tech inspection. I felt like this was a huge achievement for the team: we didn't really expect to pass at all this year, but the months of hard work and dedication meant that we had actually had a shot at driving on track. 
 
@@ -81,13 +83,13 @@ Our last test for the day was the rain test, where we had to survive two minutes
     <a href="/shared-assets/videos/flower.webm">WEBM</a>
 </video>
 
-## Thursday: we win
+# Thursday: we win
 
 Thursday morning, we went to brake test and passed. The brake test inspectors let us do some practice laps around the parking lot, and the microcontroller board rattled out of it's socket and killed itself, meaning we lost throttle. So, with nothing left to do, we packed up the trailer, cleaned out the garage, and waited for the awards ceremony. Although we didn't make it on track, we were the only hybrid car to drive at competition this year. 
 
 ![](./img/trophy.jpg "trophy")
 
-## Thoughts 
+# Thoughts 
 
 Overall, I thoroughly enjoyed competition this year and learned a lot. This really did feel like a culmination of a lot of my education so far, and throughout the year and at competition I got to interact with real things that were previously only concepts or isolated in a lab environment. To put it in business-marketing jargon, our cross-functional team successfully developed a cutting-edge hybrid race car from conceptualization to completion, leveraging interdisciplinary expertise to optimize performance and efficiency, resulting in a competitive edge in the automotive industry landscape, or whatever.
 
@@ -111,7 +113,7 @@ For next year, I am going switching to a more hardware-oriented role. There's st
 
 ![](./img/red_40.jpg "red 40")
 
-## Further Reading
+# Further Reading
 - [MSOE News article about us](https://www.msoe.edu/about-msoe/news/details/msoe-sae-formula-hybrid-team-earns-third-world-championship-title-at-new-hampshire-motor-speedway/)
 - [NHMS article about comp](https://www.nhms.com/media/news/nhms-host-north-america-top-engineering-students-for-annual-formula-hybrid-electric-competition.html)
 

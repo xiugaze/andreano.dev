@@ -69,6 +69,10 @@ fn handle_request(mut stream: TcpStream, dir: &str, router: &Router) {
         .unwrap_or("/").to_string();
 
 
+
+    println!("got request {:?}", request.lines().next());
+
+
     /* if path is an external link */
     if path.starts_with("http://") || path.starts_with("https://") {
         let response = format!(
@@ -82,9 +86,9 @@ fn handle_request(mut stream: TcpStream, dir: &str, router: &Router) {
 
     let file_name = router.resolve(&path).unwrap_or(&path);
     let file_path = Path::new(dir).join(&file_name[1..]);
-    println!("got request for {:?}", file_path);
+    //println!("got request for {:?}", file_path);
     if file_path.exists() && file_path.is_file() {
-        println!("Fetching {}", file_path.display());
+        //println!("Fetching {}", file_path.display());
 
         let content_type = match file_path.extension().and_then(|ext| ext.to_str()) {
             Some("html") => "text/html; charset=utf-8",

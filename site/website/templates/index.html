@@ -8,19 +8,23 @@
   >
     <link rel="icon" href="/favicon.gif">
     <link href="/styles/style.css" rel="stylesheet">
+    <link href="/styles/menu.css" rel="stylesheet">
     <script>
       /*to prevent Firefox FOUC, this must be here*/
     let FF_FOUC_FIX;
     </script>
+    <script>
+        (function() {
+          const savedTheme = localStorage.getItem('selectedTheme');
+          if (savedTheme) {
+            document.documentElement.setAttribute('data-theme', savedTheme);
+          }
+        })();
+    </script>
   </head>
   <body>
     <div class="container">
-      <div class="menu">
-        <a style="font-weight: bold;" href="/">andreano.dev</a>
-        <a style="font-style: italic;" href="/about">/about</a>
-        <a style="font-style: italic;" href="/blog">/blog</a>
-        <a style="font-style: italic;" href="/etc">/etc</a>
-      </div>
+      {{>menu.html}}
       <div class="index-container">
         {{{ content }}}
       </div>

@@ -1,9 +1,25 @@
 # Before Done
 
+
+**NOTE TO SELF**
+Table of contents: works right now, but only because
+of {{{ toc }}} in base template html, not in the markdown thing. 
+Maybe we need a pre-render step for inserting the TOC html
+at the correct location in the markdown? Or inserting the rendered
+html body content into memory and then re-rendering for page...
+Also, header text is consumed with parser.next(), so doesn't
+end up in final page. Also, headers with the ' character get cut 
+for some reason, why is that? this should probably get fixed. 
+
+Also, because of relative paths, if the href of an a is like #header-1, the 
+browser requests post/#header-1 instead of post#header-1. How to fix this?
+
+
 ## colors
 
 - [x] fix color fading from default on homepage
 - [x] cube color
+- [ ] favicon colors
 - [ ] fenced code colors
 - [ ] about page list colors
 
@@ -33,13 +49,13 @@
     - [x] link to jpg version
     - [x] use source tags
     - [ ] maybe they should be resized to the viewport width: we can do this with while let in render step
-    - [ ] images definitely need a size... how to do this? To prevent content rearranging
+    - [x] images definitely need a size... how to do this? To prevent content rearranging
 - [ ] don't build drafts
 - [ ] incremental rebuilds with file hashing
 - [ ] adopt old posts to new format
     - [x] fh
     - [ ] scraper thing
-- [ ] table of contents (sidecar?)
+- [x] table of contents (sidecar?)
     can do this with while let
 
 ## chrome problems

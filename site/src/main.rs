@@ -1,6 +1,6 @@
-use image::{image_dimensions, ImageFormat};
 use image::io::Reader as ImageReader;
-use pulldown_cmark::{CowStr, Event, Options, Parser, Tag};
+use image::{image_dimensions, ImageFormat};
+use pulldown_cmark::{CowStr, Event, HeadingLevel, Options, Parser, Tag};
 use ramhorns::{Content, Ramhorns, Template};
 use serde_yaml::Value;
 
@@ -10,7 +10,6 @@ use std::path::{Path, PathBuf};
 use std::process::{exit, Command};
 use std::{env, io, str};
 
-mod preprocessor;
 mod server;
 
 struct Post {
@@ -128,6 +127,57 @@ struct HtmlContent {
     content: String,
     has_code: bool,
     has_math: bool,
+    toc: Option<String>,
+}
+
+fn headinglevel_to_i8(level: HeadingLevel) -> i8 {
+    match level {
+        HeadingLevel::H1 => 1,
+        HeadingLevel::H2 => 2,
+        HeadingLevel::H3 => 3,
+        HeadingLevel::H4 => 4,
+        HeadingLevel::H5 => 5,
+        HeadingLevel::H6 => 6,
+    }
+}
+
+fn make_toc(toc: Vec<(String, String, i8)>) -> String {
+
+    if toc.is_empty() {
+        return String::from("");
+    }
+
+    let mut toc_string = String::from("<div class=\"toc\"><h4>Index</h4><ul>");
+    let mut cur = 1; 
+
+    for entry in toc {
+        let level = entry.2; 
+
+        while cur < level {
+            toc_string.push_str("<ul>");
+            cur += 1;
+        }
+
+        while cur > level {
+            toc_string.push_str("</ul></li>");
+            cur -= 1;
+        }
+
+        if level == cur {
+            if !toc_string.ends_with("<ul>") && !toc_string.ends_with("<div class=\"toc\"><ul>") {
+                toc_string.push_str("</li>");
+            }
+        }
+        toc_string.push_str(&format!("<li><a href=\"#{}\">{}</a>", entry.1, entry.0));
+    }
+
+    while cur > 1 {
+        toc_string.push_str("</ul></li>");
+        cur -= 1;
+    }
+
+    toc_string.push_str("</li></ul></div>");
+    toc_string
 }
 
 fn chew(content: &mut String, path: &Path) -> HtmlContent {
@@ -145,10 +195,36 @@ fn chew(content: &mut String, path: &Path) -> HtmlContent {
     let mut has_code = false;
     let mut has_math = false;
 
+    let mut toc = Vec::new();
     let mut events = Vec::new();
 
     while let Some(event) = parser.next() {
-        let e = match event {
+        match event {
+            Event::Start(Tag::Heading {
+                level,
+                id,
+                classes,
+                attrs,
+            }) => {
+                if let Some(Event::Text(text)) = parser.next() {
+                    let id_text: CowStr = text.to_lowercase().replace(" ", "-").into();
+                    toc.push((text.to_string(), id_text.clone().to_string(), headinglevel_to_i8(level)));
+                    events.push(Event::Start(Tag::Heading {
+                        level,
+                        id: Some(id_text),
+                        classes,
+                        attrs,
+                    }));
+                    events.push(Event::Text(text));
+                } else {
+                    events.push(Event::Start(Tag::Heading {
+                        level,
+                        id,
+                        classes,
+                        attrs,
+                    }))
+                }
+            }
             Event::Start(Tag::Image {
                 link_type,
                 mut dest_url,
@@ -161,6 +237,8 @@ fn chew(content: &mut String, path: &Path) -> HtmlContent {
                     Some(p) => p,
                     None => &dest_url,
                 };
+
+                /* NOTE: this is the biggest performance hit, this takes 4ever */
                 let img_path = parent.join(image_path);
                 let mut img_path = Path::new("./").join(img_path);
                 img_path.set_extension("webp");
@@ -168,9 +246,7 @@ fn chew(content: &mut String, path: &Path) -> HtmlContent {
                     Ok(dim) => dim,
                     Err(_) => (800, 400),
                 };
-                println!("{:?}: {:?}", img_path, dimensions);
 
-                
                 if let Some(Event::Text(alt)) = parser.next() {
                     alttext.push_str(&alt);
                 }
@@ -179,16 +255,21 @@ fn chew(content: &mut String, path: &Path) -> HtmlContent {
                 html.push_str(format!("<a href=\"{}\">\n", dest_url).as_str());
                 html.push_str("<picture>\n");
 
-                if dest_url.ends_with(".jpg") | dest_url.ends_with(".png") | dest_url.ends_with(".jpeg") {
+                if dest_url.ends_with(".jpg")
+                    | dest_url.ends_with(".png")
+                    | dest_url.ends_with(".jpeg")
+                {
                     let dest_str = dest_url.to_string();
-                    let extension = Path::new(&dest_str).extension().and_then(|ext| ext.to_str()).unwrap();
+                    let extension = Path::new(&dest_str)
+                        .extension()
+                        .and_then(|ext| ext.to_str())
+                        .unwrap();
                     html.push_str(
                         format!(
                             "
-                                <source srcset=\"{}\" type=\"image/{}\">
+                                <source srcset=\"{}\" type=\"image/webp\">
                             ",
                             dest_url.replace(extension, "webp"),
-                            extension
                         )
                         .as_str(),
                     );
@@ -208,14 +289,14 @@ fn chew(content: &mut String, path: &Path) -> HtmlContent {
                 html.push_str("</a>\n");
                 html.push_str(format!("<figcaption>{}</figcaption>", title).as_str());
                 html.push_str("</figure>\n");
-                Event::Html(html.into())
+                events.push(Event::Html(html.into()))
             }
 
             Event::Start(tag) => {
                 if let Tag::CodeBlock(_) = tag {
                     has_code = true;
                 }
-                Event::Start(tag)
+                events.push(Event::Start(tag))
             }
             Event::DisplayMath(c) => {
                 let text: CowStr<'_> =
@@ -223,7 +304,7 @@ fn chew(content: &mut String, path: &Path) -> HtmlContent {
                         .unwrap_or_else(|e| e.to_string())
                         .into();
                 has_math = true;
-                Event::Html(text)
+                events.push(Event::Html(text))
             }
             Event::InlineMath(c) => {
                 let text: CowStr<'_> =
@@ -231,21 +312,26 @@ fn chew(content: &mut String, path: &Path) -> HtmlContent {
                         .unwrap_or_else(|e| e.to_string())
                         .into();
                 has_math = true;
-                Event::Html(text)
+                events.push(Event::Html(text))
             }
-            _ => event,
+            _ => events.push(event),
         };
-
-        events.push(e);
     }
+
+    let toc_string = make_toc(toc);
+
+    println!("{}", toc_string);
 
     let parser = events.into_iter();
     let mut html_content = String::new();
     pulldown_cmark::html::push_html(&mut html_content, parser);
+
+    html_content = html_content.replace("{{ toc }}", &toc_string.clone()); // HACK: should fix this lol.
     HtmlContent {
         content: html_content,
         has_code,
         has_math,
+        toc: Some(toc_string),
     }
 }
 
@@ -277,7 +363,6 @@ fn parse_post_markdown(
     }
 
     if rendered_content.has_math {
-        println!("adding math to {:?}", input_path);
         post.add_style("/styles/math.css");
     }
 
@@ -288,10 +373,12 @@ fn parse_post_markdown(
         rel_path_parent.push('/');
     }
 
-    println!(
-        "output path parent: {}",
-        output_path.parent().unwrap().to_str().unwrap()
-    );
+    let toc_str = match rendered_content.toc {
+        Some(toc_str) => toc_str,
+        None => String::from(""),
+    };
+
+    println!("toc_str: {:?}", toc_str);
 
     let rendered = template.render(&BaseTemplate {
         title: &post.title,
@@ -438,8 +525,9 @@ fn copy_traverse(input: &Path, output: &Path, full: bool) -> io::Result<()> {
         ));
     }
 
-    let template = fs::read_to_string("templates/index.html")?;
-    let rendered = Template::new(template).unwrap().render(&BaseTemplate {
+    let tpls: Ramhorns = Ramhorns::from_folder("./templates").unwrap();
+    let template = tpls.get("index.html").unwrap();
+    let rendered = template.render(&BaseTemplate {
         title: "blog",
         path: "/blog/",
         content: &blog_index_content,
