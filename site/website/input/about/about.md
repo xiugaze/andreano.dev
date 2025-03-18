@@ -8,6 +8,7 @@ My passion sits at the intersection of hardware and software.
 My professional focuses are systems software, embedded systems, and computer architecture. 
 I also enjoy PCB design, learning about compilers and programming languages, and tinkering with [Nix](https://nixos.org/) and [GNU Guix](https://guix.gnu.org/) on my homelab. 
 
+You can find a PDF copy of my resume [here: cv.pdf](./cv.pdf)
 
 ## education
 <div class="timeline">

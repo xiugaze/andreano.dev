@@ -4,6 +4,9 @@
 Headers with the ' character get cut 
 for some reason, why is that? this should probably get fixed. 
 
+**NOTE TO SELF**
+Fix spacing on frontpage
+
 ## nix stuff
 - [ ] build ssg
 - [ ] build site (run ssg)
@@ -15,8 +18,9 @@ for some reason, why is that? this should probably get fixed.
 - [x] fix color fading from default on homepage
 - [x] cube color
 - [ ] favicon colors
-- [ ] fenced code colors
-- [ ] about page list colors
+- [x] fenced code colors
+    - done for now, but should figure out how to do custom themes
+- [x] about page list colors
 
 
 ## server
@@ -49,9 +53,10 @@ for some reason, why is that? this should probably get fixed.
 - [ ] incremental rebuilds with file hashing
 - [ ] adopt old posts to new format
     - [x] fh
-    - [ ] scraper thing
+    - [x] scraper thing
 - [x] table of contents (sidecar?)
     can do this with while let
+- [x] index page mobile formatting
 
 ## chrome problems
 - [ ] math fonts
@@ -69,4 +74,5 @@ for some reason, why is that? this should probably get fixed.
 - [ ] for latex2mathml, image, consume closing tag
 - [ ] rss feed
 - [ ] text-only sitemap generation
+- [ ] index page for subfolders in general? 
 - [ ] md directory can have scripts and css, should get copied and included automatically

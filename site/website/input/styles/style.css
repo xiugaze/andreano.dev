@@ -80,8 +80,19 @@ a:hover {
     width: 90%; 
     line-height: 1.75; 
     min-height: 100vh;
+    text-align: justify;
 }
 
+/* fenced code block */
+.container pre {
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5); 
+    font-family: monospace;
+    background-color: var(--uchu-red-1);
+    padding: 16px; 
+    border-radius: 8px; 
+    overflow-x: auto; 
+    line-height: 1.5; 
+}
 .container img {
     max-width: 100%;
     height: auto;
@@ -105,15 +116,6 @@ a:hover {
 .container blockquote {
     font-style: italic;
     color: var(--accent-color);
-}
-.container pre {
-    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5); 
-    font-family: monospace;
-    background-color: var(--uchu-red-1);
-    padding: 16px; 
-    border-radius: 8px; 
-    overflow-x: auto; 
-    line-height: 1.5; 
 }
 
 .index-container > a {

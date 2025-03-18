@@ -1,2 +1,8 @@
 build: 
   wasm-pack build --target web 
+
+deploy:
+  rm -rf ../site/website/input/scripts/cube && cp -r ./pkg ../site/website/input/scripts/cube
+
+
+

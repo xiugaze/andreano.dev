@@ -51,7 +51,7 @@ impl Cube {
         self.angle_y += 0.01;
     }
 
-    pub fn render(&self, ctx: &CanvasRenderingContext2d, width: f64, height: f64) {
+    pub fn render(&self, ctx: &CanvasRenderingContext2d, width: f64, height: f64, color: &str) {
         ctx.clear_rect(0.0, 0.0, width, height);
 
         ctx.save();
@@ -61,12 +61,13 @@ impl Cube {
         let scale = 25.0;
         ctx.scale(scale, scale).unwrap();
 
-        ctx.set_stroke_style(&JsValue::from_str("#202225"));
+        //ctx.set_stroke_style(&JsValue::from_str("#202225"));
+        ctx.set_stroke_style_str(color);
         ctx.set_line_width(0.08);
 
         for (start, end) in &self.edges {
-            let start_vertex = self.rotate(&self.vertices[*start]);
-            let end_vertex = self.rotate(&self.vertices[*end]);
+            let start_vertex = self.rotate_vertex(&self.vertices[*start]);
+            let end_vertex = self.rotate_vertex(&self.vertices[*end]);
 
             ctx.begin_path();
             ctx.move_to(start_vertex[0] as f64, start_vertex[1] as f64);
@@ -77,7 +78,7 @@ impl Cube {
         ctx.restore();
     }
 
-    fn rotate(&self, vertex: &[f32; 3]) -> [f32; 3] {
+    fn rotate_vertex(&self, vertex: &[f32; 3]) -> [f32; 3] {
         let x = vertex[0];
         let y = vertex[1] * self.angle_x.cos() - vertex[2] * self.angle_x.sin();
         let z = vertex[1] * self.angle_x.sin() + vertex[2] * self.angle_x.cos();

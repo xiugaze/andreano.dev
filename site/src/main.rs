@@ -493,6 +493,7 @@ fn copy_traverse(input: &Path, output: &Path, full: bool) -> io::Result<()> {
             let mut new_path = cur_out.join(file_name);
 
             if path.is_dir() {
+                println!("created dir {:?}", new_path);
                 fs::create_dir_all(&new_path)?;
                 todo.push_back((path, new_path));
             } else if path.is_file() {
@@ -521,6 +522,13 @@ fn copy_traverse(input: &Path, output: &Path, full: bool) -> io::Result<()> {
                                 posts.push(post);
                             }
                         }
+                        "html" => {
+                            routes.insert(
+                                String::from(path.parent().unwrap().to_str().unwrap().strip_prefix("input").unwrap()),
+                                String::from(new_path.to_str().unwrap().strip_prefix("static").unwrap())
+                            );
+                            fs::copy(&path, &new_path)?;
+                        },
                         "jpg" | "jpeg" | "png" => {
                             fs::copy(&path, &new_path)?;
                             if full {
@@ -546,14 +554,16 @@ fn copy_traverse(input: &Path, output: &Path, full: bool) -> io::Result<()> {
 
     let mut blog_index_content = String::new();
     posts.sort_by(|i, j| (&j.date).cmp(&i.date)); // reverse comparison
-    blog_index_content.push_str("<h1>blog</h1>");
+    blog_index_content.push_str("<h1>blog</h1>\n\t<div class=\"blog-index\">\n");
     for p in posts {
+        blog_index_content.push_str("<div class=\"blog-entry\">\n");
+
         let date_str = p.date.format("%Y-%m-%d").to_string();
-        blog_index_content.push_str(&format!(
-            "<a href=\"{}\">&lt;{}&gt; {}</a>\n",
-            p.url, date_str, p.title
-        ));
+        blog_index_content.push_str(&format!("<div class=\"blog-date\">&lt;{}&gt;</div>", date_str));
+        blog_index_content.push_str(&format!("<div class=\"blog-title\"><a href=\"{}\">{}</a></div>", p.url, p.title));
+        blog_index_content.push_str("</div>");
     }
+    blog_index_content.push_str("</div>");
 
     let tpls: Ramhorns = Ramhorns::from_folder("./templates").unwrap();
     let template = tpls.get("index.html").unwrap();
@@ -597,7 +607,4 @@ fn main() -> std::io::Result<()> {
     let path = Path::new("./input/blog/formula-hybrid-2024/img/paddock.jpg");
     println!("{:?}", path.exists());
     copy_traverse(&input, &output, false)
-
-    //println!("Deploying from commit {}", &hash[0..6]);
-    //render_blog("blog")
 }
