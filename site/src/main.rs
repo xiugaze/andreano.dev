@@ -17,6 +17,7 @@ use std::{env, io, str};
 mod server;
 
 struct Post {
+    id: String,
     title: String,
     content: String,
     draft: bool,
@@ -70,7 +71,11 @@ impl Post {
                     _ => Vec::new(),
                 };
 
+                let filename = file_path.file_name().unwrap().to_str().unwrap().strip_suffix(".md").unwrap();
+                println!("id: {:?}", filename);
+
                 let mut post = Post {
+                    id: filename.to_string(),
                     title: title.to_string(),
                     content: body.to_string(),
                     draft,
@@ -89,6 +94,7 @@ impl Post {
         }
 
         Ok(Post {
+            id: "".to_string(),
             title: "default title".to_string(),
             content,
             draft: false,
@@ -112,6 +118,7 @@ impl Post {
 
 #[derive(Content)]
 struct BaseTemplate<'a> {
+    post_id: &'a str,
     title: &'a str,
     path: &'a str,
     content: &'a str,
@@ -412,6 +419,7 @@ fn parse_post_markdown(
     println!("toc_str: {:?}", toc_str);
 
     let rendered = template.render(&BaseTemplate {
+        post_id: &post.id,
         title: &post.title,
         path: &format!("/{}", rel_path_parent),
         content: &rendered_content.content,
@@ -501,7 +509,7 @@ fn copy_traverse(input: &Path, output: &Path, full: bool) -> io::Result<()> {
                 if let Some(ext) = path.extension() {
                     match ext.to_str().unwrap() {
                         "md" => {
-                            new_path.set_extension("html");
+                            new_path = cur_out.join("index.html");
                             let Ok(post) = parse_post_markdown(&path, &new_path, &commit) else {
                                 break;
                             };
@@ -524,6 +532,7 @@ fn copy_traverse(input: &Path, output: &Path, full: bool) -> io::Result<()> {
                             }
                         }
                         "html" => {
+                            new_path = cur_out.join("index.html");
                             routes.insert(
                                 String::from(path.parent().unwrap().to_str().unwrap().strip_prefix("input").unwrap()),
                                 String::from(new_path.to_str().unwrap().strip_prefix("static").unwrap())
@@ -569,6 +578,7 @@ fn copy_traverse(input: &Path, output: &Path, full: bool) -> io::Result<()> {
     let tpls: Ramhorns = Ramhorns::from_folder("./templates").unwrap();
     let template = tpls.get("index.html").unwrap();
     let rendered = template.render(&BaseTemplate {
+        post_id: "",
         title: "blog",
         path: "/blog/",
         content: &blog_index_content,
@@ -598,14 +608,13 @@ fn main() -> std::io::Result<()> {
 
     if args.len() > 1 {
         if args[1] == "serve" {
-            serve(&cwd, "8080");
+            let rt = tokio::runtime::Runtime::new()?;
+            rt.block_on(serve());
+            //serve(&cwd, "8080");
         }
         if args[1] == "full" {
             copy_traverse(&input, &output, true)?;
         }
     }
-
-    let path = Path::new("./input/blog/formula-hybrid-2024/img/paddock.jpg");
-    println!("{:?}", path.exists());
     copy_traverse(&input, &output, false)
 }

@@ -27,8 +27,14 @@ Fix spacing on frontpage
 - [x] routing table builds gets created on site build
 - [x] server supports webm locally
 - [ ] routing table includes index pages
-- [ ] comment engine 
-    - [ ] rebuild the web server to support this
+
+## Comment Engine
+- [x] basic commenting
+- [x] comments are per-page
+- [ ] comments are *only* on blog pages, will need new templating support for this (parse template from frontmatter?)
+- [ ] comment length: will need severe refactor to use `hyper` to get this going. 
+- [ ] switch to sqlite backend or something...
+- [ ] challenge generation
 
 ## page generation
 - [x] building an index

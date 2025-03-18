@@ -6,7 +6,7 @@
     <link href="/styles/menu.css" rel="stylesheet">
     {{{ styles }}}
     <link rel="icon" href="/favicon.gif">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
     <base
       href="{{{ path }}}"
   >
@@ -23,13 +23,14 @@
         })();
     </script>
   </head>
-  <body>
+  <body data-post_id="{{ post_id }}">
     <div class="container">
       <div class="content-wrap">
         {{>menu.html}}
         <h1>{{ title }}</h1>
         {{{ toc }}}
         {{{ content }}}
+        {{>comments.html}}
       </div>
       <footer>
         <p>

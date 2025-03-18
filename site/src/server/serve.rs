@@ -1,145 +1,39 @@
 use std::collections::HashMap;
-use std::io::{Read, Write};
-use std::net::{TcpListener, TcpStream};
-use std::path::Path;
-use std::sync::{Arc, Mutex};
-use std::fs;
 
-use crate::server::comment::{handle_get_comments, handle_options, handle_post_comment, Comment, CommentState};
+use warp::Filter;
+
+use super::comment::{get_comments, options_handler, post_comment};
 
 
-#[derive(Clone)]
-struct Router {
-    routes: HashMap<String, String>,
-}
 
-impl Router {
-    fn new() -> Self {
-        Router {
-            routes: HashMap::new(),
-        }
-    }
+pub async fn serve() {
 
-    fn add_route(&mut self, path: &str, endpoint: &str) {
-        self.routes.insert(path.to_string(), endpoint.to_string());
-    }
+    let file_server = warp::fs::dir("./");
+    let get_route = warp::path("get-comments")
+        .and(warp::get())
+        .and(warp::query::<HashMap<String, String>>())
+        .and_then(|query: HashMap<String, String>| async move {
+            let post = query.get("post").cloned().unwrap_or_else(|| "test".to_string());
+            get_comments(post).await
+        });
 
-    fn resolve(&self, path: &str) -> Option<&String> {
-        self.routes.get(path)
-    }
-}
+    // POST /comments
+    let post_route = warp::path("comments")
+        .and(warp::post())
+        .and(warp::body::json())
+        .and_then(post_comment);
 
-pub fn serve(dir: &str, port: &str) {
-    let listener = TcpListener::bind(format!("127.0.0.1:{}", port)).unwrap();
-    println!("listening at http://127.0.0.1:{}", port);
+    // OPTIONS /comments
+    let options_route = warp::path("comments")
+        .and(warp::options())
+        .and_then(options_handler);
 
-    let mut router = Router::new();
 
-    router.add_route("/", "/index.html");
-    router.add_route("/blog", "/blog/index.html");
+    warp::serve(
+        file_server
+            .or(get_route)
+            .or(post_route)
+            .or(options_route)
+    ).run(([127, 0, 0, 1], 8080)).await;
 
-    let routes: HashMap<String, String> =
-        serde_json::from_str(&fs::read_to_string("routes.json").unwrap()).unwrap();
-    for (k, v) in routes.iter() {
-        router.add_route(k, v);
-    }
-
-    let router = Arc::new(router);
-    for stream in listener.incoming() {
-        match stream {
-            Ok(stream) => {
-                let dir = dir.to_string();
-                let router = Arc::clone(&router);
-                std::thread::spawn(move || {
-                    handle_request(stream, &dir, &router);
-                });
-            }
-            Err(e) => {
-                eprintln!("failed to accept connection: {}", e);
-            }
-        }
-    }
-}
-
-fn handle_request(mut stream: TcpStream, dir: &str, router: &Router) {
-    let state = CommentState::call_forth();
-
-    let mut buffer = [0; 1024];
-    let bytes_read = stream.read(&mut buffer).unwrap();
-
-    let request = String::from_utf8_lossy(&buffer[..bytes_read]);
-    let path = request
-        .lines()
-        .next()
-        .and_then(|line| line.split_whitespace().nth(1))
-        .unwrap_or("/")
-        .to_string();
-
-    println!("got request {:?}", request.lines().next());
-
-    /* HACK: I hate this whole section and I want to kill myself */
-    if request.starts_with("OPTIONS /comments") {
-        let _ = handle_options(&mut stream);
-        return;
-    }
-
-    if request.starts_with("POST /comments") {
-        println!("got comment request...");
-        let _ = handle_post_comment(&mut stream, &request, &state);
-        return;
-    }
-
-    if request.starts_with("GET /get-comments") {
-        println!("got get-comments request...");
-        handle_get_comments(&mut stream, &request, &state);
-        return;
-    }
-
-    /* if path is an external link */
-    if path.starts_with("http://") || path.starts_with("https://") {
-        let response = format!("HTTP/1.1 302 Found\r\nLocation: {}\r\n\r\n", path);
-        stream.write(response.as_bytes()).unwrap();
-        stream.flush().unwrap();
-        return;
-    }
-
-    let file_name = router.resolve(&path).unwrap_or(&path);
-    let file_path = Path::new(dir).join(&file_name[1..]);
-    println!("got request for {:?}", file_path);
-    if file_path.exists() && file_path.is_file() {
-        println!("Fetching {}", file_path.display());
-
-        let content_type = match file_path.extension().and_then(|ext| ext.to_str()) {
-            Some("html") => "text/html; charset=utf-8",
-            Some("css") => "text/css",
-            Some("js") => "application/javascript",
-            Some("wasm") => "application/wasm",
-            Some("jpg") | Some("jpeg") => "image/jpeg",
-            Some("png") => "image/png",
-            Some("gif") => "image/gif",
-            Some("svg") => "image/svg+xml",
-            Some("webm") => "video/webm",
-            Some("woff") => "font/woff",
-            Some("woff2") => "font/woff2",
-            Some("ttf") => "font/ttf",
-            Some("otf") => "font/otf",
-            _ => "application/octet-stream", // Default to binary data
-        };
-
-        let contents = fs::read(&file_path).unwrap_or_else(|_| Vec::new());
-
-        let response = format!(
-            "HTTP/1.1 200 OK\r\nContent-Type: {}\r\nContent-Length: {}\r\nAccept-Ranges: bytes'\r\n\r\n",
-            content_type,
-            contents.len()
-        );
-
-        stream.write(response.as_bytes()).unwrap();
-        stream.write(&contents).unwrap();
-    } else {
-        println!("Could not find {}", file_path.display());
-        let response = "HTTP/1.1 404 Not Found\r\n\r\n";
-        stream.write(response.as_bytes()).unwrap();
-    }
-    stream.flush().unwrap();
 }
