@@ -3,6 +3,7 @@ use pulldown_cmark::{CodeBlockKind, CowStr, Event, HeadingLevel, Options, Parser
 use ramhorns::{Content, Ramhorns, Template};
 use serde_yaml::Value;
 
+use server::serve::serve;
 use syntect::highlighting::ThemeSet;
 use syntect::html::highlighted_html_for_string;
 use syntect::parsing::{SyntaxReference, SyntaxSet};
@@ -597,7 +598,7 @@ fn main() -> std::io::Result<()> {
 
     if args.len() > 1 {
         if args[1] == "serve" {
-            server::serve(&cwd, "8080");
+            serve(&cwd, "8080");
         }
         if args[1] == "full" {
             copy_traverse(&input, &output, true)?;

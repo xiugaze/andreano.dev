@@ -32,56 +32,7 @@
       <footer>
       </footer>
     </div>
-    <script>
-        window.onload = function() {
-            fetch('comments.json')
-                .then(response => response.json())
-                .then(comments => {
-                    const container = document.getElementById('comments');
-                    comments.forEach(comment => {
-                        const div = document.createElement('div');
-                        div.className = 'comment';
-                        div.innerHTML = `
-                            <strong>${comment.author}</strong> 
-                            <small>${new Date(comment.timestamp).toLocaleString()}</small>
-                            <p>${comment.content}</p>
-                        `;
-                        container.appendChild(div);
-                    });
-                });
-        };
-
-        document.getElementById('commentForm').onsubmit = function(e) {
-            e.preventDefault();
-            const author = this.author.value;
-            const content = this.content.value;
-            
-            fetch('http://localhost:8080/comments', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json', 
-                },
-                body: JSON.stringify({ author, content }) 
-            })
-            .then(response => {
-                if (!response.ok) throw new Error('Failed to post comment');
-                return response.json();
-            })
-            .then(comment => {
-                const container = document.getElementById('comments');
-                const div = document.createElement('div');
-                div.className = 'comment';
-                div.innerHTML = `
-                    <strong>${comment.author}</strong> 
-                    <small>${new Date(comment.timestamp).toLocaleString()}</small>
-                    <p>${comment.content}</p>
-                `;
-                container.insertBefore(div, container.firstChild);
-                this.reset();
-            })
-            .catch(error => console.error('Error:', error));
-        };
-    </script>
+    <script src="/scripts/comment.js"></script>
     <script src="/scripts/theme.js"></script>
     <script>
       /* fix for anchor links */
