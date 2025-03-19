@@ -1,38 +1,10 @@
 {
-  "test": [
-    {
-      "id": 0,
-      "author": "test author",
-      "content": "hi",
-      "timestamp": "2025-03-18T17:06:41.437685823+00:00"
-    }
-  ],
   "formula-hybrid-2024": [
     {
       "id": 0,
-      "author": "admin",
-      "content": "this is a test comment on the Formula 2024 ",
-      "timestamp": "2025-03-18T17:28:11.551023425+00:00"
-    },
-    {
-      "id": 1,
-      "author": "admin",
-      "content": "this is a short comment",
-      "timestamp": "2025-03-18T17:30:16.259647548+00:00"
-    },
-    {
-      "id": 2,
-      "author": "admin",
-      "content": "this is a long commentasdfsadlfjadslfkjdsalkjfldsakjfaldskfjlaskdjfldsakjflsadkfjlakdsjflsakdjfdsa",
-      "timestamp": "2025-03-18T17:30:52.533397728+00:00"
-    }
-  ],
-  "msoe-scraper": [
-    {
-      "id": 0,
-      "author": "admin",
-      "content": "This is a test post on the scraper",
-      "timestamp": "2025-03-18T17:27:11.221288022+00:00"
+      "author": "Caleb",
+      "content": "test",
+      "timestamp": "2025-03-19T02:08:19.558754628+00:00"
     }
   ]
 }

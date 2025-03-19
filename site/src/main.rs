@@ -382,6 +382,7 @@ fn parse_post_markdown(
     input_path: &Path,
     output_path: &Path,
     commit: &str,
+    template: &Template
 ) -> std::io::Result<PostMetadata> {
     let mut post = Post::from_path(&input_path)?;
 
@@ -397,8 +398,8 @@ fn parse_post_markdown(
     let rendered_content: HtmlContent = chew(&mut post.content, &input_path);
 
     /* render template */
-    let tpls: Ramhorns = Ramhorns::from_folder("./templates").unwrap();
-    let template = tpls.get("post.html").unwrap();
+    //let tpls: Ramhorns = Ramhorns::from_folder("./templates").unwrap();
+    //let template = tpls.get("post.html").unwrap();
 
     if rendered_content.has_math {
         post.add_style("/styles/math.css");
@@ -491,8 +492,7 @@ fn copy_traverse(input: &Path, output: &Path, full: bool) -> io::Result<()> {
     todo.push_back((input.to_path_buf(), output.to_path_buf()));
 
     let mut posts: Vec<PostMetadata> = Vec::new();
-
-    let mut routes: HashMap<String, String> = HashMap::new();
+    let tpls: Ramhorns = Ramhorns::from_folder("./templates").unwrap();
 
     while let Some((cur_in, cur_out)) = todo.pop_front() {
         for entry in fs::read_dir(&cur_in)? {
@@ -510,7 +510,18 @@ fn copy_traverse(input: &Path, output: &Path, full: bool) -> io::Result<()> {
                     match ext.to_str().unwrap() {
                         "md" => {
                             new_path = cur_out.join("index.html");
-                            let Ok(post) = parse_post_markdown(&path, &new_path, &commit) else {
+                            let Some(str) = path.to_str() else {
+                                break;
+                            };
+
+                            let mut template = "base.html";
+                            let mut blog = false;
+                            if str.contains("blog") {
+                                template = "post.html";
+                                blog = true;
+                            }
+
+                            let Ok(post) = parse_post_markdown(&path, &new_path, &commit, &tpls.get(template).unwrap()) else {
                                 break;
                             };
 
@@ -518,25 +529,12 @@ fn copy_traverse(input: &Path, output: &Path, full: bool) -> io::Result<()> {
                                 break;
                             }
 
-                            let Some(str) = path.to_str() else {
-                                break;
-                            };
-                            routes.insert(
-                                String::from(&post.url),
-                                String::from(
-                                    new_path.to_str().unwrap().strip_prefix("static").unwrap(),
-                                ),
-                            );
-                            if str.contains("blog") {
+                            if blog {
                                 posts.push(post);
                             }
-                        }
+                        },
                         "html" => {
                             new_path = cur_out.join("index.html");
-                            routes.insert(
-                                String::from(path.parent().unwrap().to_str().unwrap().strip_prefix("input").unwrap()),
-                                String::from(new_path.to_str().unwrap().strip_prefix("static").unwrap())
-                            );
                             fs::copy(&path, &new_path)?;
                         },
                         "jpg" | "jpeg" | "png" => {
@@ -557,11 +555,6 @@ fn copy_traverse(input: &Path, output: &Path, full: bool) -> io::Result<()> {
         }
     }
 
-    fs::write(
-        "static/routes.json",
-        serde_json::to_string(&routes).unwrap(),
-    )?;
-
     let mut blog_index_content = String::new();
     posts.sort_by(|i, j| (&j.date).cmp(&i.date)); // reverse comparison
     blog_index_content.push_str("<h1>blog</h1>\n\t<div class=\"blog-index\">\n");
@@ -575,7 +568,6 @@ fn copy_traverse(input: &Path, output: &Path, full: bool) -> io::Result<()> {
     }
     blog_index_content.push_str("</div>");
 
-    let tpls: Ramhorns = Ramhorns::from_folder("./templates").unwrap();
     let template = tpls.get("index.html").unwrap();
     let rendered = template.render(&BaseTemplate {
         post_id: "",

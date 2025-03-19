@@ -1,12 +1,10 @@
 use std::collections::HashMap;
 use std::fs::{File, OpenOptions};
 use std::io::{Read, Write};
-use std::sync::Arc;
-use std::{net::TcpStream, path::Path};
-use std::{io, sync::Mutex};
-
+use std::path::Path;
+use std::io;
+use rand::Rng;
 use serde::{Deserialize, Serialize};
-
 
 pub async fn get_comments(
     post: String,
@@ -33,21 +31,46 @@ pub struct Comment {
 
 #[derive(Deserialize)]
 pub struct CommentInput {
+    id: String, 
+    sum: u32,
     post: String,
     author: String,
     content: String,
 }
 
-
 #[derive(Serialize)]
 struct ErrorResponse {
     error: String,
 }
+use serde_json::json;
 use warp::http::StatusCode;
 
 pub async fn post_comment(
     input: CommentInput,
 ) -> Result<impl warp::Reply, warp::Rejection> {
+    let mut challenges = match load_challenges() {
+        Ok(c) => c,
+        Err(_) => HashMap::new(),
+    };
+
+    let mut pass = false;
+    if challenges.contains_key(&input.id) {
+        let (p, q) = challenges.get(&input.id).unwrap();
+        if input.sum == p+q {
+            pass = true;
+        }
+        challenges.remove(&input.id);
+    }
+
+    if !pass {
+        let error = ErrorResponse {
+            error: "challenge failed, comment not posted".to_string(),
+        };
+        return Ok(warp::reply::with_status(
+            warp::reply::json(&error),
+            StatusCode::BAD_REQUEST,
+        ));
+    }
 
     if input.author.is_empty() || input.content.is_empty() || input.post.is_empty() {
         let error = ErrorResponse {
@@ -82,6 +105,58 @@ pub async fn post_comment(
         StatusCode::OK,
     ));
 }
+
+
+pub async fn get_challenge() -> Result<impl warp::Reply, warp::Rejection> {
+    println!("got here");
+    let mut challenges = match load_challenges() {
+        Ok(c) => c,
+        Err(_) => HashMap::new(),
+    };
+    
+    let p = rand::thread_rng().gen_range(1..100);
+    let q = rand::thread_rng().gen_range(1..100);
+    let id = uuid::Uuid::new_v4().to_string();
+
+    challenges.insert(id.clone(), (p, q));
+    let response_body = serde_json::to_string(
+        &json!({ "p": p, "q": q, "id": id })
+        ).unwrap();
+
+    println!("response body: {:?}", response_body);
+    println!("saved status: {:?}", save_challenges(&challenges));
+    return Ok(warp::reply::with_status(
+        warp::reply::json(&response_body),
+        StatusCode::OK,
+    ));
+}
+
+type Challenges = HashMap<String, (u32, u32)>;
+
+fn load_challenges() -> io::Result<Challenges> {
+    let path = Path::new("challenges.json");
+    if path.exists() {
+        let mut file = File::open(path)?;
+        let mut contents = String::new();
+        file.read_to_string(&mut contents)?;
+        Ok(serde_json::from_str(&contents)?)
+    } else {
+        Ok(HashMap::new())
+    }
+}
+
+fn save_challenges(challenges: &Challenges) -> io::Result<()> {
+    let mut file = OpenOptions::new()
+        .write(true)
+        .create(true)
+        .truncate(true)
+        .open("challenges.json")?;
+    let json = serde_json::to_string_pretty(challenges)?;
+    println!("writing {:?}", json);
+    file.write_all(json.as_bytes())?;
+    Ok(())
+}
+
 
 pub async fn options_handler() -> Result<impl warp::Reply, warp::Rejection> {
     Ok(warp::reply::with_status("", warp::http::StatusCode::NO_CONTENT))
