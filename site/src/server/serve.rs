@@ -1,7 +1,8 @@
-use std::collections::HashMap;
+use std::{collections::HashMap, convert::Infallible};
 
 use warp::Filter;
 
+use warp::http::StatusCode;
 use super::comment::{get_challenge, get_comments, options_handler, post_comment};
 
 
@@ -9,7 +10,7 @@ use super::comment::{get_challenge, get_comments, options_handler, post_comment}
 pub async fn serve() {
 
     let file_server = warp::fs::dir("static");
-
+    let four_oh_four = warp::fs::file("static/404/index.html");
 
     let challenge_route = warp::path("challenge")
         .and(warp::get())
@@ -44,6 +45,7 @@ pub async fn serve() {
             .or(get_route)
             .or(post_route)
             .or(options_route)
+            .or(four_oh_four)
     ).run(([127, 0, 0, 1], 8080)).await;
 
 }
