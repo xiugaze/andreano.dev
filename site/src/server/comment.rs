@@ -3,6 +3,7 @@ use std::fs::{File, OpenOptions};
 use std::io::{Read, Write};
 use std::path::Path;
 use std::io;
+use chrono::Datelike;
 use rand::Rng;
 use serde::{Deserialize, Serialize};
 
@@ -45,6 +46,7 @@ struct ErrorResponse {
 use serde_json::json;
 use warp::http::StatusCode;
 
+
 pub async fn post_comment(
     input: CommentInput,
 ) -> Result<impl warp::Reply, warp::Rejection> {
@@ -56,7 +58,12 @@ pub async fn post_comment(
     let mut pass = false;
     if challenges.contains_key(&input.id) {
         let (p, q) = challenges.get(&input.id).unwrap();
-        if input.sum == p+q {
+        
+        let year = chrono::Utc::now().year() as u32;
+        println!("({:?} ** {}) mod {}", year, p, q);
+        let solution = mod_exp::mod_exp(year, *p, *q);
+        println!("got {:?} for solution {:?}", input.sum, solution);
+        if input.sum  == solution {
             pass = true;
         }
         challenges.remove(&input.id);
@@ -123,8 +130,7 @@ pub async fn get_challenge() -> Result<impl warp::Reply, warp::Rejection> {
         &json!({ "p": p, "q": q, "id": id })
         ).unwrap();
 
-    println!("response body: {:?}", response_body);
-    println!("saved status: {:?}", save_challenges(&challenges));
+    save_challenges(&challenges);
     return Ok(warp::reply::with_status(
         warp::reply::json(&response_body),
         StatusCode::OK,

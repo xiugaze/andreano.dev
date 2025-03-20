@@ -17,6 +17,8 @@ latex2mathml = "0.2.3"
 ramhorns = "1.0.1"
 syntect = "5.0"
 
+mod_exp = "*"
+
 # web server
 tokio = { version = "1", features = ["full"] }
 warp = "0.3"

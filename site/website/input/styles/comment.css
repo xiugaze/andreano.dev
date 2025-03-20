@@ -2,7 +2,6 @@
   width: 90%;
 }
 
-
 .commentForm input, .commentForm textarea {
   border-color: var(--text-color);
   border-style: solid;
@@ -18,7 +17,8 @@
 }
 
 .commentForm input {
-  width: 200px;
+  width: 280px;
+  margin-right: 16px;
   padding: 10px;
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5); 
 }
@@ -40,7 +40,7 @@
   margin-top: 20px;
   padding: 10px;
   display: block;
-  width: 400px;
+  width: 600px;
   height: 200px;
   max-width: 100%;
   max-height: 200px;

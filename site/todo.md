@@ -33,8 +33,7 @@ Fix spacing on frontpage
 - [x] comments are per-page
 - [x] comments are *only* on blog pages, will need new templating support for this (parse template from frontmatter?)
 - [x] comment length: will need severe refactor to use `hyper` to get this going. 
-- [ ] switch to sqlite backend or something...
-- [ ] challenge generation
+- [x] challenge generation
 
 ## page generation
 - [x] building an index
@@ -56,8 +55,7 @@ Fix spacing on frontpage
     - [ ] maybe the actual image should be resized to the viewport width: we can do this with while let in render step
     - [x] images definitely need a size... how to do this? To prevent content rearranging
 - [x] don't build drafts
-- [ ] incremental rebuilds with file hashing
-- [ ] adopt old posts to new format
+- [x] adopt old posts to new format
     - [x] fh
     - [x] scraper thing
 - [x] table of contents (sidecar?)
@@ -70,6 +68,7 @@ Fix spacing on frontpage
     - [x] calling this fixed, but it's not really. Nothing I can do here.
 
 # After Done
+- [ ] incremental rebuilds with file hashing
 - [ ] collapsable headings
 - [x] menu bar as component
 - [x] include absolute styles from frontmatter
@@ -82,3 +81,4 @@ Fix spacing on frontpage
 - [ ] text-only sitemap generation
 - [ ] index page for subfolders in general? 
 - [ ] md directory can have scripts and css, should get copied and included automatically
+- [ ] switch to sqlite backend or something for comments...
