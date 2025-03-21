@@ -3,15 +3,19 @@ use std::fs::{File, OpenOptions};
 use std::io::{Read, Write};
 use std::path::Path;
 use std::io;
+use std::sync::Arc;
 use chrono::Datelike;
 use rand::Rng;
+use rusqlite::params;
 use serde::{Deserialize, Serialize};
 
 pub async fn get_comments(
     post: String,
+    db_dir: &str,
 ) -> Result<impl warp::Reply, warp::Rejection> {
 
-    let comments = load_comments().unwrap_or_else(|_| HashMap::new());
+    let path = Path::new(db_dir);
+    let comments = load_comments(&path).unwrap_or_else(|_| HashMap::new());
     let empty = &vec![];
     let post_comments = comments.get(&post).unwrap_or(empty);
     
@@ -46,19 +50,24 @@ struct ErrorResponse {
 use serde_json::json;
 use warp::http::StatusCode;
 
+use super::serve::get_db_connection;
+
 
 pub async fn post_comment(
     input: CommentInput,
+    db_dir: Arc<String>,
 ) -> Result<impl warp::Reply, warp::Rejection> {
-    let mut challenges = match load_challenges() {
+    let db_path = Path::new(db_dir.as_str());
+    let mut challenges = match load_challenges(&db_path) {
         Ok(c) => c,
         Err(_) => HashMap::new(),
     };
 
+
     let mut pass = false;
     if challenges.contains_key(&input.id) {
         let (p, q) = challenges.get(&input.id).unwrap();
-        
+
         let year = chrono::Utc::now().year() as u32;
         println!("({:?} ** {}) mod {}", year, p, q);
         let solution = mod_exp::mod_exp(year, *p, *q);
@@ -90,7 +99,7 @@ pub async fn post_comment(
     }
 
     let timestamp = chrono::Utc::now().to_rfc3339();
-    let mut next_id_map = get_last_ids().unwrap_or_else(|| HashMap::new());
+    let mut next_id_map = get_last_ids(db_path).unwrap_or_else(|| HashMap::new());
     let next_id = next_id_map.entry(input.post.clone()).or_insert(0);
     let comment = Comment {
         id: *next_id,
@@ -100,13 +109,13 @@ pub async fn post_comment(
     };
     *next_id += 1;
 
-    let mut comments_map = load_comments().unwrap_or_else(|_| HashMap::new());
+    let mut comments_map = load_comments(&db_path).unwrap_or_else(|_| HashMap::new());
     let post_comments = comments_map
         .entry(input.post.clone())
         .or_insert_with(Vec::new);
     post_comments.push(comment.clone());
     
-    save_comments(&comments_map);
+    save_comments(&comments_map, &db_path);
     return Ok(warp::reply::with_status(
         warp::reply::json(&comment),
         StatusCode::OK,
@@ -114,9 +123,10 @@ pub async fn post_comment(
 }
 
 
-pub async fn get_challenge() -> Result<impl warp::Reply, warp::Rejection> {
+pub async fn get_challenge(db_dir: Arc<String>) -> Result<impl warp::Reply, warp::Rejection> {
     println!("got here");
-    let mut challenges = match load_challenges() {
+    let db_path = Path::new(db_dir.as_str());
+    let mut challenges = match load_challenges(&db_path) {
         Ok(c) => c,
         Err(_) => HashMap::new(),
     };
@@ -130,7 +140,7 @@ pub async fn get_challenge() -> Result<impl warp::Reply, warp::Rejection> {
         &json!({ "p": p, "q": q, "id": id })
         ).unwrap();
 
-    save_challenges(&challenges);
+    save_challenges(&challenges, &db_path);
     return Ok(warp::reply::with_status(
         warp::reply::json(&response_body),
         StatusCode::OK,
@@ -139,61 +149,82 @@ pub async fn get_challenge() -> Result<impl warp::Reply, warp::Rejection> {
 
 type Challenges = HashMap<String, (u32, u32)>;
 
-fn load_challenges() -> io::Result<Challenges> {
-    let path = Path::new("challenges.json");
-    if path.exists() {
-        let mut file = File::open(path)?;
-        let mut contents = String::new();
-        file.read_to_string(&mut contents)?;
-        Ok(serde_json::from_str(&contents)?)
-    } else {
-        Ok(HashMap::new())
+fn load_challenges(db_dir: &Path) -> io::Result<Challenges> {
+    let mut challenges = HashMap::new();
+
+    if db_dir.exists() {
+        let conn = get_db_connection(db_dir).map_err(|e| io::Error::new(io::ErrorKind::Other, e)).unwrap();
+        let mut stmt = conn.prepare("SELECT challenge_id, value1, value2 FROM challenges").unwrap();
+        let rows = stmt.query_map([], |row| {
+            Ok((
+                row.get(0).unwrap(), // challenge_id
+                (row.get(1).unwrap(), row.get(2).unwrap()) // (value1, value2)
+            ))
+        }).unwrap();
+
+        for row in rows {
+            let (challenge_id, values): (String, (u32, u32)) = row.unwrap();
+            challenges.insert(challenge_id, values);
+        }
     }
+    Ok(challenges)
 }
 
-fn save_challenges(challenges: &Challenges) -> io::Result<()> {
-    let mut file = OpenOptions::new()
-        .write(true)
-        .create(true)
-        .truncate(true)
-        .open("challenges.json")?;
-    let json = serde_json::to_string_pretty(challenges)?;
-    println!("writing {:?}", json);
-    file.write_all(json.as_bytes())?;
+fn save_challenges(challenges: &Challenges, db_path: &Path) -> io::Result<()> {
+    let conn = get_db_connection(db_path).map_err(|e| io::Error::new(io::ErrorKind::Other, e)).unwrap();
+    conn.execute("DELETE FROM challenges", []).unwrap();
+
+    for (challenge_id, &(value1, value2)) in challenges {
+        conn.execute(
+            "INSERT INTO challenges (challenge_id, value1, value2) VALUES (?1, ?2, ?3)",
+            params![challenge_id, value1, value2],
+        ).unwrap();
+    }
     Ok(())
 }
-
 
 pub async fn options_handler() -> Result<impl warp::Reply, warp::Rejection> {
     Ok(warp::reply::with_status("", warp::http::StatusCode::NO_CONTENT))
 }
 
 
-fn load_comments() -> io::Result<HashMap<String, Vec<Comment>>> {
-    let path = Path::new("comments.json");
-    if path.exists() {
-        let mut file = File::open(path)?;
-        let mut contents = String::new();
-        file.read_to_string(&mut contents)?;
-        Ok(serde_json::from_str(&contents)?)
-    } else {
-        Ok(HashMap::new())
+fn load_comments(db_dir: &Path) -> io::Result<HashMap<String, Vec<Comment>>> {
+    let mut comments = HashMap::new();
+
+    if db_dir.exists() {
+        let conn = get_db_connection(&db_dir).unwrap();
+        let mut stmt = conn.prepare("SELECT post_id, comment FROM comments").unwrap();
+        let rows = stmt.query_map([], |row| {
+            Ok((row.get(0).unwrap(), row.get(1).unwrap()))
+        }).unwrap();
+
+        for row in rows {
+            let (post_id, comment_json): (String, String) = row.unwrap();
+            let comment: Comment = serde_json::from_str(&comment_json)?;
+            comments.entry(post_id).or_insert_with(Vec::new).push(comment);
+        }
     }
+    Ok(comments)
 }
 
-fn save_comments(comments: &HashMap<String, Vec<Comment>>) -> io::Result<()> {
-    let mut file = OpenOptions::new()
-        .write(true)
-        .create(true)
-        .truncate(true)
-        .open("comments.json")?;
-    let json = serde_json::to_string_pretty(comments)?;
-    file.write_all(json.as_bytes())?;
+fn save_comments(comments: &HashMap<String, Vec<Comment>>, db_path: &Path) -> io::Result<()> {
+    let conn = get_db_connection(&db_path).unwrap();
+    conn.execute("DELETE FROM comments", []).unwrap();
+
+    for (post_id, comment_list) in comments {
+        for comment in comment_list {
+            let comment_json = serde_json::to_string(comment).unwrap();
+            conn.execute(
+                "INSERT INTO comments (post_id, comment) VALUES (?1, ?2)",
+                &[post_id, &comment_json],
+            ).unwrap();
+        }
+    }
     Ok(())
 }
 
-fn get_last_ids() -> Option<HashMap<String, u32>> {
-    load_comments().ok().map(|comments| {
+fn get_last_ids(db_path: &Path) -> Option<HashMap<String, u32>> {
+    load_comments(db_path).ok().map(|comments| {
         comments.into_iter().map(|(post, comments)| {
             let max_id = comments.iter().map(|c| c.id).max().unwrap_or(0);
             (post, max_id + 1)

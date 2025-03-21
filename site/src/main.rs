@@ -587,30 +587,29 @@ fn copy_traverse(input: &Path, output: &Path, full: bool) -> io::Result<()> {
     Ok(())
 }
 
+
+const DB_DIR: &'static str = "/var/lib/andreano-dev/db.sqlite3";
+
 fn main() -> std::io::Result<()> {
     let args: Vec<String> = std::env::args().collect();
 
-    let cwd = match env::current_dir() {
-        Ok(path) => path.display().to_string(),
-        Err(e) => {
-            println!("Failed to get current directory: {}", e);
-            exit(1)
-        }
-    };
-
-    let input = PathBuf::from("input");
-    let output = PathBuf::from("static");
-
-    if args.len() > 1 {
-        if args[1] == "serve" {
-            let rt = tokio::runtime::Runtime::new()?;
-            if args.len() > 2 {
-                rt.block_on(serve(Path::new(&args[2])));
-            }
-        }
-        if args[1] == "full" {
-            copy_traverse(&input, &output, true)?;
+    if args.len() == 1 {
+        let input = PathBuf::from("input");
+        let output = PathBuf::from("static");
+        return copy_traverse(&input, &output, false)
+    } else {
+        match args[1].as_str() {
+            "serve" => {
+                println!("serving...");
+                let rt = tokio::runtime::Runtime::new()?;
+                if args.len() > 2 {
+                    rt.block_on(serve(Path::new(&args[2]), String::from(DB_DIR)));
+                }
+            },
+            _ => { println!("unknown argument"); }
         }
     }
-    copy_traverse(&input, &output, false)
+    return Ok(());
 }
+
+

@@ -14,10 +14,12 @@ Fix spacing on frontpage
 - [ ] fix:
     - [ ] comments are just straight up not gonna work as is... nix store paths are immutable, so we can't push new comments
     - [ ] the serve binary is running from it's nix store path, which doesn't even have the comment/challenge files...
-    - [ ] probably the best solution is to a) run a database as another service, and have the server communicate through sockets or through TCP/IP
+    - [ ] **probably the best solution is to a) run a database as another service, and have the server communicate through sockets or through TCP/IP on the same machine**
+    - [ ] **sqlite is probably the move lol**
     - [ ] but we want to version control the comment files too...? do we need to do this in the same repo?
     - [ ] can we just clone the repo to /var/www/andreano.dev or something? should we be serving from here anyway instead of from the derivation?
     - [ ] probably we should NOT version control comments, at least in the same repository. Maybe the comment engine should be a separate project entirely, and run at comments.andreano.dev (CORS issues though lol)...
+    - [ ] also commit number doesn't even work lol, this needs to get fixed
 
 ## colors
 

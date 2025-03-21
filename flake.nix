@@ -13,21 +13,32 @@
           inherit system overlays;
         };
 
-        # rustPlatform = pkgs.makeRustPlatform {
-        #   cargo = pkgs.rust-bin.stable.latest.cargo;
-        #   rustc = pkgs.rust-bin.stable.latest.rustc;
-        # };
-
-
         # define the server package
         andreano-dev-package = pkgs.rustPlatform.buildRustPackage {
           pname = "andreano-dev";
+          buildInputs = [ pkgs.sqlite ];
           version = "1.0";
           src = ./site/.;
           cargoLock = {
             lockFile = ./site/Cargo.lock;
           };
         };
+        #
+        # andreano-dev-package = pkgs.stdenv.mkDerivation {
+        #   name = "andreano-dev";
+        #   src = pkgs.fetchurl {
+        #     url = "https://github.com/xiugaze/andreano.dev/releases/download/v0.1.0-alpha/site";
+        #   };
+        #   dontUnpack = true; 
+        #   buildPhase = ''
+        #       cp $src site
+        #     '';
+        #     installPhase = ''
+        #       mkdir -p $out/bin
+        #       cp site $out/bin/site
+        #       chmod +x $out/bin/site
+        #     '';
+        # };
 
     in {
       packages.default = andreano-dev-package;
@@ -55,16 +66,28 @@
               description = "enable the web server";
             } ;
             user = mkOption {
-              default = "caleb";
+              default = "andreano-dev";
               description = "user to run the service";
             };
           };
         };
 
         config = mkIf config.services.andreano-dev.enable {
+
+          users.users.${cfg.user} = {
+            isSystemUser = true;
+            group = "${cfg.user}"; 
+            home = "/var/lib/andreano-dev"; 
+            createHome = true; 
+            description = "andreano-dev web service user";
+          };
+
+          users.groups.${cfg.user} = {};
+
           systemd.services.andreano-dev = let
             package-base = "${self.packages.${pkgs.system}.default}";
             serve-path = "${self.packages.${pkgs.system}.andreano-dev-site}/static";
+            db-dir = "/var/lib/andreano-dev";
           in {
             wantedBy = [ "default.target" ]; 
             after = [ "network.target" ];
@@ -106,11 +129,10 @@
               cargo-flamegraph
               linuxKernel.packages.linux_latest_libre.perf
 
-              # js
-              bun
-
               # tools
               libwebp
+
+              sqlite
             ];
         };
     });
