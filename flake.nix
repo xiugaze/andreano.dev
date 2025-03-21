@@ -7,7 +7,7 @@
   };
   outputs = { self, nixpkgs, rust-overlay, flake-utils }:
     flake-utils.lib.eachDefaultSystem (system: 
-      let 
+      let
         overlays = [ (import rust-overlay) ];
         pkgs = import nixpkgs {
           inherit system overlays;
@@ -19,6 +19,7 @@
         # };
 
 
+        # define the server package
         andreano-dev-package = pkgs.rustPlatform.buildRustPackage {
           pname = "andreano-dev";
           version = "1.0";
@@ -27,18 +28,53 @@
             lockFile = ./site/Cargo.lock;
           };
         };
-    in
-    {
-      packages.default = andreano-dev-package;
 
-      nixosModules.default = { config, lib, pkgs, ...}: 
-        with lib;
-        let 
-          cfg = config.services.andreano-dev; 
-        in {
-          options.services.hello = {
-            enable = mkEnableOption "hello service";
+    in {
+      packages.default = andreano-dev-package;
+      packages.andreano-dev-package = andreano-dev-package;
+      packages.andreano-dev-site = pkgs.runCommand "andreano-dev-site" {
+        buildInputs = [ self.packages.${system}.default ];
+      } ''
+          mkdir -p $out
+          cp -r ${./site/website} ./website
+          chmod -R u+w ./website
+          cd ./website
+          ${self.packages.${system}.default}/bin/site
+          cp -r . $out/  # Copy the entire contents of ./website to $out
+        '';
+
+
+      nixosModules.default = { config, lib, pkgs, ...}:
+          let 
+            cfg = config.services.andreano-dev;
+          in with lib; {
+        options = {
+          services.andreano-dev = {
+            enable = mkOption {
+              default = false;
+              description = "enable the web server";
+            } ;
+            user = mkOption {
+              default = "caleb";
+              description = "user to run the service";
+            };
           };
+        };
+
+        config = mkIf config.services.andreano-dev.enable {
+          systemd.services.andreano-dev = let
+            package-base = "${self.packages.${pkgs.system}.default}";
+            serve-path = "${self.packages.${pkgs.system}.andreano-dev-site}/static";
+          in {
+            wantedBy = [ "default.target" ]; 
+            after = [ "network.target" ];
+            serviceConfig = {
+              Type = "simple";
+              User = "${cfg.user}";
+              ExecStart = "${package-base}/bin/site serve ${serve-path}";
+            };
+          };
+        };
       };
       devShells.default = with pkgs; mkShell.override { stdenv = clangStdenv; } {
           buildInputs = with pkgs; [

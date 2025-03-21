@@ -1,16 +1,14 @@
-use std::{collections::HashMap, convert::Infallible};
+use std::{collections::HashMap, convert::Infallible, path::Path};
 
 use warp::Filter;
 
 use warp::http::StatusCode;
 use super::comment::{get_challenge, get_comments, options_handler, post_comment};
 
+pub async fn serve(dir: &Path) {
 
-
-pub async fn serve() {
-
-    let file_server = warp::fs::dir("static");
-    let four_oh_four = warp::fs::file("static/404/index.html");
+    let file_server = warp::fs::dir(dir.to_path_buf());
+    let four_oh_four = warp::fs::file(dir.join("404/index.html"));
 
     let challenge_route = warp::path("challenge")
         .and(warp::get())

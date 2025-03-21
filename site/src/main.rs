@@ -486,7 +486,10 @@ fn copy_traverse(input: &Path, output: &Path, full: bool) -> io::Result<()> {
         fs::create_dir_all(output)?;
     }
 
-    let commit = &get_git_commit_hash().unwrap()[0..6];
+    let commit = match get_git_commit_hash() {
+        Ok(hash) => &hash.clone()[0..6],
+        Err(_) => "000000",
+    };
 
     let mut todo = VecDeque::new();
     todo.push_back((input.to_path_buf(), output.to_path_buf()));
@@ -601,8 +604,9 @@ fn main() -> std::io::Result<()> {
     if args.len() > 1 {
         if args[1] == "serve" {
             let rt = tokio::runtime::Runtime::new()?;
-            rt.block_on(serve());
-            //serve(&cwd, "8080");
+            if args.len() > 2 {
+                rt.block_on(serve(Path::new(&args[2])));
+            }
         }
         if args[1] == "full" {
             copy_traverse(&input, &output, true)?;
