@@ -1,0 +1,74 @@
+.commentForm {
+  width: 90%;
+}
+
+.commentForm input, .commentForm textarea {
+  border-color: var(--text-color);
+  border-style: solid;
+  border-width: 2px;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  border-radius: 5px;
+  font-size: 1.2rem;
+  font-family: monospace;
+  height: 30px;
+  width: 100px;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5); 
+}
+
+.commentForm input {
+  width: 280px;
+  margin-right: 16px;
+  padding: 10px;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5); 
+}
+
+.commentForm button {
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5); 
+  border-style: none;
+  border-radius: 5px;
+  background-color: var(--text-color);
+  font-family: monospace;
+  font-size: 1.2rem;
+  color: var(--bg-color);
+  padding: 5px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.commentForm textarea {
+  margin-top: 20px;
+  padding: 10px;
+  display: block;
+  width: 600px;
+  height: 200px;
+  max-width: 100%;
+  max-height: 200px;
+  resize: horizontal;
+}
+
+
+.comments {
+  width: 90%;
+}
+.comment {
+  border: 2px solid;
+  border-color: var(--text-color);
+  margin: 30px auto;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.comment * {
+  text-align: left;
+}
+
+.comment small {
+  color: var(--accent-color);
+}
+
+.comment p {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding-left: 20px;
+}

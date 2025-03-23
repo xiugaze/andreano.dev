@@ -1,0 +1,178 @@
+@import url("color.css");
+
+:root {
+    --bg-color: var(--uchu-pink-2);
+    --text-color: var(--uchu-yin-9);
+    --accent-color: var(--uchu-pink-6);
+    --hl-color: var(--uchu-purple-6);
+}
+
+html[data-theme="dark"] {
+    --bg-color: var(--uchu-yin-9);
+    --text-color: var(--uchu-pink-2);
+    --accent-color: var(--uchu-yin-7);
+    --hl-color: var(--uchu-purple-3);
+}
+
+html[data-theme="reader"] {
+    --bg-color: white;
+    --text-color: black;
+    --accent-color: grey;
+    --hl-color: black;
+}
+
+body {
+    font-family: monospace;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-size: 16px;
+}
+
+code {
+    font-weight: bold;
+    color: var(--hl-color);
+}
+
+/* footnotes */
+.footnote-definition {
+  display: flex; 
+  align-items: flex-start; 
+  margin-bottom: 1em; 
+}
+
+.footnote-definition-label {
+  margin-right: 0.5em; 
+  font-weight: bold; 
+}
+
+.footnote-definition p {
+  margin: 0; 
+}
+
+.container video {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5); 
+}
+
+
+a {
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+
+
+.container {
+    max-width: 800px;
+    position: relative;
+    margin: auto;
+    font-size: 1.25em;
+    width: 90%; 
+    line-height: 1.75; 
+    min-height: 100vh;
+    text-align: justify;
+}
+
+/* fenced code block */
+.container pre {
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5); 
+    font-family: monospace;
+    background-color: var(--uchu-red-1);
+    padding: 16px; 
+    border-radius: 8px; 
+    overflow-x: auto; 
+    line-height: 1.5; 
+}
+.container img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    border-radius: 8px; 
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5); 
+}
+.container figure {
+    text-align: center; 
+    display: inline-block; 
+    margin: 10px auto;
+}
+
+.container figcaption {
+    padding-top: 5px;
+    font-size: 0.9rem;
+    color: var(--accent-color);
+}
+
+.container blockquote {
+    font-style: italic;
+    color: var(--accent-color);
+}
+
+.index-container > a {
+    display: block;
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+.index-container > a:hover {
+    text-decoration: underline;
+}
+
+
+.toc {
+    border-radius: 5px;
+    border-width: 2px;
+    padding: 10px;
+    font-size: 1rem;
+}
+
+.toc h4 {
+    margin: 5px auto;
+}
+
+.toc > ul {
+    margin: 5px auto;
+}
+.toc ul {
+    list-style-type: none;
+    padding-left: 10px;
+}
+
+.toc li {
+    padding-left: 0px;
+}
+.toc > a {
+    display: block;
+}
+
+/* footer */
+
+/* always have an extra 3rem at the bottom */
+.content-wrap { 
+  padding-bottom: 3rem;
+}
+
+footer {
+  color: var(--accent-color);
+  text-align: center;
+  font-size: 0.8rem;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 3rem;
+}
+
+/*footer > p {*/
+/*    padding-top: 1.2rem;*/
+/*}*/
+

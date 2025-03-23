@@ -1,0 +1,10 @@
+@font-face {
+    font-family: 'Latin Modern Math';
+    src: url('/fonts/latinmodern-math.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+math {
+    font-family: 'Latin Modern Math';
+}

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{ title }}</title>
+    <link href="/styles/style.css" rel="stylesheet">
+    <link href="/styles/menu.css" rel="stylesheet">
+    {{{ styles }}}
+    <link rel="icon" href="/favicon.gif">
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+    <base
+      href="{{{ path }}}"
+  >
+    <script>
+      /*to prevent Firefox FOUC, this must be here*/
+    let FF_FOUC_FIX;
+    </script>
+    <script>
+        (function() {
+          const savedTheme = localStorage.getItem('selectedTheme');
+          if (savedTheme) {
+            document.documentElement.setAttribute('data-theme', savedTheme);
+          }
+        })();
+    </script>
+  </head>
+  <body data-post_id="{{ post_id }}">
+    <div class="container">
+      <div class="content-wrap">
+        {{>menu.html}}
+        <h1>{{ title }}</h1>
+        {{{ content }}}
+        {{>comments.html}}
+      </div>
+      <footer>
+        <p>
+          This site is on  <a href="https://github.com/xiugaze/andreano.dev/tree/{{{commit}}}">main/{{{ commit }}}</a>
+        </p>
+      </footer>
+    </div>
+    {{{ scripts }}}
+    <script src="/scripts/theme.js"></script>
+  </body>
+</html>
