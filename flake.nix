@@ -44,13 +44,13 @@
       packages.default = andreano-dev-package;
       packages.andreano-dev-package = andreano-dev-package;
       packages.andreano-dev-site = pkgs.runCommand "andreano-dev-site" {
-        buildInputs = [ self.packages.${system}.default ];
+        buildInputs = [ self.packages.${system}.default pkgs.git ];
       } ''
           mkdir -p $out
           cp -r ${./site/website} ./website
           chmod -R u+w ./website
           cd ./website
-          ${self.packages.${system}.default}/bin/site
+          ${self.packages.${system}.default}/bin/site ${self.rev}
           cp -r . $out/  # Copy the entire contents of ./website to $out
         '';
 

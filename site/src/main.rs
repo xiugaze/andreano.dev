@@ -473,7 +473,7 @@ fn get_git_commit_hash() -> Result<String, String> {
     }
 }
 
-fn copy_traverse(input: &Path, output: &Path, full: bool) -> io::Result<()> {
+fn copy_traverse(input: &Path, output: &Path, hash: &str, full: bool) -> io::Result<()> {
     if !input.is_dir() {
         println!("error: input is not a directory");
         return Err(io::Error::new(
@@ -486,10 +486,7 @@ fn copy_traverse(input: &Path, output: &Path, full: bool) -> io::Result<()> {
         fs::create_dir_all(output)?;
     }
 
-    let commit = match get_git_commit_hash() {
-        Ok(hash) => &hash.clone()[0..6],
-        Err(_) => "000000",
-    };
+    let commit = &hash[0..6];
 
     let mut todo = VecDeque::new();
     todo.push_back((input.to_path_buf(), output.to_path_buf()));
@@ -593,10 +590,8 @@ const DB_DIR: &'static str = "/var/lib/andreano-dev/db.sqlite3";
 fn main() -> std::io::Result<()> {
     let args: Vec<String> = std::env::args().collect();
 
-    if args.len() == 1 {
-        let input = PathBuf::from("input");
-        let output = PathBuf::from("static");
-        return copy_traverse(&input, &output, false)
+    if args.len() < 2{
+        println!("error: provide a command");
     } else {
         match args[1].as_str() {
             "serve" => {
@@ -605,6 +600,15 @@ fn main() -> std::io::Result<()> {
                 if args.len() > 2 {
                     rt.block_on(serve(Path::new(&args[2]), String::from(DB_DIR)));
                 }
+            },
+            "crunch" => {
+                let input = PathBuf::from("input");
+                let output = PathBuf::from("static");
+                let mut hash = "000000";
+                if args.len() > 2 {
+                    hash = &args[2];
+                }
+                return copy_traverse(&input, &output, &hash, false)
             },
             _ => { println!("unknown argument"); }
         }
