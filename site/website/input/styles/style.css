@@ -68,6 +68,8 @@ a {
 
 a:hover {
     font-weight: bold;
+    text-decoration: underline;
+    text-decoration-color: var(--text-color);
 }
 
 

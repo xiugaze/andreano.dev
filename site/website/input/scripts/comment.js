@@ -1,6 +1,6 @@
-const host = "http://localhost:8080"
 const get_endpoint = "/comments"
 const post_endpoint = "/comments"
+const challenge_endpoint = "/challenge"
 
 const POST_NAME = document.body.dataset.post_id || "test"
 
@@ -15,7 +15,7 @@ const options = {
 };
 
 window.onload = function() {
-    fetch(`${host}${get_endpoint}?post=${POST_NAME}`)
+    fetch(`${get_endpoint}?post=${POST_NAME}`)
         .then(response => response.json())
         .then(comments => {
             const container = document.getElementById('comments');
@@ -38,7 +38,7 @@ window.onload = function() {
 
 document.getElementById('challengeButton').onclick = function(e) {
     e.preventDefault();
-    fetch(`${host}/challenge`)
+    fetch(`${challenge_endpoint}`)
         .then(response => response.json())
         .then(challenge => JSON.parse(challenge))
         .then(challenge => {
@@ -59,7 +59,7 @@ document.getElementById('commentForm').onsubmit = function(e) {
     const body = JSON.stringify({ id, sum, post: POST_NAME, author, content });
     console.log(body);
     
-    fetch(`${host}${post_endpoint}`, {
+    fetch(`${post_endpoint}`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
