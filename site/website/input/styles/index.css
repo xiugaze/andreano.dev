@@ -1,8 +1,8 @@
 .blog-index {
   display: grid;
-  grid-template-columns: auto 1fr; /* Left column for dates, right column for titles */
-  gap: 10px; /* Space between rows */
-  width: 100%; /* Ensure the grid takes the full width of its parent */
+  grid-template-columns: auto 1fr; 
+  gap: 10px; 
+  width: 100%; 
 }
 
 .blog-index * {
@@ -11,15 +11,14 @@
 }
 
 .blog-entry {
-  display: contents; /* Makes the children of .entry participate directly in the grid */
+  display: contents; 
 }
 
 .blog-date {
-  padding-right: 10px; /* Optional: Add some spacing between date and title */
+  padding-right: 10px; 
   font-size: 1rem;
   font-style: italic;
 }
 
 .blog-title {
-  /* No additional styling needed; fills remaining space */
 }

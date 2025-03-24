@@ -7,6 +7,24 @@ svg {
         color 0.5s ease;
 }
 
+a {
+    text-decoration: none;
+}
+
+#mobile-home {
+    display: none;
+    margin-right: 10px;
+}
+
+@media (max-width: 768px) {
+  #desktop-home {
+    display: none; 
+  }
+  #mobile-home {
+    display: block; 
+  }
+}
+
 .icon {
     transition: 
         transform 0.5s ease,
@@ -21,6 +39,7 @@ svg {
     padding-top: 10px;
     border-bottom: solid;
     border-width: 2px;
+    font-size: 1.25em;
 }
 
 .menu a {

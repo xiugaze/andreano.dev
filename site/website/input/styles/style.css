@@ -62,11 +62,11 @@ code {
 
 a {
     color: var(--text-color);
-    text-decoration: none;
+    text-decoration: underline;
+    text-decoration-color: var(--accent-color);
 }
 
 a:hover {
-    text-decoration: underline;
     font-weight: bold;
 }
 
@@ -81,6 +81,13 @@ a:hover {
     line-height: 1.75; 
     min-height: 100vh;
     text-align: justify;
+}
+
+@media (max-width: 768px) {
+    .container {
+        text-align: left;
+        font-size: 1.0em;
+    }
 }
 
 /* fenced code block */

@@ -486,7 +486,7 @@ fn copy_traverse(input: &Path, output: &Path, hash: &str, full: bool) -> io::Res
         fs::create_dir_all(output)?;
     }
 
-    let commit = &hash[0..6];
+    let commit = &hash[0..7];
 
     let mut todo = VecDeque::new();
     todo.push_back((input.to_path_buf(), output.to_path_buf()));

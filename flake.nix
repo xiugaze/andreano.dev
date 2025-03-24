@@ -50,7 +50,7 @@
           cp -r ${./site/website} ./website
           chmod -R u+w ./website
           cd ./website
-          ${self.packages.${system}.default}/bin/site ${self.rev}
+          ${self.packages.${system}.default}/bin/site crunch ${toString self.shortRev or self.dirtyShortRev}
           cp -r . $out/  # Copy the entire contents of ./website to $out
         '';
 
