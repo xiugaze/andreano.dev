@@ -19,8 +19,8 @@ Fix spacing on frontpage
     - [x] but we want to version control the comment files too...? do we need to do this in the same repo?
     - [x] can we just clone the repo to /var/www/andreano.dev or something? should we be serving from here anyway instead of from the derivation?
     - [x] probably we should NOT version control comments, at least in the same repository. Maybe the comment engine should be a separate project entirely, and run at comments.andreano.dev (CORS issues though lol)...
-    - [ ] also commit number doesn't even work lol, this needs to get fixed
-    - [ ] cube code was gitignored, fix that
+    - [x] also commit number doesn't even work lol, this needs to get fixed
+    - [x] cube code was gitignored, fix that
 
 ## colors
 
@@ -78,16 +78,16 @@ Fix spacing on frontpage
 
 # After Done
 - [ ] incremental rebuilds with file hashing
-- [ ] collapsable headings
+- [ ] collapsable headings as heading class
 - [x] menu bar as component
 - [x] include absolute styles from frontmatter
 - [ ] include absolute scripts from frontmatter
-- [ ] include relative scripts from directory
-- [ ] include relative scripts from directory
+- [x] include relative scripts from directory
+- [x] include relative scripts from directory
+- [x] md directory can have scripts and css, should get copied and included automatically
+- [x] switch to sqlite backend or something for comments...
 
 - [ ] for latex2mathml, image, consume closing tag
 - [ ] rss feed
 - [ ] text-only sitemap generation
 - [ ] index page for subfolders in general? 
-- [ ] md directory can have scripts and css, should get copied and included automatically
-- [ ] switch to sqlite backend or something for comments...
