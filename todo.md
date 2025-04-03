@@ -1,7 +1,16 @@
 # Before Done
 
+[**STL Viewer**](https://github.com/ottobonn/stl-viewer)
+- this talks about how to actually use it: https://tonybox.net/posts/simple-stl-viewer/
+
+## Posts
+- [ ] website
+- [ ] FH '25
+- [ ] picture frame
+- [ ] arm assembly
+
 **NOTE TO SELF**
-Headers with the ' character get cut 
+Headers with the ''` character get cut 
 for some reason, why is that? this should probably get fixed. 
 
 **NOTE TO SELF**
@@ -75,6 +84,9 @@ Fix spacing on frontpage
 - [ ] math fonts
 - [x] theme switch transitions
     - [x] calling this fixed, but it's not really. Nothing I can do here.
+
+## mobile
+- [ ] debounce theme switcher somehow
 
 # After Done
 - [ ] incremental rebuilds with file hashing

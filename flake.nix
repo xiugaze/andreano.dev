@@ -132,6 +132,10 @@
               # tools
               libwebp
 
+
+              nodejs_23
+              esbuild
+
               sqlite
             ];
         };
