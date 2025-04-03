@@ -4,8 +4,6 @@
     text-decoration: none;
 }
 
-
-
 .home-container {
     width: 100%;
     height: 60vh;
@@ -26,6 +24,7 @@ svg {
 }
 
 canvas {
+    padding-top: 10px;
     transition: 
         strokeStyle 0.5s ease;
 }

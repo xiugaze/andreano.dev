@@ -90,12 +90,12 @@ a:hover {
     min-height: 100vh;
 }
 
-.container p {
+.content-wrap p {
     text-align: justify;
 }
 
 @media (max-width: 768px) {
-    .container p {
+    .content-wrap p {
         text-align: left;
         font-size: 1.0em;
     }
