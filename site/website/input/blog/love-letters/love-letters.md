@@ -9,7 +9,6 @@ This is some test text.
 
 
 <!--This is needed for three.js to work:-->
-<script src="index.js" type="module"></script>
 <script type="importmap">
 {
     "imports": {
@@ -17,3 +16,4 @@ This is some test text.
     }
 }
 </script>
+<script src="index.js" type="module"></script>
