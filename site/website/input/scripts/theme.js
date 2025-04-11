@@ -26,10 +26,12 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
     loadSavedPreferences();
+
     const earlyStyleElement = document.querySelector('style[data-early-icon-fix]');
     if (earlyStyleElement) {
         earlyStyleElement.remove();
     }
+
     icons.forEach(icon => {
         icon.addEventListener('click', function () {
             if (this === mainIcon) return;

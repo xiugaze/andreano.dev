@@ -1,4 +1,12 @@
-@import url("color.css");
+@import url("/styles/color.css");
+
+
+@font-face {
+  font-family: "Roboto Mono";
+  src:
+    local("Roboto Mono"),
+    url("/fonts/RobotoMono-VariableFont_wght.ttf") format("truetype");
+}
 
 :root {
     --bg-color: var(--uchu-pink-2);
@@ -22,7 +30,7 @@ html[data-theme="reader"] {
 }
 
 body {
-    font-family: monospace;
+    font-family: "Roboto Mono", monospace;
     margin: 0;
     padding: 0;
     display: flex;
@@ -72,8 +80,6 @@ a:hover {
     text-decoration-color: var(--text-color);
 }
 
-
-
 .container {
     max-width: 800px;
     position: relative;
@@ -82,11 +88,14 @@ a:hover {
     width: 90%; 
     line-height: 1.75; 
     min-height: 100vh;
+}
+
+.content-wrap p {
     text-align: justify;
 }
 
 @media (max-width: 768px) {
-    .container {
+    .content-wrap p {
         text-align: left;
         font-size: 1.0em;
     }

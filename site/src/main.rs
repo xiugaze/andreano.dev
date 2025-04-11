@@ -71,6 +71,7 @@ impl Post {
                     _ => Vec::new(),
                 };
 
+
                 let filename = file_path.file_name().unwrap().to_str().unwrap().strip_suffix(".md").unwrap();
                 println!("id: {:?}", filename);
 
@@ -88,6 +89,30 @@ impl Post {
                 for s in styles {
                     post.add_style(&format!("styles/{}", s));
                 }
+
+                let scripts_dir = file_path.parent().unwrap().join("scripts/");
+                let index_js = scripts_dir.join("index.js");
+
+                if index_js.exists() {
+                    post.add_script("scripts/index.js");
+                }
+                //if scripts_dir.exists() && scripts_dir.is_dir() {
+                //    for entry in fs::read_dir(scripts_dir)? {
+                //        let entry = entry?;
+                //        let path = entry.path();
+                //        post.add_script(&format!("scripts/{}", path.file_name().unwrap().to_str().unwrap()));
+                //    }
+                //}
+
+                let styles_dir = file_path.parent().unwrap().join("styles/");
+                if styles_dir.exists() & styles_dir.is_dir() {
+                    for entry in fs::read_dir(styles_dir)? {
+                        let entry = entry?;
+                        let path = entry.path();
+                        post.add_style(&format!("styles/{}", path.file_name().unwrap().to_str().unwrap()));
+                    }
+                }
+
 
                 return Ok(post);
             }
