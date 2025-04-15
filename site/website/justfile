@@ -1,0 +1,4 @@
+b: 
+  cargo run -- crunch $(git rev-parse HEAD)
+s: 
+  cargo run -- serve static
