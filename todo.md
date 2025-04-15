@@ -6,11 +6,14 @@
 ## Posts
 - [ ] website
 - [ ] FH '25
+    - [ ] comp
+    - [ ] e-motor throttle
+    - [ ] throttle body
 - [ ] picture frame
 - [ ] arm assembly
 
 **NOTE TO SELF**
-Headers with the ''` character get cut 
+Headers with the `'` character get cut 
 for some reason, why is that? this should probably get fixed. 
 
 **NOTE TO SELF**
@@ -79,6 +82,7 @@ Fix spacing on frontpage
 - [x] table of contents (sidecar?)
     can do this with while let
 - [x] index page mobile formatting
+- [x] blog post date and author 
 
 ## chrome problems
 - [ ] math fonts

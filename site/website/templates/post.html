@@ -25,7 +25,10 @@
     <div class="container">
       <div class="content-wrap">
         {{>menu.html}}
-        <h1>{{ title }}</h1>
+        <div class="title-block">
+          <h1>{{ title }}</h1>
+          <h3>Caleb Andreano on {{ date }}</h3>
+        </div>
         {{{ content }}}
         {{>comments.html}}
       </div>

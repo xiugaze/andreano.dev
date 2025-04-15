@@ -144,6 +144,7 @@ impl Post {
 #[derive(Content)]
 struct BaseTemplate<'a> {
     post_id: &'a str,
+    date: &'a str,
     title: &'a str,
     path: &'a str,
     content: &'a str,
@@ -446,6 +447,7 @@ fn parse_post_markdown(
 
     let rendered = template.render(&BaseTemplate {
         post_id: &post.id,
+        date: &post.date.format("%Y-%m-%d").to_string(),
         title: &post.title,
         path: &format!("/{}", rel_path_parent),
         content: &rendered_content.content,
@@ -596,6 +598,7 @@ fn copy_traverse(input: &Path, output: &Path, hash: &str, full: bool) -> io::Res
     let template = tpls.get("index.html").unwrap();
     let rendered = template.render(&BaseTemplate {
         post_id: "",
+        date: "",
         title: "blog",
         path: "/blog/",
         content: &blog_index_content,
