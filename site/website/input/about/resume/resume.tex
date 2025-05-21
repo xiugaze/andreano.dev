@@ -49,29 +49,29 @@ Skills in embedded systems programming, software design for critical systems, FP
 {Milwaukee Tool} {Brookfield, WI}
 {Firmware Engineering Intern: Battery Platform/NPD} {\period{Jun}{2024}{Aug}{2024}}
 {\begin{circlist}
-	\item Implemented Coulomb-count and open circuit voltage based state of charge algorithm for next-generation battery pack firmware using \code{c}/\code{c++} on TI and STM hardware, verifying with unit test suite and CSTAT static analysis.
-	\item Developed data processing pipelines using \code{pandas}, \code{numpy}, \code{scipy} and \code{matplotlib} for interpretation and monitoring of circuit parameters, I$^2$C traffic and pack MCU serial communications.
-	\item Used \code{golang}, \code{python}, mutlithreaded programming, analog circuit design principles and digital filters to build automated test fixtures and control equipment.
-	\item Explored extended Kalman filters for modeling dynamical state transitions using MatLab.
-	\item Result: Project firmware and tests will be integrated into next-generation M18 platform.
+  \item Implemented Coulomb-count and open circuit voltage based state of charge algorithm for next-generation battery pack firmware using \code{c}/\code{c++} on TI and STM hardware, verifying with unit test suite and CSTAT static analysis.
+  \item Developed data processing pipelines using \code{pandas}, \code{numpy}, \code{scipy} and \code{matplotlib} for interpretation and monitoring of circuit parameters, I$^2$C traffic and pack MCU serial communications.
+  \item Used \code{golang}, \code{python}, mutlithreaded programming, analog circuit design principles and digital filters to build automated test fixtures and control equipment.
+  \item Explored extended Kalman filters for modeling dynamical state transitions using MatLab.
+  \item Result: Project firmware and tests will be integrated into next-generation M18 platform.
 \end{circlist}}
 
 \sectionloc
 {Gama Space} {Paris, France (Remote)}
 {Guidance, Navigation, Controls Intern} {\period{Feb}{2023}{Oct}{2023}}
 {\begin{circlist}
-	\item Used \code{c} and FreeRTOS to design asynchronous UART and CAN drivers for an STM microcontroller.
-	\item Reverse-engineered and redesigned Cubesat Space Protocol (\code{libcsp}) into a cross-plaform, memory and thread safe Rust library, 
-	      providing and documenting an ergonomic API for integration into existing flight software for currently in-flight low Earth orbit satellite platform.
-	\item Provided network interface drivers for UDP, TCP/IP, CAN, UART, and loopback. 
+  \item Used \code{c} and FreeRTOS to design asynchronous UART and CAN drivers for an STM microcontroller.
+  \item Reverse-engineered and redesigned Cubesat Space Protocol (\code{libcsp}) into a cross-plaform, memory and thread safe Rust library, 
+        providing and documenting an ergonomic API for integration into existing flight software for currently in-flight low Earth orbit satellite platform.
+  \item Provided network interface drivers for UDP, TCP/IP, CAN, UART, and loopback. 
 \end{circlist}}
 
 % \sectionloc
 % {Cognex} {Wauwatosa, WI}
 % {Software Engineering Intern} {\period{Nov}{2022}{Feb}{2023}}
 % {\begin{circlist}
-% 	\item Worked on an agile software team continuously developing In-Sight, a \code{C\#}/.NET software suite for network management of machine vision cameras used in manufacturing, verification and quality assurance.
-% 	\item Utilized \code{git} and Jira for CI/CD, distributed version control and Scrum-oriented collaboration.
+%   \item Worked on an agile software team continuously developing In-Sight, a \code{C\#}/.NET software suite for network management of machine vision cameras used in manufacturing, verification and quality assurance.
+%   \item Utilized \code{git} and Jira for CI/CD, distributed version control and Scrum-oriented collaboration.
 % \end{circlist}}
 % \rootend
 
@@ -83,14 +83,14 @@ Skills in embedded systems programming, software design for critical systems, FP
 
 {\vspace{-1.4ex}}
 \begin{circlist}
-	\item Developed custom hardware and software for four-node fault-tolerant CAN2.0B drive-by-wire system.
+  \item Developed custom hardware and software for four-node fault-tolerant CAN2.0B drive-by-wire system.
 \end{circlist}
 {\vspace{-1.4ex}}
 \sectionsplit{Software Team Lead}{\period{May}{2023}{May}{2024}}
 \begin{circlist}
-	\item Directed full system software rebuild for 2024 1st place world-champion hybrid vehicle.
-	\item Implemented fully asychronous firmware using Rust and \code{embassy} for controlling multiple subsystems, including collecting and interpreting throttle input, controlling ICE throttle body (throttle-by-wire) and electric motor controller over CANFD, and validating safety system startup sequence, runtime monitoring, and fault detection.
-	\item Attended 2024 Formula Hybrid + Electric competition in Loudon, NH, continuously developing and testing firmware during competition and passing all technical inspections.
+  \item Directed full system software rebuild for 2024 1st place world-champion hybrid vehicle.
+  \item Implemented fully asychronous firmware using Rust and \code{embassy} for controlling multiple subsystems, including collecting and interpreting throttle input, controlling ICE throttle body (throttle-by-wire) and electric motor controller over CANFD, and validating safety system startup sequence, runtime monitoring, and fault detection.
+  \item Attended 2024 Formula Hybrid + Electric competition in Loudon, NH, continuously developing and testing firmware during competition and passing all technical inspections.
 \end{circlist}
 \sectionsplit{Software Team Member}{\period{Sep}{2022}{May}{2023}}
 
@@ -98,9 +98,9 @@ Skills in embedded systems programming, software design for critical systems, FP
 % \sectiondate
 % {MSOE Artificial Intelligence Club}
 % {Immunohistochemical Research Team} {\period{Aug}{2023}{Present}{}}
-% {\begin{circlist}	
-% 	\item Developed image labeling and structural similarity processing pipeline mapping hematoxylin and eosin cancerous tissue sample images to immunohistochemical slides. 
-% 	\item Worked with team of four to use \code{keras} and PyTorch to implement image-to-image translation model. 
+% {\begin{circlist} 
+%   \item Developed image labeling and structural similarity processing pipeline mapping hematoxylin and eosin cancerous tissue sample images to immunohistochemical slides. 
+%   \item Worked with team of four to use \code{keras} and PyTorch to implement image-to-image translation model. 
 % \end{circlist}}
 
 \sectiontutor
@@ -123,57 +123,68 @@ Skills in embedded systems programming, software design for critical systems, FP
 \rootstart{Selected Projects}
 
 \sectionproj
+{MP7 Drive-by-wire system (FSAE)} 
+{\begin{circlist}
+  \item Designed custom STM32-based PCB to drive a brushed DC motor inside throttle body, and implemented firmware in C++ for PID closed-loop control system for positional motor control.
+  \item Designed custom RP2350-based PCB providing isolated throttle control to tractive system.
+  \item Designed two RP2350-based hardware devices for driver interaction (pedalbox, dashboard).
+  \item Wrote firmware in C and C++ to integrate four nodes on single CAN bus, providing fault detection and recovery.
+\end{circlist}}
+% \sectionproj
+% {Analog Computing Development Kit} 
+% {}
+\sectionproj
 {FPGA Touchscreen/Servo Control} 
 {\begin{circlist}
-	\item Designed custom PWM servo driver hardware component in VHDL and a \code{c} API for control.
-	\item Integrated touchscreen driver component into digital hardware system using Intel Platform Designer.
-	\item Created a graphics library in \code{c} for drawing and rendering 3D graphics on the touchscreen.
-	\item Deployed RTL design on Altera MAX 10 FPGA. 
-	\item Implemented application code to draw a shape on the touchscreen using a stylus or finger and and automatically trace the shape with a servo-controlled robotic arm and laser. 
+  \item Designed custom PWM servo driver hardware component in VHDL and a \code{c} API for control.
+  \item Integrated touchscreen driver component into digital hardware system using Intel Platform Designer.
+  \item Created a graphics library in \code{c} for drawing and rendering 3D graphics on the touchscreen.
+  \item Deployed RTL design on Altera MAX 10 FPGA. 
+  \item Implemented application code to draw a shape on the touchscreen using a stylus or finger and and automatically trace the shape with a servo-controlled robotic arm and laser. 
 \end{circlist}}
 
 \sectionproj
 {ARMv4 CPU on FPGA} 
 {\begin{circlist}
-	\item Designed and implemented a 5-stage single-cycle RISC ARMv4 CPU on an Altera MAX 10 FPGA. 
-	\item Implemented instruction fetch (program counter/memory), decode, execute (ALU, register file, shifter), write-back, and memory stages using VHDL and Intel Quartus, enabling a subset of the ARM ISA to run on the CPU.
-	\item Created custom assembler and disassembler in \code{c++} to encode/decode from ARM to machine code.
-	\item Verified design by implementing automated tests using ModelSim, validated by running programs on hardware interacting with memory-mapped peripherals and devices.
+  \item Designed and implemented a 5-stage single-cycle RISC ARMv4 CPU on an Altera MAX 10 FPGA. 
+  \item Implemented instruction fetch (program counter/memory), decode, execute (ALU, register file, shifter), write-back, and memory stages using VHDL and Intel Quartus, enabling a subset of the ARM ISA to run on the CPU.
+  \item Created custom assembler and disassembler in \code{c++} to encode/decode from ARM to machine code.
+  \item Verified design by implementing automated tests using ModelSim, validated by running programs on hardware interacting with memory-mapped peripherals and devices.
 \end{circlist}}
 
 \sectionproj
 {Network Interface Device} 
 {\begin{circlist}
-	% carrier select multiple access/collision detection
-	\item Developed a CSMA/CD network device, implementing physical and data-link layers with a baremetal firmware design.
-	\item Created Manchester Biphase II line encoder/decoder, interrupt driven, buffered, and variable length transmitter and receiver, CRC8 frame check sequence, asynchronous channel monitor and collision detection.
-	\item Wrote repeatable test procedures, created design criteria and developed robust system requirements.
-	\item Implemented common protocol standard enabling communication using unicast and broadcast addressing.
+  % carrier select multiple access/collision detection
+  \item Developed a CSMA/CD network device, implementing physical and data-link layers with a baremetal firmware design.
+  \item Created Manchester Biphase II line encoder/decoder, interrupt driven, buffered, and variable length transmitter and receiver, CRC8 frame check sequence, asynchronous channel monitor and collision detection.
+  \item Wrote repeatable test procedures, created design criteria and developed robust system requirements.
+  \item Implemented common protocol standard enabling communication using unicast and broadcast addressing.
 \end{circlist}}
 
 \sectionproj
 {Tritone: Vector Calculator Expression Language/Interpreter} 
 {\begin{circlist}
-	\item Created context-free grammar and recursive descent expression parser in \code{c}.
-	\item Developed abstract syntax tree data structure for expression evaluation and \code{dj2}-based dynamically-resizing linear probe hash table for variable assignment and retrieval.
-	\item Implemented CLI interpreter for nested expression evaluation, implementing scalar and n-dimensional vector operations. 
+  \item Created context-free grammar and recursive descent expression parser in \code{c}.
+  \item Developed abstract syntax tree data structure for expression evaluation and \code{dj2}-based dynamically-resizing linear probe hash table for variable assignment and retrieval.
+  \item Implemented CLI interpreter for nested expression evaluation, implementing scalar and n-dimensional vector operations. 
 \end{circlist}}
 
 \sectionproj
 {Coltrane: Round-Robin scheduler and synthesizer on STM32} 
 {\begin{circlist}
-	\item Developed a round-robin scheduling algorithm on an STM32 Arm platform using \code{c} and Arm Assembly.
-	\item Implemented thread-level parallelism with custom synchronization primitives (mutex, semaphore).
-	\item Enabled asynchronous user input through a serial console and UART driver, recording a song using an interrupt-driven keypad and song playback with multiple waveform types using a digital-to-analog converter and a piezo speaker. 
+  \item Developed a round-robin scheduling algorithm on an STM32 Arm platform using \code{c} and Arm Assembly.
+  \item Implemented thread-level parallelism with custom synchronization primitives (mutex, semaphore).
+  \item Enabled asynchronous user input through a serial console and UART driver, recording a song using an interrupt-driven keypad and song playback with multiple waveform types using a digital-to-analog converter and a piezo speaker. 
 \end{circlist}}
 \rootend
 
 \rootstart{Skills}
 
 \begin{indentsection}
-	\skill{Software}{C/C++, Rust, Go, VHDL, Python, Java, HTML/CSS/JS, ARM Assembly, Nix, Bash}
-	\skill{Hardware}{PCB Design, Board Bringup, HIL/HITL testing, FPGA, RTL, Circuit Design, Digital Filters, Signal Processing}
-	\skill{Technologies}{Intel Quartus/ModelSim, NI MultiSim, Altium Designer/KiCad, TCP/IP}
+  \skill{Software}{C/C++, Rust, Go, VHDL, Python, Java, HTML/CSS/JS, ARM Assembly, Nix, Bash}
+  \skill{Hardware}{PCB Design, Board Bringup, HIL/HITL testing, FPGA, RTL, Circuit Design, Digital Filters, Signal Processing}
+  \skill{Technologies}{Intel Quartus/ModelSim, NI MultiSim, Altium Designer, KiCad, TCP/IP, Autodesk Fusion, Real-time DSP}
 \end{indentsection}
 
 \vfill
