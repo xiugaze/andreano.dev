@@ -38,3 +38,11 @@
 
 ```
 
+## SOPS notes
+```
+
+read -S SSH_TO_AGE_PASSPHRASE; export SSH_TO_AGE_PASSPHRASE
+ssh-to-age -private-key -i ~/.ssh/id_ed25519 > ~/.config/sops/age/keys.txt
+```
+
+

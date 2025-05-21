@@ -1,5 +1,6 @@
 ---
 title: "An E-Ink message board for my girlfriend"
+draft: true
 ---
 
 

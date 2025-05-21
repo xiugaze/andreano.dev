@@ -125,6 +125,8 @@
         devShells.default =
           with pkgs;
           mkShell.override { stdenv = clangStdenv; } {
+
+            name="andreano-dev";
             buildInputs = with pkgs; [
               llvmPackages.libclang
               llvmPackages.clang

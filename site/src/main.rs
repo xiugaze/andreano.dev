@@ -248,9 +248,7 @@ fn chew(content: &mut String, path: &Path) -> HtmlContent {
     while let Some(event) = parser.next() {
         match event {
             Event::Start(Tag::CodeBlock(kind)) => {
-                println!("kind: {:?}", kind);
-                // In actual use you'd probably want to keep track of what language this code is
-                //syntax = ss.find_syntax_by_name(kind.)
+                //println!("kind: {:?}", kind);
                 if let CodeBlockKind::Fenced(lang) = kind {
                     syntax = ss.find_syntax_by_token(&lang);
                 }
@@ -479,27 +477,6 @@ fn parse_post_markdown(
     Ok(post)
 }
 
-fn get_git_commit_hash() -> Result<String, String> {
-    let output = Command::new("git")
-        .args(["rev-parse", "HEAD"])
-        .output()
-        .map_err(|e| format!("failed to execute git command: {}", e))?;
-
-    if output.status.success() {
-        let hash = str::from_utf8(&output.stdout)
-            .map_err(|e| format!("invalid UTF-8 in git output: {}", e))?
-            .trim()
-            .to_string();
-        Ok(hash)
-    } else {
-        let error = str::from_utf8(&output.stderr)
-            .map_err(|e| format!("invalid UTF-8 in git error: {}", e))?
-            .trim()
-            .to_string();
-        Err(format!("git command failed: {}", error))
-    }
-}
-
 fn copy_traverse(input: &Path, output: &Path, hash: &str, full: bool) -> io::Result<()> {
     if !input.is_dir() {
         println!("error: input is not a directory");
@@ -543,7 +520,7 @@ fn copy_traverse(input: &Path, output: &Path, hash: &str, full: bool) -> io::Res
 
                             let mut template = "base.html";
                             let mut blog = false;
-                            if str.contains("blog") {
+                            if str.contains("/blog/") {
                                 template = "post.html";
                                 blog = true;
                             }

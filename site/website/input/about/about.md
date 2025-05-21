@@ -3,10 +3,11 @@ title: "about"
 styles: ["timeline.css"]
 ---
 
-I am an aspiring engineer and Computer Engineering student at Milwaukee School of Engineering, graduating in May 2025.
+I am an engineer and Machine Learning Master's student at Milwaukee School of Engineering.
+I'm currently working at SpaceX in Redmond, Washington as a software engineer. 
 My passion sits at the intersection of hardware and software. 
 My professional focuses are systems software, embedded systems, and computer architecture. 
-I also enjoy PCB design, learning about compilers and programming languages, and tinkering with [Nix](https://nixos.org/) and [GNU Guix](https://guix.gnu.org/) on my homelab. 
+I also enjoy PCB design, learning about compilers and programming languages, and tinkering with FPGAs. 
 
 You can find a PDF copy of my resume [here: cv.pdf](./cv.pdf)
 
@@ -35,25 +36,25 @@ You can find a PDF copy of my resume [here: cv.pdf](./cv.pdf)
   <div class="entry">
     <div class="circle"></div>
     <div class="content">
-      <h3>SpaceX</h3>
+      <h3><a href="https://www.spacex.com/">SpaceX</a></h3>
       <p class="date">Starting July 2025</p>
-      <p class="position">Software Engineer</p>
+      <p class="position">Software Engineer (Starlink)</p>
     </div>
   </div>
   <div class="entry">
     <div class="circle"></div>
     <div class="content">
-      <h3>Milwaukee Tool</h3>
+      <h3><a href="https://www.milwaukeetool.com/">Milwaukee Tool</a></h3>
       <p class="date">June 2024 - August 2024</p>
-      <p class="position">Firmware Engineer Intern</p>
+      <p class="position">Firmware Engineer (Internship)</p>
     </div>
   </div>
   <div class="entry">
     <div class="circle"></div>
     <div class="content">
-      <h3>Gama Space</h3>
+      <h3><a href="https://www.gamaspace.com/">Gama Space</a></h3>
       <p class="date">February 2023 - October 2023</p>
-      <p class="position">GNC Engineer Intern</p>
+      <p class="position">GNC Engineer (Internship)</p>
     </div>
   </div>
 </div>

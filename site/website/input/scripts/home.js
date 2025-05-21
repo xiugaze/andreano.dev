@@ -1,6 +1,4 @@
-
 import init, { Cube } from '/scripts/cube/spinning_square.js';
-
   async function run() {
       await init();
 
