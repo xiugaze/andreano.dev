@@ -9,7 +9,7 @@ My passion sits at the intersection of hardware and software.
 My professional focuses are systems software, embedded systems, and computer architecture. 
 I also enjoy PCB design, learning about compilers and programming languages, and tinkering with FPGAs. 
 
-You can find a PDF copy of my resume [here: cv.pdf](./cv.pdf)
+You can find a PDF copy of my resume [here: resume.pdf](./resume/resume.pdf) ([source](./resume/resume.tex))
 
 ## education
 <div class="timeline">

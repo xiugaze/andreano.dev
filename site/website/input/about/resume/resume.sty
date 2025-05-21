@@ -1,0 +1,152 @@
+% Original template by Abhinay Korukonda
+% Heavily modified by Matthew Tran
+
+%%% PACKAGES
+
+% Used for scaling
+\usepackage{relsize}
+% Font
+\usepackage{tgpagella}
+% Microtyping, apparently makes things look better
+\usepackage[expansion,protrusion]{microtype}
+
+%%% DOCUMENT WIDE STYLING
+
+\pagestyle{empty}
+
+%%% CUSTOM COMMANDS
+
+% Name and contact info
+\newcommand\namestuff[2]{
+	\begin{center}
+		\item[]\textbf{\huge #1}\\
+		\vspace{0.7ex}
+		#2
+	\end{center}
+	\vspace{-3.2ex}
+}
+
+% Title for major sections
+\newcommand\rootstart[1]{
+	\vspace{-2ex}
+	\subsection*{\Large \textit{#1}}
+	\vspace{-1ex}
+}
+
+% Inline code
+\newcommand\code[1]{\texttt{#1}}
+
+% Horizontal line to split major sections
+\newcommand\rootend{
+	\vspace{0.4ex}
+	\hrule
+	\vspace{0.4ex}
+}
+
+% Make new indent bc \parindent doesn't work for some reason
+\newlength{\newparindent}
+\addtolength{\newparindent}{\parindent}
+
+% Indentation style for stuff that isn't already in a list
+\newenvironment{indentsection} {
+	\begin{list}{} {
+		\setlength{\leftmargin}{0pt}
+		\setlength{\parsep}{0pt}
+		\setlength{\parskip}{0pt}
+		\setlength{\itemsep}{0pt}
+		\setlength{\topsep}{0pt}}
+	}
+	{\end{list}}
+
+% Provides indentation style for lists as well as makes a bullet
+\newenvironment{circlist} {
+	\begin{list}{$\bullet$} {	
+		\setlength{\leftmargin}{\newparindent}
+		\setlength{\parsep}{0pt}
+		\setlength{\parskip}{0pt}
+		\setlength{\itemsep}{0pt}
+		\setlength{\topsep}{0pt}}
+	}
+	{\end{list}}
+
+% Shortcut for making time periods
+\newcommand{\period}[4]{#1\ #2 -- #3\ #4}
+
+% Shortcut for making time periods that haven't ended yet
+\newcommand{\periodnow}[2]{#1\ #2 -- Present}
+
+% Good for education, includes part for GPA, make sure to always use circlist with this
+\newcommand{\sectiongpa}[9] {
+	\begin{indentsection}
+		\item[]\textscale{1.063}{\textbf{#1}} \textsl{#2}\\
+		\textsl{#3}\ $|$\ {#4}\hfill\textsl{#5}\\
+		\textsl{#6}\ $|$\ {#7}\hfill\textsl{#8}\\
+		\vspace{-2.4ex}
+		{#9}
+	\end{indentsection}
+} 
+
+% Good for experiences, activities, just stuff with a location
+\newcommand{\sectionloc}[5] {
+	\begin{indentsection}
+		\item[]\textscale{1.063}{\textbf{#1}} \textsl{#2}\\
+		\textsl{#3}\hfill\textsl{#4}\\
+		\vspace{-2.4ex}
+		{#5}
+	\end{indentsection}
+}
+
+\newcommand{\sectionsingle}[2] {
+	\begin{indentsection}
+		\item[]\textscale{1.063}{\textbf{#1}}\hfill\textsl{#2}
+	\end{indentsection}
+}
+
+
+
+% Good for experiences, activities, just stuff with a location
+\newcommand{\sectiondate}[4] {
+	\begin{indentsection}
+		\item[]\textscale{1.063}{\textbf{#1}} \\
+		\textsl{#2}\hfill\textsl{#3}\\
+		\vspace{-2.4ex}
+		{#4}
+	\end{indentsection}
+}
+
+\newcommand{\sectiontutor}[5] {
+	\begin{indentsection}
+		\item[]\textscale{1.063}{\textbf{#1}} \\
+		\textsl{#2}\hfill\textsl{#3}\\
+		\textsl{#4}\hfill\textsl{#5}\\
+		\vspace{-2.4ex}
+	\end{indentsection}
+}
+
+% Good for when you have a new position
+\newcommand{\sectionsplit}[2] {
+	\vspace{0.4ex}
+	\textsl{#1}\hfill\textsl{#2}\\
+	\vspace{-2.4ex}
+}
+
+% Good for projects, doesn't have a location
+% \newcommand{\sectionproj}[3] {
+% 	\begin{indentsection}
+% 		\item[]\textscale{1.063}{\textbf{#1}}\hfill\textsl{#2}\\
+% 		\vspace{-2.4ex}
+% 		{#3}
+% 	\end{indentsection}
+% }
+\newcommand{\sectionproj}[2] {
+	\begin{indentsection}
+	\item[]\textscale{1.063}{\textbf{#1}}\\
+		\vspace{-2.4ex}
+		{#2}
+	\end{indentsection}
+}
+
+% Good for skills
+\newcommand{\skill}[2] {
+	\item[]\textbf{#1}{:} #2
+}
