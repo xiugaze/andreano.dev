@@ -6,18 +6,24 @@
 \usepackage{listings}
 \usepackage{hyperref}
 \usepackage{multicol}
-\usepackage{resume}
+\usepackage{other}
+
+\hypersetup{
+  pdfborder={0 0 0},
+}
+
+\urlstyle{same} % Use the same font as the document
 
 \begin{document}
 \relscale{0.95}
 
 \namestuff 
 {Caleb Andreano}
-{calebandreano@gmail.com $|$ linkedin.com/in/calebandreano $|$ www.andreano.dev}
+{calebandreano@gmail.com $|$ \url{www.linkedin.com/in/calebandreano} $|$ \url{www.andreano.dev}}
 
 \rootstart{}
-B.S. Computer Engineering and M.S. Machine Learning student at MSOE with internship and numerous, diverse, hands-on and 
-team-based project experiences. 
+Software Engineer at SpaceX and M.S. Machine Learning student at MSOE.
+% B.S. Computer Engineering and M.S. Machine Learning student at MSOE with internship and numerous, diverse, hands-on and team-based project experiences. 
 % Devoting $x$ hours a week to $x$ and extracurriculars. 
 Skills in embedded systems programming, software design for critical systems, FPGA and hardware design, data science and ML engineering.
 
@@ -27,7 +33,7 @@ Skills in embedded systems programming, software design for critical systems, FP
 
 \sectiongpa
 {Milwaukee School of Engineering} {Milwaukee, WI}
-{B.S. Computer Engineering} {GPA: 3.94} {Expected May 2025}
+{B.S. Computer Engineering} {GPA: 3.95} {May 2025}
 {M.S. Machine Learning} {GPA: 4.00} {Expected May 2026}
 
 \rootend
@@ -36,14 +42,14 @@ Skills in embedded systems programming, software design for critical systems, FP
 
 \sectionloc
 {SpaceX} {Redmond, WA}
-{Flight Software Engineer} {\period{Jun}{2025}{Present}}
+{Software Engineer (Starlink)} {\period{July}{2025}{Present}}
 {}
 
 \sectionloc
 {Milwaukee Tool} {Brookfield, WI}
 {Firmware Engineering Intern: Battery Platform/NPD} {\period{Jun}{2024}{Aug}{2024}}
 {\begin{circlist}
-	\item Implemented Coulomb-count and open circuit voltage state of charge algorithm for next-generation battery pack firmware using \code{c}/\code{c++} on TI and STM hardware, verifying with unit test suite and CSTAT static analysis.
+	\item Implemented Coulomb-count and open circuit voltage based state of charge algorithm for next-generation battery pack firmware using \code{c}/\code{c++} on TI and STM hardware, verifying with unit test suite and CSTAT static analysis.
 	\item Developed data processing pipelines using \code{pandas}, \code{numpy}, \code{scipy} and \code{matplotlib} for interpretation and monitoring of circuit parameters, I$^2$C traffic and pack MCU serial communications.
 	\item Used \code{golang}, \code{python}, mutlithreaded programming, analog circuit design principles and digital filters to build automated test fixtures and control equipment.
 	\item Explored extended Kalman filters for modeling dynamical state transitions using MatLab.
@@ -73,12 +79,11 @@ Skills in embedded systems programming, software design for critical systems, FP
 
 \sectiondate
 {Mozee Motorsports (SAE Formula Hybrid)}
-{Hardware Project Owner} {\periodnow{May}{2024}}  
+{Hardware Project Owner} {\period{May}{2024}{May}{2025}}  
 
 {\vspace{-1.4ex}}
 \begin{circlist}
-	\item Directed hardware design project for throttle-by-wire control subsystem. 
-	\item Developed custom PCB for H-bridge PID motor controller. 
+	\item Developed custom hardware and software for four-node fault-tolerant CAN2.0B drive-by-wire system.
 \end{circlist}
 {\vspace{-1.4ex}}
 \sectionsplit{Software Team Lead}{\period{May}{2023}{May}{2024}}
@@ -105,7 +110,7 @@ Skills in embedded systems programming, software design for critical systems, FP
 
 \vspace{-1.6ex}
 \sectionsingle
-{MSOE Jazz Band}{\period{Feb}{2022}{Present}{}}
+{MSOE Jazz Band}{\period{Feb}{2022}{May 2025}{}}
 \vspace{-1.4ex}
 \sectionsingle
 {Tau Beta Pi: WI-Delta}{\period{Aug}{2023}{Present}{}}
