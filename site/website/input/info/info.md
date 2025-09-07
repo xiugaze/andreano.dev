@@ -1,5 +1,5 @@
 ---
-title: "about"
+title: "info"
 styles: ["timeline.css"]
 ---
 
