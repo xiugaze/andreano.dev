@@ -1,10 +1,9 @@
 ---
 title: "info"
-# styles: ["timeline.css"]
 ---
 
-I am an engineer and Machine Learning Master's student at Milwaukee School of Engineering.
-I'm currently working at SpaceX in Redmond, Washington as a software engineer. 
+I'm currently working at SpaceX in Redmond, Washington as a software engineer.
+I am also working on my Master's in Machine Learning at MSOE.
 My passion sits at the intersection of hardware and software. 
 My professional focuses are systems software, embedded systems, and computer architecture. 
 I also enjoy PCB design, learning about compilers and programming languages, and tinkering with FPGAs. 
@@ -37,8 +36,8 @@ You can find a PDF copy of my resume [here: resume.pdf](./resume/resume.pdf) ([s
     <div class="circle"></div>
     <div class="content">
       <h3><a href="https://www.spacex.com/">SpaceX</a></h3>
-      <p class="date">Starting July 2025</p>
-      <p class="position">Software Engineer (Starlink)</p>
+      <p class="date">July 2025 - Present</p>
+      <p class="position">Flight Software Engineer (Starlink)</p>
     </div>
   </div>
   <div class="entry">
