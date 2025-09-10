@@ -1,6 +1,6 @@
 ---
 title: "info"
-styles: ["timeline.css"]
+# styles: ["timeline.css"]
 ---
 
 I am an engineer and Machine Learning Master's student at Milwaukee School of Engineering.
