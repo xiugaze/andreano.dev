@@ -109,7 +109,7 @@ a:hover {
 @media (max-width: 768px) {
     .content-wrap p {
         text-align: left;
-        font-size: 1.0em;
+        font-size: 0.8em;
     }
 }
 
